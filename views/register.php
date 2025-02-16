@@ -1,4 +1,4 @@
-<?php include('server.php'); ?>
+<?php include '/xampp/htdocs/Project_Final/server.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/register.css">
+
 </head>
 <body>
 
@@ -19,7 +21,7 @@
         <div class="box-black"></div>
         <nav class="header">
 
-            <img src="all-imh/logo (1).png" alt="">
+            <img src="../static/img/logo (1).png" alt="">
             <h1>ลงทะเบียน</h1>
             <form action="reg_test.php" method="POST">
                 <div class="input-box">

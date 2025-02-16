@@ -55,7 +55,7 @@ session_start(); // เริ่มต้นเซสชัน
     </header>
 
     <div class="box_logo">
-        <img src="all-imh/logo (1).png" alt="">
+        <img src="../static/img/logo (1).png" alt="">
         <nav>
             <a href="#">หน้าแรก</a>
             <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
@@ -70,7 +70,7 @@ session_start(); // เริ่มต้นเซสชัน
 </html>
 
         <div class="box_menu">
-            <img src="all-imh/slide-image-1.jpg" alt="">
+            <img src="../static/img/slide-image-1.jpg" alt="">
             <nav>
                 <a href="#">ขอแบบฟอร์มการกู้ยืม</a>
                 <a href="#">นักศึกษาเริ่มกู้กับเกษม</a>

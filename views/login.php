@@ -2,7 +2,7 @@
 
 session_start();
 
-include 'server.php';
+include '/xampp/htdocs/Project_Final/server.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_id = $_POST['c_id'];
