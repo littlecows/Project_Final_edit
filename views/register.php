@@ -1,67 +1,134 @@
-<?php include '/xampp/htdocs/Project_Final/server.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <title>กองทุน</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/register.css">
-
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.min.css">
 </head>
+
 <body>
-
-    <script src="js/bootstrap.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-
     <div class="container">
         <div class="box-black"></div>
         <nav class="header">
-
-            <img src="../static/img/logo (1).png" alt="">
+            <img src="all-imh/logo (1).png" alt>
             <h1>ลงทะเบียน</h1>
-            <form action="reg_test.php" method="POST">
+            <form action="/register" method="POST">
                 <div class="input-box">
-                    <label for="id_account"></label>
-                    <input type="text" id="c_id" name="c_id" required  placeholder="เลขบัตรประจำตัวประชาชน">
-                </div>
-                
-                <div class="input-box">
-                    <label for="username_account"></label>
-                    <input type="text" id="c_name" name="c_name" required  placeholder="ชื่อ">
-
-                </div>
-                
-                <div class="input-box">
-                    <label for="sername_account"></label>
-                    <input type="text" id="c_sername" name="c_sername" required  placeholder="นามสกุล">
+                    <input type="text" id="c_id" name="c_id" required placeholder="เลขบัตรประจำตัวประชาชน">
                 </div>
 
                 <div class="input-box">
-                    <label for="number_account"></label>
-                    <input type="text" id="c_number" name="c_number" required  placeholder="เบอร์โทรศัพท์">
-
+                    <input type="text" id="c_name" name="c_name" required placeholder="ชื่อ">
                 </div>
 
                 <div class="input-box">
-                    <label for="password_account"></label>
-                    <input type="password" id="c_password" name="c_password" required  placeholder="รหัสผ่าน">
+                    <input type="text" id="c_sername" name="c_sername" required placeholder="นามสกุล">
+                </div>
 
-                <button type="submit" class="btn">ลงทะเบียน</button>
+                <div class="input-box">
+                    <input type="text" id="address" name="address" required placeholder="ที่อยู่">
+                </div>
 
+                <div class="input-box">
+                    <input type="text" id="c_number" name="c_number" required placeholder="เบอร์โทรศัพท์">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="s_id" name="s_id" required placeholder="เลขบัตรประชาชนคู่สมรส">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="f_id" name="f_id" required placeholder="เลขบัตรประชาชนบิดา">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="m_id" name="m_id" required placeholder="เลขบัตรประชาชนมารดา">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="g_id" name="g_id" required placeholder="เลขบัตรประชาชนผู้ปกครอง">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="e_id" name="e_id" required
+                        placeholder="เลขบัตรประชาชนผู้รับรองรายได้ครอบครัว">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="d_id" name="d_id" required placeholder="รหัสสาขา">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="member_ id" name="member_ id" required placeholder="ID สถานภาพครอบครัว">
+                </div>
 
+                <div class="input-box">
+                    <input type="text" id="Email" name="Email" required placeholder="Email">
+                </div>
+
+                <!-- Button styled file input -->
+                <label class="btn btn-primary">
+                    Image <input type="file" accept="image/*" hidden id="imageInput">
+                </label>
+
+                <!-- Preview Image -->
+                <div class="mt-3">
+                    <img id="previewImage" src class="img-thumbnail d-none" width="200">
+                </div>
+
+                <script>
+                    document.getElementById('imageInput').addEventListener('change', function (event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const img = document.getElementById('previewImage');
+                                img.src = e.target.result;
+                                img.classList.remove('d-none');
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                </script>
+
+                <form id="passwordForm">
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        <input type="password" id="password" name="password" class="form-control" required
+                            placeholder="รหัสผ่าน">
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="mb-3">
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                            required placeholder="ยืนยันรหัสผ่าน">
+                        <div id="passwordError" class="text-danger mt-1 d-none">รหัสผ่านไม่ตรงกัน</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">ลงทะเบียน</button>
+                </form>
+
+                <script>
+                    document.getElementById("passwordForm").addEventListener("submit", function (event) {
+                        const password = document.getElementById("password").value;
+                        const confirmPassword = document.getElementById("confirm_password").value;
+                        const errorText = document.getElementById("passwordError");
+
+                        if (password !== confirmPassword) {
+                            event.preventDefault();
+                            errorText.classList.remove("d-none");
+                        } else {
+                            errorText.classList.add("d-none");
+                        }
+                    });
+                </script>
                 <div class="register-link">
                     <p>มีบัญชีเข้าใช้งานแล้ว
-                        <a href="login.php">เข้าใช้งาน</a>
-                    </p> 
+                        <a href="/login">เข้าใช้งาน</a>
+                    </p>
                 </div>
             </form>
         </nav>
     </div>
-
-    
 </body>
+
 </html>
