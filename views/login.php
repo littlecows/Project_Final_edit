@@ -1,46 +1,42 @@
 <?php
-
 session_start();
-
 include '/xampp/htdocs/Project_Final/server.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $c_id = $_POST['c_id'];
-    $c_password = $_POST['c_password'];
+    $username = $_POST['username']; // รับค่าชื่อผู้ใช้ หรือเลขบัตรประชาชน
+    $password = $_POST['password']; // รับค่ารหัสผ่าน
 
-    // print_r($c_id);
-    // print_r($password_id);
+    // ตรวจสอบในตาราง user (สำหรับเจ้าหน้าที่)
+    $sql_user = "SELECT * FROM user WHERE username = '$username' AND password_hash = '$password'";
+    $result_user = $conn->query($sql_user);
 
-    // สร้างคำสั่ง SQL
-    $sql = "SELECT * FROM reg_user WHERE c_id = '$c_id' AND c_password = '$c_password'";
+    // ตรวจสอบในตาราง collegian (สำหรับนักศึกษา)
+    $sql_collegian = "SELECT * FROM collegian WHERE student_id = '$username'";
+    $result_collegian = $conn->query($sql_collegian);
 
-    // รันคำสั่ง SQL
-    $result = $conn->query($sql);
-
-    print_r($result);
-
-    if ($result->num_rows > 0) {
-        // เก็บข้อมูลผู้ใช้ในเซสชัน
-        $user = $result->fetch_assoc();
-        $_SESSION['c_id'] = $c_id;
-        $_SESSION['c_name'] = $user['c_name'];
-        $_SESSION['c_sername'] = $user['c_sername'];
-        // เปลี่ยนเส้นทางไปหน้า index.php
+    if ($result_user->num_rows > 0) {
+        // ถ้าเป็นเจ้าหน้าที่ (user)
+        $user = $result_user->fetch_assoc();
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = "user";
+        $_SESSION['user_id'] = $user['user_id'];
         header("Location: index.php");
-        exit(); // สิ้นสุดการทำงานของสคริปต์
+        exit();
+    } elseif ($result_collegian->num_rows > 0) {
+        // ถ้าเป็นนักศึกษา (collegian)
+        $collegian = $result_collegian->fetch_assoc();
+        $_SESSION['username'] = $collegian['email']; 
+        $_SESSION['role'] = "collegian";
+        $_SESSION['user_id'] = $collegian['student_id'];
+        header("Location: index.php");
+        exit();
     } else {
-        echo "Invalid account ID or password.";
+        echo "Invalid ID or password.";
     }
 
-    // ปิดการเชื่อมต่อ
     $conn->close();
 }
-
-
-    
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,12 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../static/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
 
-    <script src="js/bootstrap.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
     <div class="container">
@@ -64,36 +58,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img src="../static/img/logo (1).png" alt="">
             <h1>เข้าสู่ระบบ</h1>
                 
-                <form method="POST" action="">
-                    <div class="input-box">
-                        <label for="c_id"></label>
-                        <input type="text" name="c_id" placeholder="เลขบัตรประจำตัวประชาชน" required>
-                    </div>
-
-                    <div class="input-box">
-                        <label for="c_password"></label>
-                        <input type="password" name="c_password" placeholder="รหัสผ่าน" required>
-                    </div>
-
-                    <button type="submit" class="btn">เข้าสู่ระบบ</button>
-                </form>
-
-                <div class="remember-forgot">
-                    <label> <input type="checkbox">จดจำฉันไว้</label>
-                    <a href="#">ลืมรหัสผ่าน</a>
+            <form method="POST" action="">
+                <div class="input-box">
+                    <label for="username"></label>
+                    <input type="text" name="username" placeholder="เลขบัตรประจำตัวประชาชน / ชื่อผู้ใช้" required>
                 </div>
 
-
-                <div class="register-link">
-                    <p>ยังไม่มีชื่อผู้ใช้งาน
-                        <a href="register.php">ลงทะเบียนขอสิทธิ์เข้าใช้งาน</a>
-                    </p> 
+                <div class="input-box">
+                    <label for="password"></label>
+                    <input type="password" name="password" placeholder="รหัสผ่าน" required>
                 </div>
 
-                <div class="register-link-2">
-                    <a href="#">เข้าสู่ระบบสำหรับเจ้าหน้าที่</a>
-                </div>
+                <button type="submit" class="btn">เข้าสู่ระบบ</button>
+            </form>
 
+            <div class="remember-forgot">
+                <label> <input type="checkbox">จดจำฉันไว้</label>
+                <a href="#">ลืมรหัสผ่าน</a>
+            </div>
+
+            <div class="register-link">
+                <p>ยังไม่มีชื่อผู้ใช้งาน
+                    <a href="register.php">ลงทะเบียนขอสิทธิ์เข้าใช้งาน</a>
+                </p> 
+            </div>
+
+            <div class="register-link-2">
+                <a href="#">เข้าสู่ระบบสำหรับเจ้าหน้าที่</a>
+            </div>
         </nav>
         <div class="box-black"></div>
     </div>
