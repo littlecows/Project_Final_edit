@@ -48,18 +48,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>กองทุน</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../static/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
 
     <script src="js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 
     <div class="container">
         <nav class="header">
-            <img src="logo (1).png" alt="">
+            <img src="../static/img/logo (1).png" alt="">
             <h1>เข้าสู่ระบบ</h1>
                 
                 <form method="POST" action="">
