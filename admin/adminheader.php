@@ -1,106 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+<header class="box_head">
+        <?php if (isset($_SESSION['c_name']) && isset($_SESSION['c_sername'])): ?>
+            
+           <select id="navigationDropdown">
+            <option value="index.php">
+            <span>ยินดีต้อนรับ, <?php echo $_SESSION['c_name'] . " " . $_SESSION['c_sername']; ?></span>
+            </option>
+            <option value="profile.php">แก้ไขโปรไฟล์</option>
+            <option value="#">กยศ.</option>
+            <option value="#">จิตอาสา</option>
+            <option value="logout.php">ออกจากระบบ</option>
+           </select>
 
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+           <script>
+                document.getElementById("navigationDropdown").onchange = function() {
+                var selectedLink = this.value;
+                if (selectedLink) {
+                window.location.href = selectedLink;
+                }
+            };
+            </script>
 
-    <!-- Owl-carousel CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
-
-    <!-- font awesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-
-    <!-- Custom CSS file -->
-    <link rel="stylesheet" href="../style.css">
-
-    <!-- Search CSS file -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js">
-    
-    <!-- chart js -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-
-
-
-</head>
-<body>
-
-<!-- start #header -->
-<header id="header">
-    <!-- Primary Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav m-auto font-rubik">
-                <li class="nav-item active">
-                    <a class="nav-link" href="adminindex.php">หน้าแรก</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admincompany.php">การสั่งสินค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminblueprint.php">แปลนสินค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminCalculation.php">สูตร</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admincatagory.php">ประเภทสินค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminproduct.php">สินค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminOrder.php">คำสั่งซื้อ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminmadeOrder.php">การสั่งทำ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminuser.php">ลูกค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adminincome.php">ออเดอร์สั่งสินค้า</a>
-                </li>
-            </ul>
-            <?php if(isset($_SESSION['admin_id'])) { ?> 
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $_SESSION['A_fullname']; ?>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="adminlogout.php">Logout</a>
-                    </div>
-                </div>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <form action="#" class="font-size-14 font-rale">
-                    <a class="py-2 rounded-pill bg-secondary">
-                        <span class="font-size-20 px-2 text-white"><i class="fas fa-user-tie" style="color:black;"></i></span>
-                    </a>
-                </form>
-            <?php }else{ ?>       
+        <?php else: ?>
                 
-            <?php 
-            }
-            ?>
-        </div>
-    </nav>
-    <!-- !Primary Navigation -->
+                <a href="register.php">ลงทะเบียน</a>
+                <a href="login.php">เข้าสู่ระบบ</a>
+        <?php endif; ?>
+    </header>
 
-</header>
-<!-- !start #header -->
-
-<!-- start #main-site -->
-<main id="main-site">
+    <div class="box_logo">
+        <img src="all-imh/logo (1).png" alt="">
+        <nav>
+            <a href="#">หน้าแรก</a>
+            <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
+            <a href="#">ข่าวสาร</a>
+            <a href="#">ติดต่อ</a>
+        </nav>
+    </div>
