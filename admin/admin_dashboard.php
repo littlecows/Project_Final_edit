@@ -43,6 +43,7 @@ if (!isset($_SESSION['username'])) {
                         <span>Welcome Admin, <?php echo $_SESSION['username']; ?></span>
                     </option>
                     <option value="adminlogout.php">Logout</option>
+                    <option value="admin_edit.php">edit</option>
                 </select>
                 <script>
                     document.getElementById("navigationDropdown").onchange = function() {
