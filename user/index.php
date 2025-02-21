@@ -2,23 +2,30 @@
 session_start();
 include '/xampp/htdocs/Project_Final/server.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username']; // รับค่าชื่อผู้ใช้
+    $student_id = $_POST['student_id']; // รับค่าชื่อผู้ใช้
     $password = $_POST['password']; // รับค่ารหัสผ่าน
 
     // ตรวจสอบในตาราง user
-    $sql_user = "SELECT * FROM user WHERE username = '$username' AND password_hash = '$password'";
+    $sql_user = "SELECT * FROM collegian WHERE student_id = '$student_id' AND password = '$password'";
     $result_user = $conn->query($sql_user);
 
     if ($result_user->num_rows > 0) {
         // ถ้า user มีข้อมูล
         $user = $result_user->fetch_assoc();
-        $_SESSION['username'] = $user['username'];
+        $_SESSION['student_id'] = $user['student_id'];
         $_SESSION['user_id'] = $user['user_id'];
 
         // ดึงข้อมูลชื่อ-นามสกุลจาก collegian
-        $sql_collegian = "SELECT f_name, l_name FROM collegian WHERE student_id = '".$user['user_id']."'";
+        $sql_user = "SELECT * FROM collegian WHERE student_id = ? AND password = ?";
+        $stmt = $conn->prepare($sql_user);
+        $stmt->bind_param("ss", $student_id, $password);
+        $stmt->execute();
+        $result_user = $stmt->get_result();
+
         $result_collegian = $conn->query($sql_collegian);
+
 
         if ($result_collegian->num_rows > 0) {
             $collegian = $result_collegian->fetch_assoc();
