@@ -46,6 +46,8 @@ if (!isset($_SESSION['username'])) {
                     <option value="admin_edit.php">edit</option>
                     <option value="adminadd_user.php">add user</option>
                     <option value="admin_dashboard.php">Dashboard</option>
+                    <option value="adminCheck_Borrower_Status.php">Check Borrower Status</option>
+                    
                 </select>
                 <script>
                     document.getElementById("navigationDropdown").onchange = function() {
