@@ -65,7 +65,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO collegian (student_id, student_code, password ,f_name , l_name , address) VALUES ('$student_id', '$student_code', '$password', '$f_name', '$l_name', '$address')";
+        $sql = "INSERT INTO student (student_id, student_code, password ,f_name , l_name , address) VALUES ('$student_id', '$student_code', '$password', '$f_name', '$l_name', '$address')";
 
         if ($conn->query($sql) === TRUE) {
             echo "<div class='alert alert-success mt-3'>New user added successfully</div>";

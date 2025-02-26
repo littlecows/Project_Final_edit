@@ -15,13 +15,11 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
 </head>
 <body>
 
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 
     <div class="container">
     <body>
