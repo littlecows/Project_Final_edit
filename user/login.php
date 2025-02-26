@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="register-link-2">
-                <a href="#">เข้าสู่ระบบสำหรับเจ้าหน้าที่</a>
+                <a href="../admin/adminlogin.php">เข้าสู่ระบบสำหรับเจ้าหน้าที่</a>
             </div>
         </nav>
         <div class="box-black"></div>
