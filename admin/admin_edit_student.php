@@ -12,27 +12,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// ตรวจสอบว่ามีการส่งค่า student_id มาหรือไม่
-if (isset($_GET['student_id'])) {
-    $student_id = $_GET['student_id'];
-
-    // ดึงข้อมูลจากฐานข้อมูล
-    $sql = "SELECT * FROM student WHERE student_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $student_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-    } else {
-        echo "ไม่พบข้อมูล";
-        exit();
-    }
-} else {
-    echo "ไม่พบข้อมูล";
-    exit();
-}
+// ดึงข้อมูลจากฐานข้อมูล
+$sql = "SELECT * FROM student";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -40,40 +22,47 @@ if (isset($_GET['student_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แก้ไขข้อมูล</title>
+    <title>แก้ไขข้อมูลนักเรียน</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">แก้ไขข้อมูล</h2>
-    <form action="adminedit_process.php" method="POST">
-        <div class="mb-3">
-            <label for="student_id" class="form-label">Student ID</label>
-            <input type="text" class="form-control" id="student_id" name="student_id" value="<?php echo htmlspecialchars($row['student_id']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="student_code" class="form-label">Student Code</label>
-            <input type="text" class="form-control" id="student_code" name="student_code" value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($row['password']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="f_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="f_name" name="f_name" value="<?php echo htmlspecialchars($row['f_name']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="l_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="l_name" name="l_name" value="<?php echo htmlspecialchars($row['l_name']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" name="address" value="<?php echo htmlspecialchars($row['address']); ?>" required>
-        </div>
-        <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
-        <a href="admin_dashboard.php" class="btn btn-secondary">ยกเลิก</a>
-    </form>
+    <h2 class="mb-4">แก้ไขข้อมูลนักเรียน</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Code</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . htmlspecialchars($row["student_id"]) . "</td>
+                            <td>" . htmlspecialchars($row["student_code"]) . "</td>
+                            <td>" . htmlspecialchars($row["f_name"]) . "</td>
+                            <td>" . htmlspecialchars($row["l_name"]) . "</td>
+                            <td>" . htmlspecialchars($row["address"]) . "</td>
+                            <td><a href='edit_student.php?student_id=" . htmlspecialchars($row["student_id"]) . "' class='btn btn-primary'>แก้ไข</a></td>
+                          </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6' class='text-center'>ไม่พบข้อมูล</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+    <a href="admin_dashboard.php" class="btn btn-secondary">กลับไปที่แดชบอร์ด</a>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

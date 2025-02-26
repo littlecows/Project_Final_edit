@@ -14,7 +14,6 @@ if ($conn->connect_error) {
 
 // ดึงข้อมูลจากฐานข้อมูล
 $sql = "SELECT * FROM admins WHERE username = '" . $_SESSION['username'] . "'";
-echo $_SESSION['username'];
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

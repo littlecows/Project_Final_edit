@@ -48,6 +48,8 @@ if (!isset($_SESSION['username'])) {
                     <option value="admin_dashboard.php">Dashboard</option>
                     <option value="adminCheck_Borrower_Status.php">Check Borrower Status</option>
                     <option value="adminCheck_form_Status.php">Check Form Status</option>
+                    <option value="admin_edit_student.php">Edit Student Status</option>
+                    
                     
                 </select>
                 <script>
