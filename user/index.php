@@ -58,7 +58,7 @@ if (!isset($_SESSION['username'])) {
     </header>
 
     <div class="box_logo">
-        <img src="../static/img/slide-image-1.jpg" alt="">
+        <img src="../static/img/logo.png" alt="">
         <nav>
             <a href="#">หน้าแรก</a>
             <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['username'])) {
 </html>
 
         <div class="box_menu">
-            <img src="all-imh/slide-image-1.jpg" alt="">
+        <img src="../static/img/slide-image-1.jpg" alt="">
             <nav>
                 <a href="#">ขอแบบฟอร์มการกู้ยืม</a>
                 <a href="#">นักศึกษาเริ่มกู้กับเกษม</a>
