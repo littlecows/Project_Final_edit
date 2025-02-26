@@ -123,7 +123,7 @@
                 </script>
                 <div class="register-link">
                     <p>มีบัญชีเข้าใช้งานแล้ว
-                        <a href="/login">เข้าใช้งาน</a>
+                        <a href="user_login.php">เข้าใช้งาน</a>
                     </p>
                 </div>
             </form>

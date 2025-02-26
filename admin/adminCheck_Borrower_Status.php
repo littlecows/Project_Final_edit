@@ -55,7 +55,7 @@
             $student_code = $selection;
             $f_name = $selection;
             $l_name = $selection;
-            $sql = "SELECT * FROM collegian WHERE student_id = ? OR student_code = ? OR f_name = ? OR l_name = ?";
+            $sql = "SELECT * FROM student WHERE student_id = ? OR student_code = ? OR f_name = ? OR l_name = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ssss", $student_id, $student_code, $f_name, $l_name);
             $stmt->execute();

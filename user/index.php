@@ -54,10 +54,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>เข้าสู่ระบบ</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
 </head>
 <body>
 
     <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/jquery-3.5.1.min.js"></script>
 
     <div class="container">
         <nav class="header">
