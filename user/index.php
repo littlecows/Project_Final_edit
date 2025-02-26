@@ -1,48 +1,10 @@
 <?php
 session_start();
-include '/xampp/htdocs/Project_Final/server.php';
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $student_id = $_POST['student_id']; // รับค่าชื่อผู้ใช้
-    $password = $_POST['password']; // รับค่ารหัสผ่าน
-
-    // ตรวจสอบในตาราง user
-    $sql_user = "SELECT * FROM collegian WHERE student_id = '$student_id' AND password = '$password'";
-    $result_user = $conn->query($sql_user);
-
-    if ($result_user->num_rows > 0) {
-        // ถ้า user มีข้อมูล
-        $user = $result_user->fetch_assoc();
-        $_SESSION['student_id'] = $user['student_id'];
-        $_SESSION['user_id'] = $user['user_id'];
-
-        // ดึงข้อมูลชื่อ-นามสกุลจาก collegian
-        $sql_user = "SELECT * FROM collegian WHERE student_id = ? AND password = ?";
-        $stmt = $conn->prepare($sql_user);
-        $stmt->bind_param("ss", $student_id, $password);
-        $stmt->execute();
-        $result_user = $stmt->get_result();
-
-        $result_collegian = $conn->query($sql_collegian);
-
-
-        if ($result_collegian->num_rows > 0) {
-            $collegian = $result_collegian->fetch_assoc();
-            $_SESSION['f_name'] = $collegian['f_name'];
-            $_SESSION['l_name'] = $collegian['l_name'];
-        } else {
-            $_SESSION['f_name'] = "ไม่พบ";
-            $_SESSION['l_name'] = "ข้อมูล";
-        }
-
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "Invalid username or password.";
-    }
-
-    $conn->close();
+// ตรวจสอบว่าผู้ใช้ได้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 ?>
 
@@ -51,51 +13,106 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เข้าสู่ระบบ</title>
+    <title>Document</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
 </head>
 <body>
 
     <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/bootstrap.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/jquery-3.5.1.min.js"></script>
 
     <div class="container">
-        <nav class="header">
-            <img src="../static/img/logo (1).png" alt="">
-            <h1>เข้าสู่ระบบ</h1>
+    <body>
+
+<script src="js/bootstrap.min.js"></script>
+
+<div class="container">
+
+    <header class="box_head">
+    <?php if (isset($_SESSION['username'])): ?>
+                <select id="navigationDropdown">
+                    <option value="admin_dashboard.php">
+                        <span>Welcome, <?php echo $_SESSION['username']; ?></span>
+                    </option>
+                    <option value="logout.php">Logout</option>
+                    <option value="admin_edit.php">edit</option>
+                    <option value="adminadd_user.php">add user</option>
+                    <option value="admin_dashboard.php">Dashboard</option>
+                </select>
+                <script>
+                    document.getElementById("navigationDropdown").onchange = function() {
+                        var selectedLink = this.value;
+                        if (selectedLink) {
+                            window.location.href = selectedLink;
+                        }
+                    };
+                </script>
+
+        <?php else: ?>
                 
-            <form method="POST" action="">
-                <div class="input-box">
-                    <label for="username"></label>
-                    <input type="text" name="username" placeholder="ชื่อผู้ใช้" required>
-                </div>
+                <a href="register.php">ลงทะเบียน</a>
+                <a href="login.php">เข้าสู่ระบบ</a>
+        <?php endif; ?>
+    </header>
 
-                <div class="input-box">
-                    <label for="password"></label>
-                    <input type="password" name="password" placeholder="รหัสผ่าน" required>
-                </div>
-
-                <button type="submit" class="btn">เข้าสู่ระบบ</button>
-            </form>
-
-            <div class="remember-forgot">
-                <label> <input type="checkbox">จดจำฉันไว้</label>
-                <a href="#">ลืมรหัสผ่าน</a>
-            </div>
-
-            <div class="register-link">
-                <p>ยังไม่มีชื่อผู้ใช้งาน?
-                    <a href="register.php">ลงทะเบียน</a>
-                </p> 
-            </div>
+    <div class="box_logo">
+        <img src="../static/img/slide-image-1.jpg" alt="">
+        <nav>
+            <a href="#">หน้าแรก</a>
+            <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
+            <a href="#">ข่าวสาร</a>
+            <a href="#">ติดต่อ</a>
         </nav>
-        <div class="box-black"></div>
     </div>
 
 </body>
+</html>
+
+</html>
+
+        <div class="box_menu">
+            <img src="all-imh/slide-image-1.jpg" alt="">
+            <nav>
+                <a href="#">ขอแบบฟอร์มการกู้ยืม</a>
+                <a href="#">นักศึกษาเริ่มกู้กับเกษม</a>
+                <a href="#">นักศึกษาเก่าในสถาบัน</a>
+                <a href="#">ปฏิทินกิจกรรม</a>
+            </nav>
+        </div>
+
+
+        <div class="selection">
+            <div class="box-face">
+                <img src="https://campus.campus-star.com/app/uploads/2015/09/edu.jpg" alt="">
+                <p class="box-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <a href="#" class="box-button">อ่านต่อ </a>
+            </div>
+            <div class="box-face">
+                <img src="https://campus.campus-star.com/app/uploads/2015/09/edu.jpg" alt="">
+                <p class="box-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <a href="#" class="box-button">อ่านต่อ </a>
+            </div>
+            <div class="box-face">
+                <img src="https://campus.campus-star.com/app/uploads/2015/09/edu.jpg" alt="">
+                <p class="box-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <a href="#" class="box-button">อ่านต่อ </a>
+            </div>
+            <div class="box-face">
+                <img src="https://campus.campus-star.com/app/uploads/2015/09/edu.jpg" alt="">
+                <p class="box-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <a href="#" class="box-button">อ่านต่อ </a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-bar">
+                
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
 </html>
