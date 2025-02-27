@@ -49,7 +49,7 @@ $result = $conn->query($sql);
                             <td>" . htmlspecialchars($row["f_name"]) . "</td>
                             <td>" . htmlspecialchars($row["l_name"]) . "</td>
                             <td>" . htmlspecialchars($row["address"]) . "</td>
-                            <td><a href='edit_student.php?student_id=" . htmlspecialchars($row["student_id"]) . "' class='btn btn-primary'>แก้ไข</a></td>
+                            <td><a href='admin_edit_student_process.php?student_id=" . htmlspecialchars($row["student_id"]) . "' class='btn btn-primary'>แก้ไข</a></td>
                           </tr>";
                 }
             } else {

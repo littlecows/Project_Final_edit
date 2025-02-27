@@ -70,6 +70,7 @@
                 <th>Last Name</th>
                 <th>Address</th>
                 </tr></thead>";
+                
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
