@@ -1,0 +1,587 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 27, 2025 at 04:44 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `project_final`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int(10) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `username`, `admin_email`, `password`) VALUES
+(1, 'babeza1030', 'moombabe24468@gmail.com', '$2y$10$gNzieYUN41PsdmhtKvRJ4.PL2kooSyq0mn3CfiMqYldFmssUHLT8W');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `department_id` int(11) NOT NULL,
+  `department_name` varchar(255) NOT NULL,
+  `faculty_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='สาขา';
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`department_id`, `department_name`, `faculty_id`) VALUES
+(1, 'วิศวกรรมคอมพิวเตอร์', 1),
+(2, 'วิศวกรรมเครื่องกล', 1),
+(3, 'วิทยาการคอมพิวเตอร์', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `endorsee`
+--
+
+CREATE TABLE `endorsee` (
+  `endorser_id` varchar(13) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ผู้รับรองรายได้ครอบครัว';
+
+--
+-- Dumping data for table `endorsee`
+--
+
+INSERT INTO `endorsee` (`endorser_id`, `full_name`, `address`, `phone_number`) VALUES
+('1', 'นายสมชาย ใจดี', '123 หมู่ 4 ตำบลทดสอบ อำเภอเมือง จังหวัดกรุงเทพ', '0812345678'),
+('2', 'นางสาวสมหญิง รักเรียน', '456 หมู่ 8 ตำบลทดสอบ อำเภอเมือง จังหวัดเชียงใหม่', '0898765432'),
+('3', 'นายวิทยา เก่งงาน', '789 หมู่ 5 ตำบลทดสอบ อำเภอเมือง จังหวัดขอนแก่น', '0865432198');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faculty`
+--
+
+CREATE TABLE `faculty` (
+  `faculty_id` int(11) NOT NULL,
+  `faculty_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='คณะ';
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`faculty_id`, `faculty_name`) VALUES
+(1, 'คณะวิศวกรรมศาสตร์'),
+(2, 'คณะวิทยาศาสตร์');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `father`
+--
+
+CREATE TABLE `father` (
+  `father_id` varchar(13) NOT NULL,
+  `f_name` varchar(255) NOT NULL COMMENT 'ชื่อ',
+  `l_name` varchar(255) NOT NULL COMMENT 'นามสกุล',
+  `occupation` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `income` decimal(10,2) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `education_level` varchar(255) NOT NULL,
+  `school_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `father`
+--
+
+INSERT INTO `father` (`father_id`, `f_name`, `l_name`, `occupation`, `address`, `income`, `phone_number`, `education_level`, `school_name`) VALUES
+('F123', 'สมชาย', 'ใจดี', 'พนักงานบริษัท', '123 หมู่ 4 ตำบลทดสอบ อำเภอเมือง จังหวัดกรุงเทพ', '25000.00', '0812345678', 'ปริญญาตรี', 'มหาวิทยาลัย A'),
+('F234', 'อนันต์', 'สุขสันต์', 'ค้าขาย', '456 หมู่ 8 ตำบลทดสอบ อำเภอเมือง จังหวัดเชียงใหม่', '18000.00', '0898765432', 'มัธยมปลาย', 'โรงเรียน B'),
+('F345', 'วัฒนา', 'พงษ์สวัสดิ์', 'รับราชการ', '789 หมู่ 5 ตำบลทดสอบ อำเภอเมือง จังหวัดขอนแก่น', '30000.00', '0865432198', 'ปริญญาโท', 'มหาวิทยาลัย C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guardian`
+--
+
+CREATE TABLE `guardian` (
+  `guardian_id` varchar(13) NOT NULL,
+  `f_name` varchar(255) NOT NULL COMMENT 'ชื่อ',
+  `l_name` varchar(255) NOT NULL COMMENT 'นามสกุล',
+  `occupation` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `income` decimal(10,2) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `education_level` varchar(255) NOT NULL,
+  `school_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ผู้ปกครอง';
+
+--
+-- Dumping data for table `guardian`
+--
+
+INSERT INTO `guardian` (`guardian_id`, `f_name`, `l_name`, `occupation`, `address`, `income`, `phone_number`, `education_level`, `school_name`) VALUES
+('G123', 'สมศักดิ์', 'ทองดี', 'รับราชการ', '123 หมู่ 4 ตำบลทดสอบ อำเภอเมือง จังหวัดกรุงเทพ', '35000.00', '0812345678', 'ปริญญาตรี', 'มหาวิทยาลัย A'),
+('G234', 'วิชัย', 'สุขใจ', 'เกษตรกร', '456 หมู่ 8 ตำบลทดสอบ อำเภอเมือง จังหวัดเชียงใหม่', '20000.00', '0898765432', 'มัธยมปลาย', 'โรงเรียน B'),
+('G345', 'สมหมาย', 'พงษ์เพียร', 'ค้าขาย', '789 หมู่ 5 ตำบลทดสอบ อำเภอเมือง จังหวัดขอนแก่น', '25000.00', '0865432198', 'ปริญญาโท', 'มหาวิทยาลัย C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `money`
+--
+
+CREATE TABLE `money` (
+  `contract_id` int(11) NOT NULL,
+  `academic_year` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='จำนวนเงิน';
+
+--
+-- Dumping data for table `money`
+--
+
+INSERT INTO `money` (`contract_id`, `academic_year`, `amount`) VALUES
+(1, 2023, '50000.00'),
+(2, 2024, '60000.00'),
+(3, 2025, '70000.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mother`
+--
+
+CREATE TABLE `mother` (
+  `mother_id` varchar(13) NOT NULL,
+  `f_name` varchar(255) NOT NULL COMMENT 'ชื่อ',
+  `l_name` varchar(255) NOT NULL COMMENT 'นามสกุล',
+  `occupation` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `income` decimal(10,2) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `education_level` varchar(255) NOT NULL,
+  `school_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mother`
+--
+
+INSERT INTO `mother` (`mother_id`, `f_name`, `l_name`, `occupation`, `address`, `income`, `phone_number`, `education_level`, `school_name`) VALUES
+('M456', 'สมฤดี', 'ใจดี', 'พนักงานบริษัท', '500 หมู่ 7 ตำบลทดสอบ อำเภอเมือง จังหวัดเชียงใหม่', '35000.00', '0845556664', 'ปริญญาตรี', 'มหาวิทยาลัย GHJ'),
+('M567', 'วรรณา', 'สุขสันต์', 'แพทย์', '600 หมู่ 8 ตำบลทดสอบ อำเภอเมือง จังหวัดนครราชสีมา', '70000.00', '0854445553', 'ปริญญาโท', 'มหาวิทยาลัย KLM'),
+('M678', 'สุภาวดี', 'พงษ์สวัสดิ์', 'อาจารย์', '700 หมู่ 9 ตำบลทดสอบ อำเภอเมือง จังหวัดขอนแก่น', '45000.00', '0863334442', 'ปริญญาเอก', 'มหาวิทยาลัย NOP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pact`
+--
+
+CREATE TABLE `pact` (
+  `contract_id` int(11) NOT NULL,
+  `contract_date` datetime NOT NULL,
+  `loan_limit` decimal(10,2) NOT NULL,
+  `student_id` varchar(13) NOT NULL,
+  `officer_id` varchar(13) NOT NULL,
+  `academic_year` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='สัญญากู้ยืม';
+
+--
+-- Dumping data for table `pact`
+--
+
+INSERT INTO `pact` (`contract_id`, `contract_date`, `loan_limit`, `student_id`, `officer_id`, `academic_year`) VALUES
+(1, '2023-01-15 00:00:00', '100000.00', '1234567890123', '1', '2023'),
+(2, '2024-02-10 00:00:00', '120000.00', '2345678901234', '2', '2024'),
+(3, '2025-03-05 00:00:00', '150000.00', '3456789012345', '3', '2025');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sibling`
+--
+
+CREATE TABLE `sibling` (
+  `full_name` varchar(255) NOT NULL,
+  `age` int(11) NOT NULL,
+  `total_siblings` int(11) NOT NULL,
+  `current_year` varchar(255) NOT NULL,
+  `school_name` varchar(255) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `workplace` varchar(255) NOT NULL,
+  `income` decimal(10,2) NOT NULL,
+  `education_level` varchar(255) NOT NULL,
+  `student_id` varchar(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ข้อมูลพี่น้อง';
+
+--
+-- Dumping data for table `sibling`
+--
+
+INSERT INTO `sibling` (`full_name`, `age`, `total_siblings`, `current_year`, `school_name`, `gender`, `workplace`, `income`, `education_level`, `student_id`) VALUES
+('สมชาย ใจดี', 15, 3, '9', 'โรงเรียนมัธยม A', 'ชาย', '', '0.00', 'มัธยมศึกษาตอนต้น', '1234567890123'),
+('สมหญิง ใจดี', 18, 3, '12', 'โรงเรียนมัธยม B', 'หญิง', '', '0.00', 'มัธยมศึกษาตอนปลาย', '1234567890123'),
+('สมปอง ขยันเรียน', 22, 2, '', '', 'ชาย', 'บริษัท XYZ', '20000.00', 'ปริญญาตรี', '2345678901234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `spouse`
+--
+
+CREATE TABLE `spouse` (
+  `spouse_id` varchar(13) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `occupation` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `income` decimal(10,2) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `education_level` varchar(255) NOT NULL,
+  `school_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ข้อมูลคู่สมรส';
+
+--
+-- Dumping data for table `spouse`
+--
+
+INSERT INTO `spouse` (`spouse_id`, `full_name`, `occupation`, `address`, `income`, `phone_number`, `education_level`, `school_name`) VALUES
+('S001', 'สมศรี ใจดี', 'พนักงานบริษัท', '456 ถนนรัชดา กรุงเทพฯ', '30000.00', '0812345678', 'ปริญญาตรี', 'มหาวิทยาลัย A'),
+('S002', 'สมหมาย แสนดี', 'ข้าราชการ', '789 ถนนลาดพร้าว กรุงเทพฯ', '40000.00', '0898765432', 'ปริญญาโท', 'มหาวิทยาลัย B'),
+('S003', 'สมปอง รักเรียน', 'เจ้าของธุรกิจ', '123 ถนนสีลม กรุงเทพฯ', '50000.00', '0876543210', 'ปริญญาตรี', 'มหาวิทยาลัย C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `family_status_id` varchar(255) NOT NULL,
+  `status_description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='สถานภาพครอบครัว';
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`family_status_id`, `status_description`) VALUES
+('1', 'โสด'),
+('2', 'แต่งงานแล้ว');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `student_id` varchar(13) NOT NULL,
+  `student_code` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL COMMENT 'รหัสผ่าน',
+  `f_name` varchar(255) NOT NULL COMMENT 'ชื่อ',
+  `l_name` varchar(255) NOT NULL COMMENT 'นามสกุล',
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(10) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `profile_image` longtext DEFAULT NULL,
+  `spouse_id` varchar(13) DEFAULT NULL,
+  `father_id` varchar(13) DEFAULT NULL,
+  `mother_id` varchar(13) DEFAULT NULL,
+  `guardian_id` varchar(13) DEFAULT NULL,
+  `endorser_id` varchar(13) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL,
+  `family_status_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='นักศึกษา';
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `student_code`, `password`, `f_name`, `l_name`, `address`, `phone_number`, `email`, `profile_image`, `spouse_id`, `father_id`, `mother_id`, `guardian_id`, `endorser_id`, `department_id`, `family_status_id`) VALUES
+('1234567890123', '620406400925', '1234', 'test', 'test', 'test', '1234567890', 'test@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('1234567890124', '1001', 'password124', 'ไตรสิทธิ๋์', 'โลภมาก', '123 ถนนสุขุมวิท กรุงเทพฯ', '0812345678', 'somchai@email.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1'),
+('2345678901234', '1002', 'password234', 'สมหญิง', 'สบายใจ', '456 ถนนพหลโยธิน กรุงเทพฯ', '0898765432', 'somying@email.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2'),
+('3456789012345', '1003', 'password345', 'สมศักดิ์', 'สุดยอด', '789 ถนนพลโยธิน กรุงเทพฯ', '0876543210', 'anan@email.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher`
+--
+
+CREATE TABLE `teacher` (
+  `officer_id` varchar(13) NOT NULL,
+  `password` varchar(255) NOT NULL COMMENT 'รหัสผ่าน',
+  `f_name` varchar(255) NOT NULL COMMENT 'ชื่อ',
+  `l_name` varchar(255) NOT NULL COMMENT 'นามสกุล',
+  `campus` varchar(255) NOT NULL,
+  `room_number` varchar(10) NOT NULL,
+  `position` varchar(255) NOT NULL,
+  `profile_image` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='อาจารย์';
+
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`officer_id`, `password`, `f_name`, `l_name`, `campus`, `room_number`, `position`, `profile_image`) VALUES
+('1', 'pass123', 'สมชาย', 'วิทยา', 'Main Campus', '101', 'อาจารย์', NULL),
+('2', 'pass234', 'สมหญิง', 'ศึกษา', 'City Campus', '202', 'อาจารย์', NULL),
+('3', 'pass345', 'อนันต์', 'ครูดี', 'Science Campus', '303', 'หัวหน้าแผนก', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `volunteer`
+--
+
+CREATE TABLE `volunteer` (
+  `certifier_name` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `profile_image` longtext DEFAULT NULL,
+  `activity_name` varchar(255) DEFAULT NULL,
+  `activity_date` date DEFAULT NULL,
+  `student_id` varchar(13) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ข้อมูลจิตอาสา';
+
+--
+-- Dumping data for table `volunteer`
+--
+
+INSERT INTO `volunteer` (`certifier_name`, `location`, `province`, `profile_image`, `activity_name`, `activity_date`, `student_id`) VALUES
+('กยศ.', 'โรงเรียนบ้านดอน', 'กรุงเทพฯ', NULL, 'ปลูกป่าเพื่ออนุรักษ์ธรรมชาติ', '2024-02-21', '1234567890123'),
+('กยศ.', 'มหาวิทยาลัยเชียงใหม่', 'เชียงใหม่', NULL, 'บริจาคอุปกรณ์การเรียน', '2024-02-22', '1234567890456'),
+('กยศ.', 'โรงเรียนบ้านนา', 'นครราชสีมา', NULL, 'ช่วยเหลือผู้ประสบภัยน้ำท่วม', '2024-02-23', '1234567890789');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `year`
+--
+
+CREATE TABLE `year` (
+  `academic_year` int(11) NOT NULL,
+  `data_start` datetime NOT NULL COMMENT 'วันที่เริ่ม',
+  `data_end` datetime NOT NULL COMMENT 'วันที่สิ้นสุด'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='ปีการศึกษา';
+
+--
+-- Dumping data for table `year`
+--
+
+INSERT INTO `year` (`academic_year`, `data_start`, `data_end`) VALUES
+(2023, '2023-01-01 00:00:00', '2023-12-31 23:59:59'),
+(2024, '2024-01-01 00:00:00', '2024-12-31 23:59:59'),
+(2025, '2025-01-01 00:00:00', '2025-12-31 23:59:59');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`department_id`),
+  ADD KEY `department_ibfk_1` (`faculty_id`);
+
+--
+-- Indexes for table `endorsee`
+--
+ALTER TABLE `endorsee`
+  ADD PRIMARY KEY (`endorser_id`);
+
+--
+-- Indexes for table `faculty`
+--
+ALTER TABLE `faculty`
+  ADD PRIMARY KEY (`faculty_id`);
+
+--
+-- Indexes for table `father`
+--
+ALTER TABLE `father`
+  ADD PRIMARY KEY (`father_id`);
+
+--
+-- Indexes for table `guardian`
+--
+ALTER TABLE `guardian`
+  ADD PRIMARY KEY (`guardian_id`);
+
+--
+-- Indexes for table `money`
+--
+ALTER TABLE `money`
+  ADD PRIMARY KEY (`contract_id`,`academic_year`);
+
+--
+-- Indexes for table `mother`
+--
+ALTER TABLE `mother`
+  ADD PRIMARY KEY (`mother_id`);
+
+--
+-- Indexes for table `pact`
+--
+ALTER TABLE `pact`
+  ADD PRIMARY KEY (`contract_id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `officer_id` (`officer_id`);
+
+--
+-- Indexes for table `sibling`
+--
+ALTER TABLE `sibling`
+  ADD KEY `student_id` (`student_id`);
+
+--
+-- Indexes for table `spouse`
+--
+ALTER TABLE `spouse`
+  ADD PRIMARY KEY (`spouse_id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`family_status_id`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `student_code` (`student_code`),
+  ADD KEY `family_status_id` (`family_status_id`),
+  ADD KEY `father_id` (`father_id`),
+  ADD KEY `mother_id` (`mother_id`),
+  ADD KEY `guardian_id` (`guardian_id`),
+  ADD KEY `spouse_id` (`spouse_id`),
+  ADD KEY `endorser_id` (`endorser_id`);
+
+--
+-- Indexes for table `teacher`
+--
+ALTER TABLE `teacher`
+  ADD PRIMARY KEY (`officer_id`);
+
+--
+-- Indexes for table `year`
+--
+ALTER TABLE `year`
+  ADD PRIMARY KEY (`academic_year`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `faculty`
+--
+ALTER TABLE `faculty`
+  MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `pact`
+--
+ALTER TABLE `pact`
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `department`
+--
+ALTER TABLE `department`
+  ADD CONSTRAINT `department_ibfk_1` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`faculty_id`);
+
+--
+-- Constraints for table `money`
+--
+ALTER TABLE `money`
+  ADD CONSTRAINT `money_ibfk_1` FOREIGN KEY (`contract_id`) REFERENCES `pact` (`contract_id`);
+
+--
+-- Constraints for table `pact`
+--
+ALTER TABLE `pact`
+  ADD CONSTRAINT `pact_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  ADD CONSTRAINT `pact_ibfk_2` FOREIGN KEY (`officer_id`) REFERENCES `teacher` (`officer_id`);
+
+--
+-- Constraints for table `sibling`
+--
+ALTER TABLE `sibling`
+  ADD CONSTRAINT `sibling_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
+
+--
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`family_status_id`) REFERENCES `status` (`family_status_id`),
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`father_id`) REFERENCES `father` (`father_id`),
+  ADD CONSTRAINT `student_ibfk_3` FOREIGN KEY (`mother_id`) REFERENCES `mother` (`mother_id`),
+  ADD CONSTRAINT `student_ibfk_4` FOREIGN KEY (`guardian_id`) REFERENCES `guardian` (`guardian_id`),
+  ADD CONSTRAINT `student_ibfk_5` FOREIGN KEY (`spouse_id`) REFERENCES `spouse` (`spouse_id`),
+  ADD CONSTRAINT `student_ibfk_6` FOREIGN KEY (`endorser_id`) REFERENCES `endorsee` (`endorser_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
