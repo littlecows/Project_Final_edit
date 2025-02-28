@@ -49,6 +49,8 @@ if (!isset($_SESSION['username'])) {
                     <option value="adminCheck_Borrower_Status.php">Check Borrower Status</option>
                     <option value="adminCheck_form_Status.php">Check Form Status</option>
                     <option value="admin_edit_student.php">Edit Student Status</option>
+                    <option value="admin_edit_teacher.php">Edit Teacher Status</option>
+                    <option value="adminadd_teacher.php">Add Teacher</option>
                     
                     
                 </select>
