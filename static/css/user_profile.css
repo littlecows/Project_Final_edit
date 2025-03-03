@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Prompt", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+/* body {
+    font-family: "Sarabun", sans-serif;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+} */
+
+.container_user {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#profile-container {
+    background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px auto; /* จัดให้อยู่ตรงกลางและมีระยะห่างด้านบนล่าง */
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* border: 3px solid #F17629; */
+    padding-bottom: 45px;
+    max-width: 1000px; /* กำหนดความกว้างสูงสุดให้กล่องแคบลง */
+    width: 90%; /* ให้ปรับขนาดตามหน้าจอ */
+}
+
+
+.info-header {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.info-body {
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9e9e0;
+}
+
+.info-body p {
+    margin: 8px 0;
+}
+
+/* เส้นไล่สี */
+.gradient-line {
+    height: 4px;
+    background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629);
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+
+.edit-btn {
+    background: #f17629;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 15px;
+    bottom: 10px; /* ลดค่าจาก 15px เป็น 5px */
+}
+
+.edit-btn i {
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background: #ec0f0f;
+}

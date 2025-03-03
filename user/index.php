@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
                         <span>Welcome, <?php echo $_SESSION['username']; ?></span>
                     </option>
                     <option value="logout.php">Logout</option>
-                    <option value="admin_edit.php">edit</option>
+                    <option value="user_profile.php">edit</option>
                     <option value="adminadd_user.php">add user</option>
                     <option value="admin_dashboard.php">Dashboard</option>
                 </select>

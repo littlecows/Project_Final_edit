@@ -1,24 +1,22 @@
 <header class="box_head">
-        <?php if (isset($_SESSION['c_name']) && isset($_SESSION['c_sername'])): ?>
-            
-           <select id="navigationDropdown">
-            <option value="index.php">
-            <span>ยินดีต้อนรับ, <?php echo $_SESSION['c_name'] . " " . $_SESSION['c_sername']; ?></span>
-            </option>
-            <option value="profile.php">แก้ไขโปรไฟล์</option>
-            <option value="#">กยศ.</option>
-            <option value="#">จิตอาสา</option>
-            <option value="logout.php">ออกจากระบบ</option>
-           </select>
-
-           <script>
-                document.getElementById("navigationDropdown").onchange = function() {
-                var selectedLink = this.value;
-                if (selectedLink) {
-                window.location.href = selectedLink;
-                }
-            };
-            </script>
+    <?php if (isset($_SESSION['username'])): ?>
+                <select id="navigationDropdown">
+                    <option value="admin_dashboard.php">
+                        <span>Welcome, <?php echo $_SESSION['username']; ?></span>
+                    </option>
+                    <option value="logout.php">Logout</option>
+                    <option value="user_profile.php">edit</option>
+                    <option value="adminadd_user.php">add user</option>
+                    <option value="admin_dashboard.php">Dashboard</option>
+                </select>
+                <script>
+                    document.getElementById("navigationDropdown").onchange = function() {
+                        var selectedLink = this.value;
+                        if (selectedLink) {
+                            window.location.href = selectedLink;
+                        }
+                    };
+                </script>
 
         <?php else: ?>
                 
@@ -28,7 +26,7 @@
     </header>
 
     <div class="box_logo">
-        <img src="all-imh/logo (1).png" alt="">
+        <img src="../static/img/logo.png" alt="">
         <nav>
             <a href="#">หน้าแรก</a>
             <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
