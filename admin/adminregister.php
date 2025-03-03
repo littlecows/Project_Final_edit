@@ -20,7 +20,7 @@ if (isset($_POST['register'])) {
 
     if ($stmt->execute()) {
         // เมื่อสำเร็จ, รีไดเร็กต์ไปยังหน้า admin index
-        header("Location: admin_index.php"); // เปลี่ยน admin_index.php เป็นหน้าแรกของแผงผู้ดูแลระบบ
+        header("Location: adminlogin.php");// เปลี่ยน admin_index.php เป็นหน้าแรกของแผงผู้ดูแลระบบ
         exit();  // หยุดการทำงานของสคริปต์หลังจากทำการรีไดเร็กต์
     } else {
         echo "Error: " . $stmt->error;

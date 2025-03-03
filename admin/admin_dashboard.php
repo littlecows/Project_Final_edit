@@ -44,14 +44,14 @@ if (!isset($_SESSION['username'])) {
                     </option>
                     <option value="adminlogout.php">Logout</option>
                     <option value="admin_edit.php">edit</option>
-                    <option value="adminadd_user.php">add user</option>
                     <option value="admin_dashboard.php">Dashboard</option>
                     <option value="adminCheck_Borrower_Status.php">Check Borrower Status</option>
                     <option value="adminCheck_form_Status.php">Check Form Status</option>
-                    <option value="admin_edit_student.php">Edit Student Status</option>
-                    <option value="admin_edit_teacher.php">Edit Teacher Status</option>
+                    <option value="admin_edit_student.php">Edit Students Status</option>
+                    <option value="adminadd_user.php">Add Student</option>
+                    <option value="admin_edit_teacher.php">Edit Teachers Status</option>
                     <option value="adminadd_teacher.php">Add Teacher</option>
-                    
+                    <option value="admin_edit_admin.php">Admin Edit admin</option>
                     
                 </select>
                 <script>
