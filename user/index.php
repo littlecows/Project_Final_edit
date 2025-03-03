@@ -3,7 +3,7 @@ session_start();
 
 // ตรวจสอบว่าผู้ใช้ได้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: user_login.php");
     exit();
 }
 ?>
@@ -32,10 +32,10 @@ if (!isset($_SESSION['username'])) {
     <?php if (isset($_SESSION['username'])): ?>
                 <select id="navigationDropdown">
                     <option value="admin_dashboard.php">
-                        <span>Welcome, <?php echo $_SESSION['username']; ?></span>
+                        <span>ยินดีต้อนรับ , <?php echo $_SESSION['username']; ?></span>
                     </option>
-                    <option value="logout.php">Logout</option>
-                    <option value="user_profile.php">edit</option>
+                    <option value="logout.php">ออกจากระบบ</option>
+                    <option value="user_profile.php">แก้ไขข้อมูล</option>
                     <option value="adminadd_user.php">add user</option>
                     <option value="admin_dashboard.php">Dashboard</option>
                 </select>

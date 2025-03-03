@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '/xampp/htdocs/Project_Final/server.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,59 +20,36 @@
     <div class="container">
         <div class="box-black"></div>
         <nav class="header">
-            <img src="all-imh/logo (1).png" alt>
+            <img src="../static/img/logo.png" alt>
             <h1>ลงทะเบียน</h1>
-            <form action="/register" method="POST">
+            <form action="../register.php" method="POST">
+
                 <div class="input-box">
-                    <input type="text" id="c_id" name="c_id" required placeholder="เลขบัตรประจำตัวประชาชน">
+                    <input type="text" id="student_id" name="student_id" required placeholder="เลขบัตรประจำตัวประชาชน">
                 </div>
 
                 <div class="input-box">
-                    <input type="text" id="c_name" name="c_name" required placeholder="ชื่อ">
+                    <input type="text" id="f_name" name="f_name" required placeholder="ชื่อ">
                 </div>
 
                 <div class="input-box">
-                    <input type="text" id="c_sername" name="c_sername" required placeholder="นามสกุล">
+                    <input type="text" id="l_name" name="l_name" required placeholder="นามสกุล">
                 </div>
 
-                <div class="input-box">
-                    <input type="text" id="address" name="address" required placeholder="ที่อยู่">
-                </div>
 
                 <div class="input-box">
-                    <input type="text" id="c_number" name="c_number" required placeholder="เบอร์โทรศัพท์">
+                    <input type="text" id="phone_number" name="phone_number" required placeholder="เบอร์โทรศัพท์">
                 </div>
-                <div class="input-box">
-                    <input type="text" id="s_id" name="s_id" required placeholder="เลขบัตรประชาชนคู่สมรส">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="f_id" name="f_id" required placeholder="เลขบัตรประชาชนบิดา">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="m_id" name="m_id" required placeholder="เลขบัตรประชาชนมารดา">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="g_id" name="g_id" required placeholder="เลขบัตรประชาชนผู้ปกครอง">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="e_id" name="e_id" required
-                        placeholder="เลขบัตรประชาชนผู้รับรองรายได้ครอบครัว">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="d_id" name="d_id" required placeholder="รหัสสาขา">
-                </div>
-                <div class="input-box">
-                    <input type="text" id="member_ id" name="member_ id" required placeholder="ID สถานภาพครอบครัว">
-                </div>
+                
 
                 <div class="input-box">
-                    <input type="text" id="Email" name="Email" required placeholder="Email">
+                    <input type="text" id="email" name="email" required placeholder="Email">
                 </div>
 
                 <!-- Button styled file input -->
-                <label class="btn btn-primary">
+                <!-- <label class="btn btn-primary">
                     Image <input type="file" accept="image/*" hidden id="imageInput">
-                </label>
+                </label> -->
 
                 <!-- Preview Image -->
                 <div class="mt-3">
@@ -91,13 +73,13 @@
 
                 <form id="passwordForm">
                     <!-- Password Field -->
-                    <div class="mb-3">
+                    <div class="input-box">
                         <input type="password" id="password" name="password" class="form-control" required
                             placeholder="รหัสผ่าน">
                     </div>
 
                     <!-- Confirm Password Field -->
-                    <div class="mb-3">
+                    <div class="input-box">
                         <input type="password" id="confirm_password" name="confirm_password" class="form-control"
                             required placeholder="ยืนยันรหัสผ่าน">
                         <div id="passwordError" class="text-danger mt-1 d-none">รหัสผ่านไม่ตรงกัน</div>
