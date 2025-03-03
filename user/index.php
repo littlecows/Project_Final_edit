@@ -34,10 +34,9 @@ if (!isset($_SESSION['username'])) {
                     <option value="admin_dashboard.php">
                         <span>ยินดีต้อนรับ , <?php echo $_SESSION['username']; ?></span>
                     </option>
-                    <option value="logout.php">ออกจากระบบ</option>
                     <option value="user_profile.php">แก้ไขข้อมูล</option>
-                    <option value="adminadd_user.php">add user</option>
                     <option value="admin_dashboard.php">Dashboard</option>
+                    <option value="logout.php">ออกจากระบบ</option>
                 </select>
                 <script>
                     document.getElementById("navigationDropdown").onchange = function() {
