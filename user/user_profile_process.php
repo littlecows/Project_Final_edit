@@ -38,15 +38,26 @@ if (isset($_GET['student_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แก้ไขข้อมูลนักเรียน</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <div class="container mt-5">
     <h2 class="mb-4">แก้ไขข้อมูลนักเรียน</h2>
-    <form action="user_profile_process_save.php" method="POST">
+    <form action="user_profile_process_save.php" method="POST" onsubmit="return validateForm()">
         <div class="mb-3">
             <label for="student_id" class="form-label">Student ID</label>
             <input type="text" class="form-control" id="student_id" name="student_id" value="<?php echo htmlspecialchars($row['student_id']); ?>" readonly>
-        <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($row['student_id']); ?>">
+        </div>
         <div class="mb-3">
             <label for="student_code" class="form-label">Student Code</label>
             <input type="text" class="form-control" id="student_code" name="student_code" value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
@@ -66,6 +77,10 @@ if (isset($_GET['student_id'])) {
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
         </div>
         
         <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>

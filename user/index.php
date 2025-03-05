@@ -34,8 +34,8 @@ if (!isset($_SESSION['username'])) {
                     <option value="admin_dashboard.php">
                         <span>ยินดีต้อนรับ , <?php echo $_SESSION['username']; ?></span>
                     </option>
+                    <option value="index.php">หน้าแรก</option>
                     <option value="user_profile.php">แก้ไขข้อมูล</option>
-                    <option value="admin_dashboard.php">Dashboard</option>
                     <option value="logout.php">ออกจากระบบ</option>
                 </select>
                 <script>

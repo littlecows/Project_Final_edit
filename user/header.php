@@ -1,13 +1,12 @@
 <header class="box_head">
     <?php if (isset($_SESSION['username'])): ?>
                 <select id="navigationDropdown">
-                    <option value="admin_dashboard.php">
+                    <option value="index.php">
                         <span>Welcome, <?php echo $_SESSION['username']; ?></span>
                     </option>
-                    <option value="logout.php">Logout</option>
-                    <option value="user_profile.php">edit</option>
-                    <option value="adminadd_user.php">add user</option>
-                    <option value="admin_dashboard.php">Dashboard</option>
+                    <option value="index.php">หน้าแรก</option>
+                    <option value="user_profile.php">แก้ไขข้อมูล</option>
+                    <option value="logout.php">ออกจากระบบ</option>
                 </select>
                 <script>
                     document.getElementById("navigationDropdown").onchange = function() {

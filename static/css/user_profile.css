@@ -26,6 +26,7 @@
 
 #profile-container {
     background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629);
+    border: none;
 }
 
 .title {
