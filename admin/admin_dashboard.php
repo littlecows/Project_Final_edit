@@ -52,6 +52,10 @@ if (!isset($_SESSION['username'])) {
                     <option value="admin_edit_teacher.php">Edit Teachers Status</option>
                     <option value="adminadd_teacher.php">Add Teacher</option>
                     <option value="admin_edit_admin.php">Admin Edit admin</option>
+                    <option value="admin_Check_Statustable.php">Statustable</option>
+
+                    
+
                     
                 </select>
                 <script>
