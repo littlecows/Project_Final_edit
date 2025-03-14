@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
 
 * {
     margin: 0;
@@ -7,56 +6,53 @@
     box-sizing: border-box;
     font-family: "Prompt", sans-serif;
     font-weight: 300;
-    font-style: normal;
+}
+
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
 }
 
 
-/* body {
-    font-family: "Sarabun", sans-serif;
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-} */
-
-.container_user {
-    max-width: 600px;
-    margin: 20px auto;
-}
-
+/* พื้นหลังของโปรไฟล์ */
 #profile-container {
-    background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629);
-    border: none;
+    /* background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629); */
+    padding: 20px;
+    border-radius: 10px;
 }
 
+/* หัวข้อหลัก */
 .title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #fff;
+    color: #333;
 }
 
 .subtitle {
     font-size: 14px;
-    color: #ddd;
+    color: #333;
     margin-bottom: 20px;
 }
 
+/* กล่องข้อมูล */
 .info-card {
     background: white;
     color: black;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 15px;
-    margin: 20px auto; /* จัดให้อยู่ตรงกลางและมีระยะห่างด้านบนล่าง */
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
     position: relative;
-    /* border: 3px solid #F17629; */
-    padding-bottom: 45px;
-    max-width: 1000px; /* กำหนดความกว้างสูงสุดให้กล่องแคบลง */
-    width: 90%; /* ให้ปรับขนาดตามหน้าจอ */
+    max-width: 800px;
+    width: 90%;
+    padding-bottom: 50px;
+    border: 3px solid #f17629;
+    
 }
 
-
+/* หัวข้อของการ์ด */
 .info-header {
     font-size: 18px;
     font-weight: bold;
@@ -64,32 +60,41 @@
     text-align: left;
 }
 
+/* เนื้อหา */
 .info-body {
     text-align: left;
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     color: #333;
-    background-color: #f9e9e0;
+    background-color: #fbf6f3;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
 }
 
+/* เพิ่มเอฟเฟกต์ hover */
+.info-body:hover {
+    background-color: #f5f5f5;
+}
+
+/* จัดข้อความให้มีระยะห่าง */
 .info-body p {
     margin: 8px 0;
+    font-weight: 500;
 }
 
 /* เส้นไล่สี */
 .gradient-line {
-    height: 4px;
+    height: 3px;
     background: linear-gradient(to right, #ec0f0f, #ed360c, #f17629);
-    border-radius: 5px;
     margin: 10px 0;
 }
 
-
+/* ปุ่มแก้ไข */
 .edit-btn {
     background: #f17629;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
@@ -97,13 +102,40 @@
     align-items: center;
     position: absolute;
     right: 15px;
-    bottom: 10px; /* ลดค่าจาก 15px เป็น 5px */
+    bottom: 10px;
+    transition: background 0.3s ease-in-out;
 }
 
+/* ปรับขนาดไอคอน */
 .edit-btn i {
     margin-right: 5px;
+    font-size: 16px;
 }
 
+/* ปุ่ม hover */
 .edit-btn:hover {
     background: #ec0f0f;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info-card {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .info-body {
+        font-size: 14px;
+    }
+
+    .edit-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}
+
+
+
+
+
+

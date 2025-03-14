@@ -32,12 +32,87 @@ if (isset($_GET['student_id'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แก้ไขข้อมูลนักเรียน</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ปรับพื้นหลังและฟอร์ม */
+        body {
+            background: #f4f7f6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+    </style>
+
     <script>
         function validateForm() {
             var password = document.getElementById("password").value;
@@ -51,28 +126,34 @@ if (isset($_GET['student_id'])) {
     </script>
 </head>
 <body>
+
 <div class="container mt-5">
     <h2 class="mb-4">แก้ไขข้อมูลนักเรียน</h2>
     <form action="user_profile_process_save.php" method="POST" onsubmit="return validateForm()">
         <div class="mb-3">
             <label for="student_id" class="form-label">Student ID</label>
-            <input type="text" class="form-control" id="student_id" name="student_id" value="<?php echo htmlspecialchars($row['student_id']); ?>" readonly>
+            <input type="text" class="form-control" id="student_id" name="student_id" 
+                   value="<?php echo htmlspecialchars($row['student_id']); ?>" readonly>
         </div>
         <div class="mb-3">
             <label for="student_code" class="form-label">Student Code</label>
-            <input type="text" class="form-control" id="student_code" name="student_code" value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
+            <input type="text" class="form-control" id="student_code" name="student_code" 
+                   value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="f_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="f_name" name="f_name" value="<?php echo htmlspecialchars($row['f_name']); ?>" required>
+            <input type="text" class="form-control" id="f_name" name="f_name" 
+                   value="<?php echo htmlspecialchars($row['f_name']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="l_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="l_name" name="l_name" value="<?php echo htmlspecialchars($row['l_name']); ?>" required>
+            <input type="text" class="form-control" id="l_name" name="l_name" 
+                   value="<?php echo htmlspecialchars($row['l_name']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" name="address" value="<?php echo htmlspecialchars($row['address']); ?>" required>
+            <input type="text" class="form-control" id="address" name="address" 
+                   value="<?php echo htmlspecialchars($row['address']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -84,8 +165,9 @@ if (isset($_GET['student_id'])) {
         </div>
         
         <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
-        <a href="index.php" class="btn btn-secondary">ยกเลิก</a>
+        <a href="index.php" class="btn btn-secondary mt-2">ยกเลิก</a>
     </form>
 </div>
+
 </body>
 </html>

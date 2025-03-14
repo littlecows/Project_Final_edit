@@ -1,12 +1,18 @@
 <?php
 session_start();
+include '/xampp/htdocs/Project_Final/server.php';
 
-// ตรวจสอบว่าผู้ใช้ได้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
     header("Location: admin_login.php");
     exit();
 }
+
+// ดึงข้อมูลทั้งหมดจากฐานข้อมูล student
+$sql = "SELECT student_id, student_code, CONCAT(f_name, ' ', l_name) AS full_name, address, phone_number, email FROM student";
+$result = $conn->query($sql);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="th">
 
@@ -87,46 +93,55 @@ if (!isset($_SESSION['username'])) {
             border-radius: 5px;
         }
 
-        .dashboard {
-            margin-top: 20px;
-        }
-
-        img {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* ตั้งค่าปุ่ม Logout */
-        .logout-btn {
-            background: #E74C3C;
-            color: white;
-            padding: 10px;
+        .status-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            border-radius: 5px;
-            margin: 15px auto;
-            text-decoration: none;
-            width: 80%;
-            font-size: 16px;
-            font-weight: bold;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .logout-btn i {
-            margin-right: 8px;
+        .status-card {
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
             font-size: 18px;
+            font-weight: bold;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .logout-btn:hover {
-            background: #C0392B;
+        .pending { background-color: #f8c471; }
+        .in-review { background-color: #5d6d7e; }
+        .approved { background-color: #7dcea0; }
+
+        /* ตาราง */
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f17629;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -148,47 +163,75 @@ if (!isset($_SESSION['username'])) {
     <div class="main-content">
         <header class="box_head">
             <?php if (isset($_SESSION['username'])): ?>
-                <select id="navigationDropdown">
-                    <option value="admin_dashboard.php">
-                        <span>Welcome Admin, <?php echo $_SESSION['username']; ?></span>
-                    </option>
-                    <option value="adminlogout.php">Logout</option>
-                    <option value="admin_edit.php">edit</option>
-                    <option value="admin_dashboard.php">Dashboard</option>
-                    <option value="adminCheck_Borrower_Status.php">Check Borrower Status</option>
-                    <option value="adminCheck_form_Status.php">Check Form Status</option>
-                    <option value="admin_edit_student.php">Edit Students Status</option>
-                    <option value="adminadd_user.php">Add Student</option>
-                    <option value="admin_edit_teacher.php">Edit Teachers Status</option>
-                    <option value="adminadd_teacher.php">Add Teacher</option>
-                    <option value="admin_edit_admin.php">Admin Edit admin</option>
-                    <option value="admin_Check_Statustable.php">Statustable</option>
-
-                    
-
-                    
-                </select>
-                <script>
-                    document.getElementById("navigationDropdown").onchange = function() {
-                        var selectedLink = this.value;
-                        if (selectedLink) {
-                            window.location.href = selectedLink;
-                        }
-                    };
-                </script>
+                <span>ยินดีต้อนรับ , <?php echo $_SESSION['username']; ?></span>
             <?php endif; ?>
         </header>
 
         <div class="dashboard">
             <h1>Welcome to the Admin Dashboard</h1>
             <p>This is the admin dashboard where you can manage the website.</p>
+
+            <!-- การ์ดสถานะ -->
+            <div class="status-container">
+                <div class="status-card pending">
+                    <h3>รอดำเนินการ</h3>
+                    <p>กำลังเตรียมเอกสารและส่งข้อมูล</p>
+                </div>
+
+                <div class="status-card in-review">
+                    <h3>กำลังตรวจสอบ</h3>
+                    <p>เจ้าหน้าที่กำลังพิจารณาเอกสาร</p>
+                </div>
+
+                <div class="status-card approved">
+                    <h3>อนุมัติแล้ว</h3>
+                    <p>ได้รับอนุมัติเรียบร้อย สามารถดำเนินการต่อ</p>
+                </div>
+            </div>
+
+            <!-- ค้นหา -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="form-control" placeholder="ค้นหานักศึกษา...">
+            </div>
+
+            <!-- ตารางนักศึกษา -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>เลขบัตรประชาชน</th>
+                        <th>รหัสนักศึกษา</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>ที่อยู่</th>
+                        <th>เบอร์โทร</th>
+                        <th>อีเมล</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable">
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row["student_id"]) ?></td>
+                            <td><?= htmlspecialchars($row["student_code"]) ?></td>
+                            <td><?= htmlspecialchars($row["full_name"]) ?></td>
+                            <td><?= htmlspecialchars($row["address"]) ?></td>
+                            <td><?= htmlspecialchars($row["phone_number"]) ?></td>
+                            <td><?= htmlspecialchars($row["email"]) ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let searchValue = this.value.toLowerCase();
+            let tableRows = document.getElementById("studentTable").getElementsByTagName("tr");
+
+            for (let row of tableRows) {
+                row.style.display = row.innerText.toLowerCase().includes(searchValue) ? "" : "none";
+            }
+        });
+    </script>
 
 </body>
-
 </html>

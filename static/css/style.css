@@ -12,11 +12,11 @@
 
 
 .container {
-    max-width: 1980px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
 }
+
 
 /* ส่วนของ header */
 .box_head {
