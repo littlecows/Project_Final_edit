@@ -6,6 +6,7 @@
                     </option>
                     <option value="index.php">หน้าแรก</option>
                     <option value="user_profile.php">แก้ไขข้อมูล</option>
+                    <option value="user_profile.php">จิตอาสา</option>
                     <option value="logout.php">ออกจากระบบ</option>
                 </select>
                 <script>
@@ -30,6 +31,6 @@
             <a href="#">หน้าแรก</a>
             <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
             <a href="#">ข่าวสาร</a>
-            <a href="#">ติดต่อ</a>
+            <a href="user_contact.php">ติดต่อ</a>
         </nav>
     </div>
