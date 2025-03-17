@@ -37,6 +37,8 @@ if (isset($_GET['student_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แก้ไขข้อมูลนักเรียน</title>
+
+    <link rel="stylesheet" href="../static/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -89,12 +91,12 @@ if (isset($_GET['student_id'])) {
         }
 
         .btn-primary {
-            background: #007bff;
+            background: #F17629;
             border: none;
         }
 
         .btn-primary:hover {
-            background: #0056b3;
+            background: #d65c1e;
         }
 
         .btn-secondary {
@@ -127,8 +129,10 @@ if (isset($_GET['student_id'])) {
 </head>
 <body>
 
+<?php include('../user/header.php'); ?>
+
 <div class="container mt-5">
-    <h2 class="mb-4">แก้ไขข้อมูลนักเรียน</h2>
+    <h2 class="mb-4">แก้ไขข้อมูล</h2>
     <form action="user_profile_process_save.php" method="POST" onsubmit="return validateForm()">
         <div class="mb-3">
             <label for="student_id" class="form-label">Student ID</label>
