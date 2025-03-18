@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container">
         <nav class="header">
-            <img src="../static/img/logo (1).png" alt="">
+            <img src="../static/img/logo.png" alt="">
             <h1>เข้าสู่ระบบ</h1>
                 
             <form method="POST" action="">

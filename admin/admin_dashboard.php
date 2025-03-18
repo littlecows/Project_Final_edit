@@ -148,7 +148,7 @@ $result = $conn->query($sql);
         <img src="../static/img/logo.png" alt="Kasem Bundit University">
         <ul>
             <li><a href="admin_dashboard.php"><i class="bi bi-house"></i> หน้าหลัก (Dashboard)</a></li>
-            <li><a href="adminCheck_Borrower_Status.php"><i class="bi bi-search"></i> ตรวจสอบสถานะผู้กู้</a></li>
+            <!-- <li><a href="adminCheck_Borrower_Status.php"><i class="bi bi-search"></i> ตรวจสอบสถานะผู้กู้</a></li> -->
             <li><a href="adminCheck_form_Status.php"><i class="bi bi-file-text"></i> ตรวจสอบสถานะเอกสาร</a></li>
             <li><a href="admin_edit_student.php"><i class="bi bi-person"></i> แก้ไขข้อมูลนักศึกษา</a></li>
             <li><a href="adminadd_user.php"><i class="bi bi-person-plus"></i> เพิ่มนักศึกษา</a></li>
@@ -167,9 +167,8 @@ $result = $conn->query($sql);
             <?php endif; ?>
         </header>
 
-        <div class="dashboard">
-            <h1>Welcome to the Admin Dashboard</h1>
-            <p>This is the admin dashboard where you can manage the website.</p>
+        <div class="dashboard text-center">
+            <h1>Admin Dashboard</h1>
 
             <!-- การ์ดสถานะ -->
             <div class="status-container">

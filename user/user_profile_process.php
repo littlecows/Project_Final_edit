@@ -33,6 +33,7 @@ if (isset($_GET['student_id'])) {
 
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,51 +128,101 @@ if (isset($_GET['student_id'])) {
         }
     </script>
 </head>
+
 <body>
 
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
 
-<div class="container mt-5">
-    <h2 class="mb-4">แก้ไขข้อมูล</h2>
-    <form action="user_profile_process_save.php" method="POST" onsubmit="return validateForm()">
-        <div class="mb-3">
-            <label for="student_id" class="form-label">Student ID</label>
-            <input type="text" class="form-control" id="student_id" name="student_id" 
-                   value="<?php echo htmlspecialchars($row['student_id']); ?>" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="student_code" class="form-label">Student Code</label>
-            <input type="text" class="form-control" id="student_code" name="student_code" 
-                   value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="f_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="f_name" name="f_name" 
-                   value="<?php echo htmlspecialchars($row['f_name']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="l_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="l_name" name="l_name" 
-                   value="<?php echo htmlspecialchars($row['l_name']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" name="address" 
-                   value="<?php echo htmlspecialchars($row['address']); ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="mb-3">
-            <label for="confirm_password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
-        <a href="index.php" class="btn btn-secondary mt-2">ยกเลิก</a>
-    </form>
-</div>
+    <div class="container mt-5">
+        <h2 class="mb-4">แก้ไขข้อมูล</h2>
+        <form action="user_profile_process_save.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="student_id" class="form-label">Student ID</label>
+                <input type="text" class="form-control" id="student_id" name="student_id"
+                    value="<?php echo htmlspecialchars($row['student_id']); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="student_code" class="form-label">Student Code</label>
+                <input type="text" class="form-control" id="student_code" name="student_code"
+                    value="<?php echo htmlspecialchars($row['student_code']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="f_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="f_name" name="f_name"
+                    value="<?php echo htmlspecialchars($row['f_name']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="l_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="l_name" name="l_name"
+                    value="<?php echo htmlspecialchars($row['l_name']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address"
+                    value="<?php echo htmlspecialchars($row['address']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number"
+                    value="<?php echo htmlspecialchars($row['phone_number']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    value="<?php echo htmlspecialchars($row['email']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="profile_image" class="form-label">Profile Image</label>
+                <input type="file" class="form-control" id="profile_image" name="profile_image" required>
+            </div>
+            <div class="mb-3">
+                <label for="spouse_id" class="form-label">Spouse ID</label>
+                <input type="text" class="form-control" id="spouse_id" name="spouse_id"
+                    value="<?php echo htmlspecialchars($row['spouse_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="father_id" class="form-label">Father ID</label>
+                <input type="text" class="form-control" id="father_id" name="father_id"
+                    value="<?php echo htmlspecialchars($row['father_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="mother_id" class="form-label">Mother ID</label>
+                <input type="text" class="form-control" id="mother_id" name="mother_id"
+                    value="<?php echo htmlspecialchars($row['mother_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="guardian_id" class="form-label">Guardian ID</label>
+                <input type="text" class="form-control" id="guardian_id" name="guardian_id"
+                    value="<?php echo htmlspecialchars($row['guardian_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="endorser_id" class="form-label">Endorser ID</label>
+                <input type="text" class="form-control" id="endorser_id" name="endorser_id"
+                    value="<?php echo htmlspecialchars($row['endorser_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="department_id" class="form-label">Department ID</label>
+                <input type="text" class="form-control" id="department_id" name="department_id"
+                    value="<?php echo htmlspecialchars($row['department_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="family_status_id" class="form-label">Family Status ID</label>
+                <input type="text" class="form-control" id="family_status_id" name="family_status_id"
+                    value="<?php echo htmlspecialchars($row['family_status_id']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
+            <a href="index.php" class="btn btn-secondary mt-2">ยกเลิก</a>
+        </form>
+    </div>
 
 </body>
+
 </html>

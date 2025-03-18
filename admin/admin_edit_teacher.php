@@ -24,19 +24,93 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แก้ไขข้อมูลอาจารย์</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* ปรับพื้นหลังและฟอร์ม */
+        body {
+            background: #f4f7f6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #F17629;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #d65c1e;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">แก้ไขข้อมูลอาจารย์</h2>
+    <h2 class="text-center rounded-pill mb-4 col px-md-5 btn-edit">แก้ไขข้อมูลอาจารย์</h2>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>officer_id</th>
+                <th>Officer ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>campus</th>
-                <th>room_number</th>
-                <th>position</th>
+                <th>Campus</th>
+                <th>Room Number</th>
+                <th>Position</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -50,11 +124,11 @@ $result = $conn->query($sql);
                             <td>" . htmlspecialchars($row["campus"]) . "</td>
                             <td>" . htmlspecialchars($row["room_number"]) . "</td>
                             <td>" . htmlspecialchars($row["position"]) . "</td>
-                            <td><a href='admin_edit_teacher_process.php?officer_id=" . htmlspecialchars($row["officer_id"]) . "' class='btn btn-primary'>แก้ไข</a></td>
+                            <td><a href='admin_edit_teacher_process.php?officer_id=" . htmlspecialchars($row["officer_id"]) . "' class='btn btn-primary btn-edit'>แก้ไข</a></td>
                           </tr>";
                 }
             } else {
-                echo "<tr><td colspan='6' class='text-center'>ไม่พบข้อมูล</td></tr>";
+                echo "<tr><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
             }
             $conn->close();
             ?>
