@@ -1,56 +1,110 @@
 <?php
 session_start();
-include '/xampp/htdocs/Project_Final/server.php';
 
+// ตรวจสอบว่าผู้ใช้ได้เข้าสู่ระบบหรือไม่
 if (!isset($_SESSION['username'])) {
     header("Location: user_login.php");
     exit();
 }
-
-$student_id = $_SESSION['student_id'];
-
-// Fetch document status
-$sql = "SELECT * FROM documents WHERE student_id = '$student_id'";
-$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สถานะเอกสารกองทุนกู้ยืม</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>คำยินยอมตรวจสอบเอกสาร</title>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+
+    <style>
+        .container {
+            width: 50%;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #F17629;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 50px; /* เพิ่มระยะห่างจากด้านบน */
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            color: white;
+            font-weight: bold;
+        }
+
+        .step.active {
+            background-color: #F17629;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            width: calc(100% - 60px);
+            height: 2px;
+            background-color: #ccc;
+            z-index: -1;
+        }
+
+        .step:first-child::after {
+            left: 30px;
+        }
+
+        .step:last-child::after {
+            right: 30px;
+            width: calc(100% - 60px);
+        }
+
+        .step.active + .step::after {
+            background-color: #F17629;
+        }
+
+        h3 {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #F17629;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #e06a0d;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2 class="mb-4">สถานะเอกสารกองทุนกู้ยืม</h2>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>ประเภทเอกสาร</th>
-                <th>สถานะ</th>
-                <th>วันที่อัปโหลด</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>" . htmlspecialchars($row["document_type"]) . "</td>
-                            <td>" . htmlspecialchars($row["status"]) . "</td>
-                            <td>" . htmlspecialchars($row["upload_date"]) . "</td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='3' class='text-center'>ไม่พบข้อมูล</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </tbody>
-    </table>
-    <a href="user_dashboard.php" class="btn btn-secondary">กลับไปที่แดชบอร์ด</a>
+
+<?php include('../user/header.php'); ?>
+
+<div class="container">
+    <div class="step-container">
+        <div class="step active">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+    </div>
+    <h3>คำยินยอมตรวจสอบเอกสาร</h3>
+    <p>วันที่ทำการลงทะเบียน 08 ก.พ. 2567</p>
+    <button>รายละเอียดการลงทะเบียน</button>
 </div>
+
 </body>
 </html>
