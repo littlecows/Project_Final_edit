@@ -98,11 +98,9 @@ if (!isset($_SESSION['username'])) {
 <div class="container">
     <div class="content">
         <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
-        <p>pummarin2003@gmail.com สลับบัญชี</p>
-        <p><a href="#">ไม่ใช่ร่วมกัน</a></p>
         <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
 
-        <form action="#" method="post">
+        <form action="user_page2_form3.php" method="post">
             <div class="question-section">
                 <h3>กรุณากรอกข้อมูลส่วนตัวเพื่อประโยชน์ในการติดต่อ และการเตรียมเอกสารแบบฟอร์มที่ถูกต้อง</h3>
                 <p>เลขประจำตัวประชาชน 13 หลัก โดยไม่ต้องใส่ช่อง เช่น 3100100775331 *</p>
@@ -129,7 +127,7 @@ if (!isset($_SESSION['username'])) {
                 <input type="email" name="email" placeholder="คำตอบของคุณ" required>
             </div>
 
-            <button type="submit">ตกลง</button>
+            <button type="submit"><a href="user_page2_form3.php"></a>ตกลง</button>
             <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
         </form>
     </div>
