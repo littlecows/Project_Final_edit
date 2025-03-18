@@ -3,7 +3,7 @@ session_start();
 include '/xampp/htdocs/Project_Final/server.php';
 
 if (!isset($_SESSION['username'])) {
-    header("Location: admin_login.php");
+    header("Location: user_login.php");
     exit();
 }
 
@@ -135,7 +135,7 @@ if (isset($_GET['student_id'])) {
 
     <div class="container mt-5">
         <h2 class="mb-4">แก้ไขข้อมูล</h2>
-        <form action="user_profile_process_save.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <form action="user_profile_process_save1.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
             <div class="mb-3">
                 <label for="student_id" class="form-label">Student ID</label>
                 <input type="text" class="form-control" id="student_id" name="student_id"
@@ -219,7 +219,7 @@ if (isset($_GET['student_id'])) {
                 <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
             </div>
             <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
-            <a href="index.php" class="btn btn-secondary mt-2">ยกเลิก</a>
+            <a href="user_profile.php" class="btn btn-secondary mt-2">ยกเลิก</a>
         </form>
     </div>
 

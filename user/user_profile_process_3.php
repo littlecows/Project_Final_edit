@@ -16,7 +16,11 @@ if (isset($_GET['student_id'])) {
     $student_id = intval($_GET['student_id']);
 
     // ดึงข้อมูลนักเรียนจากฐานข้อมูล
-    $sql = "SELECT * FROM student WHERE student_id = $student_id";
+    $sql = "SELECT student.*, mother.mother_name, mother.mother_last_name, father.father_name, father.father_last_name 
+            FROM student 
+            LEFT JOIN mother ON student.mother_id = mother.mother_id 
+            LEFT JOIN father ON student.father_id = father.father_id 
+            WHERE student.student_id = $student_id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -133,12 +137,27 @@ if (isset($_GET['student_id'])) {
 
 <div class="container mt-5">
     <h2 class="mb-4">แก้ไขข้อมูล</h2>
-    <form action="user_profile_process_save2.php" method="POST" onsubmit="return validateForm()">
+    <form action="user_profile_process_save3.php" method="POST" onsubmit="return validateForm()">
     <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($row['student_id']); ?>">
     <div class="mb-3">
-        <label for="phone_number" class="form-label">เบอร์โทรศัพท์มือถือ</label>
-        <input type="text" class="form-control" id="phone_number" name="phone_number" 
-               value="<?php echo htmlspecialchars($row['phone_number']); ?>" required>
+        <label for="father_name" class="form-label">ชื่อพ่อ</label>
+        <input type="text" class="form-control" id="father_name" name="father_name" 
+               value="<?php echo htmlspecialchars($row['father_name']); ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="father_last_name" class="form-label">ชื่อนามสกุลพ่อ</label>
+        <input type="text" class="form-control" id="father_last_name" name="father_last_name" 
+               value="<?php echo htmlspecialchars($row['father_last_name']); ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="mother_name" class="form-label">ชื่อแม่</label>
+        <input type="text" class="form-control" id="mother_name" name="mother_name" 
+               value="<?php echo htmlspecialchars($row['mother_name']); ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="mother_last_name" class="form-label">ชื่อนามสกุลแม่</label>
+        <input type="text" class="form-control" id="mother_last_name" name="mother_last_name" 
+               value="<?php echo htmlspecialchars($row['mother_last_name']); ?>" required>
     </div>
     <div class="mb-3">
         <label for="phone_number_home" class="form-label">เบอร์โทรศัพท์บ้าน</label>

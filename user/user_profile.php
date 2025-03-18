@@ -92,6 +92,20 @@ $conn->close();
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
             </a>
         </div>
+
+                <!-- กล่องข้อมูลสถานภาพครอบครัว -->
+                <div class="info-card">
+            <div class="info-header">ข้อมูลสถานภาพครอบครัว</div>
+            <div class="gradient-line"></div>
+            <div class="info-body">
+                <div class="info-row"><strong>เบอร์โทรศัพท์บ้าน</strong> <span><?php echo htmlspecialchars($student["phone_number_home"]); ?></span></div>
+                <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
+                <div class="info-row"><strong>อีเมล</strong> <span><?php echo htmlspecialchars($student["email"]); ?></span></div>
+            </div>
+            <a href="user_profile_process_3.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
+                <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
+            </a>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

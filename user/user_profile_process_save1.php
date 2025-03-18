@@ -3,7 +3,7 @@ session_start();
 include '/xampp/htdocs/Project_Final/server.php';
 
 if (!isset($_SESSION['username'])) {
-    header("Location: admin_login.php");
+    header("Location: user_login.php");
     exit();
 }
 
@@ -79,4 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $conn->close();
 }
+
+
 ?>
