@@ -26,7 +26,9 @@
     </header>
 
     <div class="box_logo">
-        <img src="../static/img/logo.png" alt="">
+        <a href="index.php"><img src="../static/img/logo.png" alt=""></a>
+
+
         <nav>
             <a href="#">หน้าแรก</a>
             <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
