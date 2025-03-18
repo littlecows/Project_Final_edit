@@ -34,7 +34,7 @@
 
         <nav>
             <a href="#">หน้าแรก</a>
-            <a href="page-1.html">หลักเกณฑ์การกู้ยืม</a>
+            <a href="user_criteria.php">หลักเกณฑ์การกู้ยืม</a>
             <a href="#">ข่าวสาร</a>
             <a href="user_contact.php">ติดต่อ</a>
         </nav>
