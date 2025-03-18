@@ -7,39 +7,92 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $student_id = intval($_POST['student_id']);
-    $father_name = $_POST['father_name'];
-    $father_last_name = $_POST['father_last_name'];
-    $mother_name = $_POST['mother_name'];
-    $mother_last_name = $_POST['mother_last_name'];
-    $phone_number_home = $_POST['phone_number_home'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
+    $father_name = htmlspecialchars($_POST['father_name']);
+    $father_last_name = htmlspecialchars($_POST['father_last_name']);
+    $father_id = htmlspecialchars($_POST['father_id']);
+    $father_address = htmlspecialchars($_POST['father_address']);
+    $father_occupation = htmlspecialchars($_POST['father_occupation']);
+    $father_income = htmlspecialchars($_POST['father_income']);
+    $father_phone_number = htmlspecialchars($_POST['father_phone_number']);
+    $mother_name = htmlspecialchars($_POST['mother_name']);
+    $mother_last_name = htmlspecialchars($_POST['mother_last_name']);
+    $mother_id = htmlspecialchars($_POST['mother_id']);
+    $mother_address = htmlspecialchars($_POST['mother_address']);
+    $mother_occupation = htmlspecialchars($_POST['mother_occupation']);
+    $mother_income = htmlspecialchars($_POST['mother_income']);
+    $mother_phone_number = htmlspecialchars($_POST['mother_phone_number']);
+    $family_status = htmlspecialchars($_POST['family_status']);
 
-    // Update student information in the database
-    $sql = "UPDATE student 
-            SET phone_number_home='$phone_number_home', email='$email', address='$address' 
-            WHERE student_id=$student_id";
+    // Update the father table
+    $sql_father = "UPDATE father SET 
+                    father_name = ?, 
+                    father_last_name = ?, 
+                    father_id = ?, 
+                    father_address = ?, 
+                    father_occupation = ?, 
+                    father_income = ?, 
+                    father_phone_number = ? 
+                   WHERE father_id = (SELECT father_id FROM student WHERE student_id = ?)";
+    $stmt_father = $conn->prepare($sql_father);
+    $stmt_father->bind_param(
+        "sssssssi", 
+        $father_name, 
+        $father_last_name, 
+        $father_id, 
+        $father_address, 
+        $father_occupation, 
+        $father_income, 
+        $father_phone_number, 
+        $student_id
+    );
 
-    if ($conn->query($sql) === TRUE) {
-        // Update father information in the database
-        $sql_father = "UPDATE father 
-                       SET father_name='$father_name', father_last_name='$father_last_name' 
-                       WHERE father_id=(SELECT father_id FROM student WHERE student_id=$student_id)";
-        $conn->query($sql_father);
+    // Update the mother table
+    $sql_mother = "UPDATE mother SET 
+                    mother_name = ?, 
+                    mother_last_name = ?, 
+                    mother_id = ?, 
+                    mother_address = ?, 
+                    mother_occupation = ?, 
+                    mother_income = ?, 
+                    mother_phone_number = ? 
+                   WHERE mother_id = (SELECT mother_id FROM student WHERE student_id = ?)";
+    $stmt_mother = $conn->prepare($sql_mother);
+    $stmt_mother->bind_param(
+        "sssssssi", 
+        $mother_name, 
+        $mother_last_name, 
+        $mother_id, 
+        $mother_address, 
+        $mother_occupation, 
+        $mother_income, 
+        $mother_phone_number, 
+        $student_id
+    );
 
-        // Update mother information in the database
-        $sql_mother = "UPDATE mother 
-                       SET mother_name='$mother_name', mother_last_name='$mother_last_name' 
-                       WHERE mother_id=(SELECT mother_id FROM student WHERE student_id=$student_id)";
-        $conn->query($sql_mother);
+    // Update the student table
+    $sql_student = "UPDATE student SET 
+                    family_status = ?, 
+                    father_id = ?, 
+                    mother_id = ? 
+                    WHERE student_id = ?";
+    $stmt_student = $conn->prepare($sql_student);
+    $stmt_student->bind_param("sssi", $family_status, $father_id, $mother_id, $student_id);
 
-        header("Location: user_profile.php");
+    // Execute the statements
+    if ($stmt_father->execute() && $stmt_mother->execute() && $stmt_student->execute()) {
+        header("Location: user_profile.php?success=1");
     } else {
-        echo "Error updating record: " . $conn->error;
+        echo "Error: " . $stmt_father->error . " " . $stmt_mother->error . " " . $stmt_student->error;
     }
 
+    $stmt_father->close();
+    $stmt_mother->close();
+    $stmt_student->close();
     $conn->close();
+} else {
+    header("Location: user_profile.php");
+    exit();
 }
 ?>
