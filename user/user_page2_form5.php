@@ -89,16 +89,13 @@ if (!isset($_SESSION['username'])) {
 
         .content .question-section p {
             margin-bottom: 5px;
-
         }
 
         .form-group {
             display: flex;
             align-items: center;
             gap: 10px;
-            /* ระยะห่างระหว่าง radio button และข้อความ */
             flex-wrap: wrap;
-            /* ให้ข้อความที่ยาวเกินไปขึ้นบรรทัดใหม่ */
         }
 
         .form-group label {
@@ -107,82 +104,80 @@ if (!isset($_SESSION['username'])) {
 
         .form-group div {
             margin-bottom: 20px;
-            /* เพิ่มระยะห่างระหว่างแต่ละข้อ */
             display: flex;
             align-items: center;
         }
 
         .form-group input[type="radio"] {
             margin-right: 10px;
-            /* ระยะห่างระหว่าง radio button และข้อความ */
         }
     </style>
 </head>
 
 <body>
 
-    <?php include('../user/header.php'); ?>
+<?php include('../user/header.php'); ?>
 
-    <div class="container">
-        <div class="content">
-            <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
-            <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
+<div class="container">
+    <div class="content">
+        <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
+        <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
 
-            <form action="user_nonti.php" method="post">
+        <form action="user_nonti.php" method="post">
 
-                <div class="question-text">
-                    <h3>หนังสือให้ความยินยอม</h3>
-                    <p>การกู้ยืมทุกคนจะต้องมีหนังสือให้ความยินยอมที่เขียนด้วยลายมือตัวเองเท่านั้น
-                        กรุณาดาวน์โหลดตามจำนวนดังต่อไปนี้</p>
-                </div>
+            <div class="question-text">
+                <h3>หนังสือให้ความยินยอม</h3>
+                <p>การกู้ยืมทุกคนจะต้องมีหนังสือให้ความยินยอมที่เขียนด้วยลายมือตัวเองเท่านั้น
+                    กรุณาดาวน์โหลดตามจำนวนดังต่อไปนี้</p>
+            </div>
 
-                <div class="question-section">
-                    <div class="content-section">
-                        <p><b>หนังสือให้ความยินยอม *</b></p>
-                        
-                            <div>
-                                <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                                <label for="both-parents">นักศึกษาอยู่ในความดูแลของบิดาและมารดา ดาวน์โหลด 3 แผ่น</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="father-only" name="guardian" value="father-only">
-                                <label for="father-only">นักศึกษาอยู่ในความดูแลของบิดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                                <label for="mother-only">นักศึกษาอยู่ในความดูแลของมารดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="guardian" name="guardian" value="guardian">
-                                <label for="guardian">นักศึกษาอยู่ในความดูแลของผู้ปกครอง
-                                    (กรณีไม่ได้อยู่ในความดูแลของทั้งบิดาและมารดา) ดาวน์โหลด 2 แผ่น</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="both-parents-guardian" name="guardian"
-                                    value="both-parents-guardian">
-                                <label for="both-parents-guardian">นักศึกษาอยู่ในความดูแลของบิดามารดา และผู้ปกครอง
-                                    ดาวน์โหลด 4 แผ่น (กรณีบิดาและมารดาไม่มีรายได้)</label>
-                            </div>
-                    </div>
-                </div>
-
-                <div class="question-section">
-                    <div class="content-section">
-                        <p><b>แบบฟอร์มการกู้ยืม *</b></p>
-                        <p>นักศึกษาสามารถดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101ได้หลังจากบันทึกข้อมูลและกดส่งเรียบร้อยแล้ว
-                            ขอให้นำส่งหลังจากดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101 ภายใน 7 วันทำการ</p>
-                        <div class="form-group">
-                            <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                            <label for="both-parents">รับทราบ</label><br>
+            <div class="question-section">
+                <div class="content-section">
+                    <p><b>หนังสือให้ความยินยอม *</b></p>
+                    
+                        <div>
+                            <input type="radio" id="both-parents" name="consent_form" value="both-parents">
+                            <label for="both-parents">นักศึกษาอยู่ในความดูแลของบิดาและมารดา ดาวน์โหลด 3 แผ่น</label>
                         </div>
+                        <div>
+                            <input type="radio" id="father-only" name="consent_form" value="father-only">
+                            <label for="father-only">นักศึกษาอยู่ในความดูแลของบิดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="mother-only" name="consent_form" value="mother-only">
+                            <label for="mother-only">นักศึกษาอยู่ในความดูแลของมารดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="guardian" name="consent_form" value="guardian">
+                            <label for="guardian">นักศึกษาอยู่ในความดูแลของผู้ปกครอง
+                                (กรณีไม่ได้อยู่ในความดูแลของทั้งบิดาและมารดา) ดาวน์โหลด 2 แผ่น</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="both-parents-guardian" name="consent_form"
+                                value="both-parents-guardian">
+                            <label for="both-parents-guardian">นักศึกษาอยู่ในความดูแลของบิดามารดา และผู้ปกครอง
+                                ดาวน์โหลด 4 แผ่น (กรณีบิดาและมารดาไม่มีรายได้)</label>
+                        </div>
+                </div>
+            </div>
+
+            <div class="question-section">
+                <div class="content-section">
+                    <p><b>แบบฟอร์มการกู้ยืม *</b></p>
+                    <p>นักศึกษาสามารถดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101ได้หลังจากบันทึกข้อมูลและกดส่งเรียบร้อยแล้ว
+                        ขอให้นำส่งหลังจากดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101 ภายใน 7 วันทำการ</p>
+                    <div class="form-group">
+                        <input type="radio" id="loan-form-acknowledged" name="loan_form" value="acknowledged">
+                        <label for="loan-form-acknowledged">รับทราบ</label><br>
                     </div>
                 </div>
+            </div>
 
-                <button type="submit"><a href="user_nonti.php"></a>ตกลง</button>
-                <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
-            </form>
-        </div>
+            <button type="submit">ตกลง</button>
+            <button type="button" onclick="document.querySelector('form').reset();" style="float: right;">ล้างแบบฟอร์ม</button>
+        </form>
     </div>
+</div>
 
 </body>
 
