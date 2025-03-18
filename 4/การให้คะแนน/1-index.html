@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบกิจกรรม</title>
+    <link rel="stylesheet" href="1-styles.css">
+</head>
+<body>
+    <!-- ส่วนหัว -->
+    <header>
+        <h1>ระบบตรวจสอบกิจกรรม</h1>
+        <nav>
+            <ul>
+                <li><a href="1-index.html">การตรวจสอบ</a></li>
+                <li><a href="2-approved.html">ผ่านแล้ว</a></li>
+                <li><a href="#">ไม่ผ่าน</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- แถบค้นหา -->
+    <section class="search-bar">
+        <input type="text" placeholder="รหัสนักศึกษา , ชื่อขสกุล">
+        <button>ค้นหา</button>
+    </section>
+
+    <!-- ตารางกิจกรรม -->
+    <section class="activity-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>รหัสนักศึกษา</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ชื่อกิจกรรม</th>
+                    <th>วันที่ทำกิจกรรม</th>
+                    <th>รายละเอียด</th>
+                    <th>ไฟล์ข้อมูล</th>
+                    <th>สถานะ</th>
+                    <th>เพิ่มเติม</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>640406401334</td>
+                    <td>ณัฏฐ์ชุดา</td>
+                    <td>จอมศิริวัฒน์</td>
+                    <td>กิจกรรมตัวอย่าง 1</td>
+                    <td>10/10/2024</td>
+                    <td><button class="details-btn">ดูรายละเอียด</button></td>
+                    <td><a href="#">ดาวน์โหลด</a></td>
+                    <td>
+                        <!-- ตัวเลือกสถานะผ่านหรือไม่ผ่าน -->
+                        <select class="status-select">
+                            <option value="pending">รอตรวจสอบ</option>
+                            <option value="pass">ผ่าน</option>
+                            <option value="fail">ไม่ผ่าน</option>
+                        </select>
+                    </td>
+                    <td><button class="rate-btn">ดำเนินการ</button></td>
+                </tr>
+                <tr>
+                    <td>640406401122</td>
+                    <td>ณัฏฐ์ชุดา</td>
+                    <td>จอมศิริวัฒน์</td>
+                    <td>กิจกรรมตัวอย่าง 1</td>
+                    <td>10/10/2024</td>
+                    <td><button class="details-btn">ดูรายละเอียด</button></td>
+                    <td><a href="#">ดาวน์โหลด</a></td>
+                    <td>
+                        <!-- ตัวเลือกสถานะผ่านหรือไม่ผ่าน -->
+                        <select class="status-select">
+                            <option value="pending">รอตรวจสอบ</option>
+                            <option value="pass">ผ่าน</option>
+                            <option value="fail">ไม่ผ่าน</option>
+                        </select>
+                    </td>
+                    <td><button class="rate-btn">ดำเนินการ</button></td>
+                </tr>
+                <tr>
+                    <td>640406401111</td>
+                    <td>ณัฏฐ์ชุดา</td>
+                    <td>จอมศิริวัฒน์</td>
+                    <td>กิจกรรมตัวอย่าง 1</td>
+                    <td>10/10/2024</td>
+                    <td><button class="details-btn">ดูรายละเอียด</button></td>
+                    <td><a href="#">ดาวน์โหลด</a></td>
+                    <td>
+                        <!-- ตัวเลือกสถานะผ่านหรือไม่ผ่าน -->
+                        <select class="status-select">
+                            <option value="pending">รอตรวจสอบ</option>
+                            <option value="pass">ผ่าน</option>
+                            <option value="fail">ไม่ผ่าน</option>
+                        </select>
+                    </td>
+                    <td><button class="rate-btn">ดำเนินการ</button></td>
+                </tr>
+                <!-- เพิ่มกิจกรรมอื่นๆ ได้ที่นี่ -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ฟอร์มให้คะแนน/หมายเหตุ (จะแสดงตามสถานะที่เลือก) -->
+    <section id="form-section" class="hidden">
+        <div id="pass-form" class="hidden">
+            <h2>ให้คะแนนกิจกรรม</h2>
+            <p>กิจกรรม: <span id="activity-name">กิจกรรมตัวอย่าง 1</span></p>
+            <label for="score">คะแนน:</label>
+            <input type="number" id="score" name="score" min="1" max="5" value="3">
+        </div>
+        <div id="fail-form" class="hidden">
+            <h2>หมายเหตุ</h2>
+            <label for="comments">กรอกหมายเหตุ:</label>
+            <textarea id="comments" name="comments"></textarea>
+        </div>
+        <div class="form-buttons">
+            <button id="save-btn">บันทึก</button>
+            <button id="reset-btn">รีเซ็ต</button>
+        </div>
+    </section>
+
+    <script>
+        // เมื่อกดปุ่ม "ดำเนินการ"
+        document.querySelectorAll('.rate-btn').forEach((button, index) => {
+            button.addEventListener('click', function() {
+                // นำค่าจาก dropdown สถานะ
+                const statusSelect = document.querySelectorAll('.status-select')[index].value;
+
+                // แสดงฟอร์มที่เหมาะสม
+                document.getElementById('form-section').classList.remove('hidden');
+                
+                if (statusSelect === 'pass') {
+                    document.getElementById('pass-form').classList.remove('hidden');
+                    document.getElementById('fail-form').classList.add('hidden');
+                } else if (statusSelect === 'fail') {
+                    document.getElementById('fail-form').classList.remove('hidden');
+                    document.getElementById('pass-form').classList.add('hidden');
+                } else {
+                    document.getElementById('form-section').classList.add('hidden');
+                }
+            });
+        });
+
+        // เมื่อกดปุ่ม "บันทึก"
+        document.getElementById('save-btn').addEventListener('click', function() {
+            // ดึงข้อมูลทั้งหมดที่ต้องการบันทึก
+            const studentId = '640406401334'; // ตัวอย่างรหัสนักศึกษา
+            const firstName = 'ณัฏฐ์ชุดา'; // ตัวอย่างชื่อ
+            const lastName = 'จอมศิริวัฒน์'; // ตัวอย่างนามสกุล
+            const activityName = document.getElementById('activity-name').textContent;
+            const activityDate = '10/10/2024'; // ตัวอย่างวันที่ทำกิจกรรม
+            const details = 'รายละเอียดกิจกรรมตัวอย่าง 1'; // ตัวอย่างรายละเอียด
+            const fileLink = '#'; // ตัวอย่างลิงก์ไฟล์
+            const statusSelect = document.querySelector('.status-select:checked')?.value;
+            const score = document.getElementById('score').value;
+            const comments = document.getElementById('comments').value;
+
+            // บันทึกข้อมูลทั้งหมดลงใน localStorage
+            localStorage.setItem('studentId', studentId);
+            localStorage.setItem('firstName', firstName);
+            localStorage.setItem('lastName', lastName);
+            localStorage.setItem('activityName', activityName);
+            localStorage.setItem('activityDate', activityDate);
+            localStorage.setItem('details', details);
+            localStorage.setItem('fileLink', fileLink);
+            localStorage.setItem('status', statusSelect);
+            localStorage.setItem('score', score);
+            localStorage.setItem('comments', comments);
+
+            // นำทางไปยังหน้า approved.html
+            window.location.href = '2-approved.html';
+        });
+    </script>
+    
+</body>
+</html>

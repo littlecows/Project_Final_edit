@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กิจกรรมที่ผ่านการตรวจสอบ</title>
+    <link rel="stylesheet" href="1-styles.css">
+</head>
+<body>
+    <!-- ส่วนหัว -->
+    <header>
+        <h1>กิจกรรมที่ผ่านการตรวจสอบ</h1>
+        <nav>
+            <ul>
+                <li><a href="1-index.html">การตรวจสอบ</a></li>
+                <li><a href="2-approved.html">ผ่านแล้ว</a></li>
+                <li><a href="#">ไม่ผ่าน</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ตารางกิจกรรมที่ผ่านการตรวจสอบ -->
+    <section class="activity-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>รหัสนักศึกษา</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ชื่อกิจกรรม</th>
+                    <th>วันที่ทำกิจกรรม</th>
+                    <th>รายละเอียด</th>
+                    <th>ไฟล์ข้อมูล</th>
+                    <th>สถานะ</th>
+                    <th>คะแนน</th>
+                    <th>หมายเหตุ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="approved-student-id"></td>
+                    <td id="approved-first-name"></td>
+                    <td id="approved-last-name"></td>
+                    <td id="approved-activity-name"></td>
+                    <td id="approved-activity-date"></td>
+                    <td id="approved-details"></td>
+                    <td><a id="approved-file-link" href="#" target="_blank">ดาวน์โหลด</a></td>
+                    <td id="approved-status"></td>
+                    <td id="approved-score"></td>
+                    <td id="approved-comments"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        // ดึงข้อมูลจาก localStorage มาแสดงในหน้าผ่านการตรวจสอบ
+        document.getElementById('approved-student-id').textContent = localStorage.getItem('studentId');
+        document.getElementById('approved-first-name').textContent = localStorage.getItem('firstName');
+        document.getElementById('approved-last-name').textContent = localStorage.getItem('lastName');
+        document.getElementById('approved-activity-name').textContent = localStorage.getItem('activityName');
+        document.getElementById('approved-activity-date').textContent = localStorage.getItem('activityDate');
+        document.getElementById('approved-details').textContent = localStorage.getItem('details');
+        document.getElementById('approved-file-link').setAttribute('href', localStorage.getItem('fileLink'));
+        document.getElementById('approved-status').textContent = localStorage.getItem('status');
+        document.getElementById('approved-score').textContent = localStorage.getItem('score') || 'N/A';
+        document.getElementById('approved-comments').textContent = localStorage.getItem('comments') || 'N/A';
+
+        // เคลียร์ข้อมูลหลังจากแสดงผล
+        localStorage.removeItem('studentId');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('activityName');
+        localStorage.removeItem('activityDate');
+        localStorage.removeItem('details');
+        localStorage.removeItem('fileLink');
+        localStorage.removeItem('status');
+        localStorage.removeItem('score');
+        localStorage.removeItem('comments');
+    </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <!-- !start #main-site -->
 
 <!-- start #footer -->
-<footer id="footer" class="bg-dark text-white py-4">
+<footer id="footer" class="box_head">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12">

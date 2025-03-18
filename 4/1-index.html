@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Table</title>
+    <link rel="stylesheet" href="1-styles.css">
+</head>
+<body>
+    <div class="nav">
+        <a href="#contact">ติดต่อเรา</a>
+        <a href="#activities">กู้ยืม</a>
+        <a class="active" href="#home">จิตอาสา</a>
+    </div>
+
+    <main>
+        <h2>กิจกรรม</h2>
+        <table id="activity-table">
+            <thead>
+                <tr>
+                    <th>ลำดับที่</th>
+                    <th>ชื่อกิจกรรม</th>
+                    <th>ชั่วโมง</th>
+                    <th>วันที่เริ่มต้น</th>
+                    <th>วันที่สิ้นสุด</th>
+                    <th>ไฟล์</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+        </table>
+
+        <!-- ปุ่มเพิ่มกิจกรรม -->
+        <button class="add-activity" onclick="window.location.href='add_activity.php'">เพิ่มกิจกรรม</button>
+    </main>
+
+    <script>
+
+        function displayActivities() {
+            const tableBody = document.querySelector('#activity-table tbody');
+            tableBody.innerHTML = ''; // เคลียร์ข้อมูลเดิม
+            activities.forEach(activity => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${activity.id}</td>
+                    <td><span onclick="editActivity(${activity.id}, 'name')">${activity.name}</span></td>
+                    <td><span onclick="editActivity(${activity.id}, 'hours')">${activity.hours}</span></td>
+                    <td><span onclick="editActivity(${activity.id}, 'startDate')">${activity.startDate}</span></td>
+                    <td><span onclick="editActivity(${activity.id}, 'endDate')">${activity.endDate}</span></td>
+                    <td>${activity.file ? `<a href="${activity.file}" target="_blank">ดูไฟล์</a>` : 'ไม่มีไฟล์'}</td>
+                    <td>
+                        <button onclick="editActivity(${activity.id})">แก้ไข</button>
+                        <button onclick="removeActivity(${activity.id})">ลบ</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function editActivity(id, field) {
+            const activity = activities.find(activity => activity.id === id);
+            if (activity) {
+                let newValue;
+                if (field === 'name') {
+                    newValue = prompt("แก้ไขชื่อกิจกรรม:", activity.name);
+                    if (newValue) activity.name = newValue;
+                } else if (field === 'hours') {
+                    newValue = prompt("แก้ไขชั่วโมง:", activity.hours);
+                    if (newValue) activity.hours = newValue;
+                } else if (field === 'startDate') {
+                    newValue = prompt("แก้ไขวันที่เริ่ม (DD/MM/YYYY):", activity.startDate);
+                    if (newValue) activity.startDate = newValue;
+                } else if (field === 'endDate') {
+                    newValue = prompt("แก้ไขวันที่สิ้นสุด (DD/MM/YYYY):", activity.endDate);
+                    if (newValue) activity.endDate = newValue;
+                }
+                displayActivities();
+            }
+        }
+
+        function addActivity(name, hours, file, startDate, endDate) {
+            const newId = activities.length + 1;
+            activities.push({ id: newId, name: name, hours: hours, file: file, startDate: startDate, endDate: endDate });
+            displayActivities();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type === "application/pdf") { // ตรวจสอบว่าเป็นไฟล์ PDF
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileName = file.name;
+
+                    // สร้าง path สำหรับการเข้าถึงไฟล์ใน htdocs/project_ct/test2/2/uploads
+                    const filePath = `htdocs/project_ct/test2/2/uploads/${fileName}`;
+
+                    const newName = prompt("กรุณาใส่ชื่อกิจกรรม:");
+                    const newHours = prompt("กรุณาใส่ชั่วโมงกิจกรรม:");
+                    const newStartDate = prompt("กรุณาใส่วันที่เริ่มต้นกิจกรรม (DD/MM/YYYY):");
+                    const newEndDate = prompt("กรุณาใส่วันที่สิ้นสุดกิจกรรม (DD/MM/YYYY):");
+
+                    if (newName && newHours && newStartDate && newEndDate) {
+                        // ส่งข้อมูลไปยังเซิร์ฟเวอร์
+                        const formData = new FormData();
+                        formData.append('name', newName);
+                        formData.append('hours', newHours);
+                        formData.append('file', file);
+                        formData.append('startDate', newStartDate);
+                        formData.append('endDate', newEndDate);
+
+                        fetch('2-process.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.text())
+                        .then(result => {
+                            alert(result); // แจ้งผลลัพธ์จากเซิร์ฟเวอร์
+
+                            // เพิ่มกิจกรรมใหม่ลงในตารางทันที พร้อมลิงก์ไปยังไฟล์ PDF
+                            addActivity(newName, newHours, filePath, newStartDate, newEndDate);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('เกิดข้อผิดพลาดในการอัปโหลดข้อมูล');
+                        });
+                    }
+                };
+                reader.readAsDataURL(file); // อ่านไฟล์เป็น Data URL
+            } else {
+                alert("กรุณาอัปโหลดเฉพาะไฟล์ PDF เท่านั้น");
+            }
+        }
+
+        function removeActivity(id) {
+            const index = activities.findIndex(activity => activity.id === id);
+            if (index > -1) {
+                activities.splice(index, 1);
+                displayActivities();
+            }
+        }
+
+        window.onload = displayActivities;
+    </script>
+</body>
+</html>

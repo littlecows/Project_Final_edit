@@ -1,0 +1,151 @@
+/* รีเซ็ตสไตล์พื้นฐาน */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+header {
+    background-color: #F17629;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.search-bar {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #F17629;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #F17629;
+}
+
+.activity-table {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td .details-btn, td .rate-btn {
+    padding: 5px 10px;
+    background-color: #F17629;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+td .rate-btn {
+    background-color: #4CAF50;
+}
+
+td .rate-btn:hover, td .details-btn:hover {
+    background-color: #F17629;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.pending {
+    color: #FF9800;
+}
+
+.status.checked {
+    color: #F17629;
+}
+
+#rating-form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+.form-buttons {
+    margin-top: 10px;
+}
+
+.form-buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#save-btn {
+    background-color: #F17629;
+    color: white;
+}
+
+#reset-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+#save-btn:hover {
+    background-color: #F17629;
+}
+
+#reset-btn:hover {
+    background-color: #e53935;
+}
