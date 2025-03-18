@@ -74,7 +74,7 @@ $conn->close();
                 <div class="info-row"><strong>นามสกุล</strong> <span><?php echo htmlspecialchars($student["l_name"]); ?></span></div>
                 <div class="info-row"><strong>ที่อยู่</strong> <span><?php echo htmlspecialchars($student["address"]); ?></span></div>
             </div>
-            <a href="user_profile_process.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
+            <a href="user_profile_process_1.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
             </a>
         </div>
@@ -84,10 +84,13 @@ $conn->close();
             <div class="info-header">ข้อมูลติดต่อ</div>
             <div class="gradient-line"></div>
             <div class="info-body">
-                <div class="info-row"><strong>เบอร์โทรศัพท์บ้าน</strong> <span>-</span></div>
-                <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span>094-112-XXXX</span></div>
-                <div class="info-row"><strong>อีเมล</strong> <span>your@email.com</span></div>
+                <div class="info-row"><strong>เบอร์โทรศัพท์บ้าน</strong> <span><?php echo htmlspecialchars($student["phone_number_home"]); ?></span></div>
+                <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
+                <div class="info-row"><strong>อีเมล</strong> <span><?php echo htmlspecialchars($student["email"]); ?></span></div>
             </div>
+            <a href="user_profile_process_2.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
+                <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
+            </a>
         </div>
     </div>
 
