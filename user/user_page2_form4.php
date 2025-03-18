@@ -96,101 +96,76 @@ if (!isset($_SESSION['username'])) {
 
 <body>
 
-    <?php include('../user/header.php'); ?>
+<?php include('../user/header.php'); ?>
 
-    <div class="container">
-        <div class="content">
-            <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
-            <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
+<div class="container">
+    <div class="content">
+        <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
+        <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
 
-            <form action="user_page2_form4.php" method="post">
+        <form action="user_page2_form5.php" method="post">
 
-                <div class="question-text">
-                    <h3>บิดาและมารดา</h3>
-                    <p>นักศึกษาอยู่ในความดูแลของบิดาและมารดา กรุณาให้รายละเอียดเกี่ยวกับอาชีพของบิดาและมารดา
-                        คำจำกัดความการประกอบอาชีพ
-                        1. อาชีพอิสระ คือ การประกอบอาชีพที่มีค่าตอบแทนที่แบบไม่มีสลิปเงินเดือน
-                        หรือหนังสือรับรองเงินเดือน เช่น เกษตรกรประมง ค้าขาย รับจ้างทั่วไป ธุรกิจส่วนตัว ฯลฯ
-                        ​2. อาชีพที่มีเงินเดือนประจำ คือ การประกอบอาชีพที่ได้รับค่าตอบแทนเป็นรายครึ่งเดือน หรือรายเดือน
-                        (มีสลิปเงินเดือน หรือหนังสือรับรองเงินเดือน) เช่น พนักงานบริษัท รับราชการ รัฐวิสาหกิจ ฯลฯ
-                        ​3. ไม่ได้ประกอบอาชีพ คือ ไม่มีรายได้ ไม่ได้ทำงานใด ๆ เช่น พ่อบ้าน แม่บ้าน พิการ ป่วย บวช
-                        มีโทษจำคุก ฯลฯ</p>
-
-
+            <div class="question-section">
+                <h3>บิดาและมารดา *</h3>
+                <div class="form-group">
+                    <input type="radio" id="both-parents" name="guardian" value="both-parents">
+                    <label for="both-parents">บิดาและมารดาประกอบอาชีพอิสระ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.1</label><br>
+                    <input type="radio" id="father-only" name="guardian" value="father-only">
+                    <label for="father-only">บิดาประกอบอาชีพอิสระ มารดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.2</label><br>
+                    <input type="radio" id="mother-only" name="guardian" value="mother-only">
+                    <label for="mother-only">บิดาประกอบอาชีพอิสระ มารดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.3</label><br>
+                    <input type="radio" id="mother-salary" name="guardian" value="mother-salary">
+                    <label for="mother-salary">มารดาประกอบอาชีพอิสระ บิดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.4</label><br>
+                    <input type="radio" id="both-salary" name="guardian" value="both-salary">
+                    <label for="both-salary">บิดาและมารดาประกอบอาชีพมีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.5</label><br>
+                    <input type="radio" id="father-salary" name="guardian" value="father-salary">
+                    <label for="father-salary">บิดามีเงินเดือนประจำ มารดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.6</label><br>
+                    <input type="radio" id="mother-independent" name="guardian" value="mother-independent">
+                    <label for="mother-independent">มารดาประกอบอาชีพอิสระ บิดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.7</label><br>
+                    <input type="radio" id="no-job" name="guardian" value="no-job">
+                    <label for="no-job">บิดาและมารดาไม่ประกอบอาชีพ กรุณาไปข้อต่อไปเพื่อให้ข้อมูลผู้ปกครอง</label><br>
                 </div>
-                <div class="question-section">
-                    <div class="content-section">
-                        <p><b>บิดาประกอบอาชีพ *</b></p>
-                        <div class="form-group">
-                            <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                            <label for="both-parents">อาชีพอิสระ หากท่านเลือกข้อนี้ กรุณาดาวน์โหลดหนังสือรับรองรายได้
-                                กยศ. 102</label><br>
-                            <input type="radio" id="father-only" name="guardian" value="father-only">
-                            <label for="father-only">อาชีพที่มีเงินเดือนประจำ หากท่านเลือกข้อนี้
-                                กรุณาแนบหนังสือรับรองเงินเดือน
-                                หรือสลิปเงินเดือนที่ออกจากหน่วยงานที่บิดาปฏิบัติงานอยู่</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">ไม่ได้ประกอบอาชีพ หากท่านเลือกข้อนี้ กรุณาดาวน์โหลด
-                                หนังสือรับรองรายได้ กยศ.102</label><br>
-                        </div>
-                    </div>
+            </div>
+
+            <div class="question-section">
+                <h3>มารดาประกอบอาชีพ *</h3>
+                <div class="form-group">
+                    <input type="radio" id="mother-piisra" name="mother_job" value="mother-piisra">
+                    <label for="mother-piisra">มารดาประกอบอาชีพอิสระ หากทำเลือกข้อนี้ กรุณาดาวน์โหลดหนังสือรับรองรายได้ กยศ. 102</label><br>
+                    <input type="radio" id="mother-money" name="mother_job" value="mother-money">
+                    <label for="mother-money">มารดาที่มีเงินเดือนประจำ หากทำเลือกข้อนี้ กรุณาแนบหนังสือรับรองเงินเดือน หรือสลิปเงินเดือนที่ออกจากการหน่วยงานที่บิดาปฏิบัติงานอยู่</label><br>
+                    <input type="radio" id="mother-no-income" name="mother_job" value="mother-no-income">
+                    <label for="mother-no-income">ไม่ได้ประกอบอาชีพ หากทำเลือกข้อนี้ กรุณาดาวน์โหลดหนังสือรับรองรายได้ กยศ.102</label><br>
                 </div>
+            </div>
 
-
-                <div class="question-section">
-                    <div class="content-section">
-                        <p><b>มารดาประกอบอาชีพ *</b></p>
-                        <div class="form-group">
-                            <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                            <label for="both-parents">อาชีพอิสระ หากท่านเลือกข้อนี้ กรุณาดาวน์โหลดหนังสือรับรองรายได้
-                                กยศ. 102</label><br>
-                            <input type="radio" id="father-only" name="guardian" value="father-only">
-                            <label for="father-only">อาชีพที่มีเงินเดือนประจำ หากท่านเลือกข้อนี้
-                                กรุณาแนบหนังสือรับรองเงินเดือน
-                                หรือสลิปเงินเดือนที่ออกจากหน่วยงานที่บิดาปฏิบัติงานอยู่</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">ไม่ได้ประกอบอาชีพ หากท่านเลือกข้อนี้ กรุณาดาวน์โหลด
-                                หนังสือรับรองรายได้ กยศ.102</label><br>
-                        </div>
-                    </div>
+            <div class="question-section">
+                <h3>เอกสารที่ต้องเตรียมเพิ่มเติมสำหรับนักศึกษาที่อยู่ในความดูแลของบิดาและมารดา แยกตามอาชีพของบิดามารดา คือ</h3>
+                <div class="form-group">
+                    <input type="radio" id="doc1" name="additional_docs" value="doc1">
+                    <label for="doc1">บิดาและมารดาประกอบอาชีพอิสระ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.1</label><br>
+                    <input type="radio" id="doc2" name="additional_docs" value="doc2">
+                    <label for="doc2">บิดาประกอบอาชีพอิสระ มารดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.2</label><br>
+                    <input type="radio" id="doc3" name="additional_docs" value="doc3">
+                    <label for="doc3">บิดาประกอบอาชีพอิสระ มารดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.3</label><br>
+                    <input type="radio" id="doc4" name="additional_docs" value="doc4">
+                    <label for="doc4">มารดาประกอบอาชีพอิสระ บิดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.4</label><br>
+                    <input type="radio" id="doc5" name="additional_docs" value="doc5">
+                    <label for="doc5">บิดาและมารดาประกอบอาชีพมีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.5</label><br>
+                    <input type="radio" id="doc6" name="additional_docs" value="doc6">
+                    <label for="doc6">บิดามีเงินเดือนประจำ มารดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.6</label><br>
+                    <input type="radio" id="doc7" name="additional_docs" value="doc7">
+                    <label for="doc7">มารดาประกอบอาชีพอิสระ บิดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.7</label><br>
+                    <input type="radio" id="doc8" name="additional_docs" value="doc8">
+                    <label for="doc8">บิดาและมารดาไม่ประกอบอาชีพ กรุณาไปข้อต่อไปเพื่อให้ข้อมูลผู้ปกครอง</label><br>
                 </div>
+            </div>
 
-
-                <div class="question-section">
-                    <div class="content-section">
-                        <p><b>เอกสารที่ต้องเตรียมเพิ่มเติมสำหรับนักศึกษาที่อยู่ในความดูแลของบิดาและมารดา แยกตามอาชีพของบิดามารดา คือ</b></p>
-                        <div class="form-group">
-                            <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                            <label for="both-parents">บิดาและมารดาประกอบอาชีพอิสระ  จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.1</label><br>
-                            <input type="radio" id="father-only" name="guardian" value="father-only">
-                            <label for="father-only">บิดาประกอบอาชีพอิสระ มารดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.2</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">บิดาประกอบอาชีพอิสระ มารดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.3</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">มารดาประกอบอาชีพอิสระ บิดามีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.4</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">บิดาและมารดาประกอบอาชีพมีเงินเดือนประจำ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.5</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">บิดามีเงินเดือนประจำ มารดาไม่ประกอบอาชีพ  จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.6</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">มารดาประกอบอาชีพอิสระ บิดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.7</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">มารดามีเงินเดือนประจำ บิดาไม่ประกอบอาชีพ จดจำ ว่าสถานภาพครอบครัวอยู่ข้อ 1.8</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">บิดาและมารดาไม่ประกอบอาชีพ กรุณาไปข้อต่อไปเพื่อให้ข้อมูลผู้ปกครอง</label><br>
-
-                                
-                        </div>
-                    </div>
-                </div>
-
-
-
-                    <button type="submit"><a href="user_page2_form5.php"></a>ตกลง</button>
-                    <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
-            </form>
-        </div>
+            <button type="submit">ตกลง</button>
+            <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
+        </form>
     </div>
+</div>
 
 </body>
 
