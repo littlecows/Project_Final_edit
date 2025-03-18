@@ -8,7 +8,11 @@ if (!isset($_SESSION['username'])) {
 }
 
 $student_id = $_SESSION['username']; // Assuming username is actually student_id
-$sql = "SELECT * FROM student WHERE student_id = ?";
+$sql = "SELECT student.*, father.father_name, father.father_last_name, mother.mother_name, mother.mother_last_name, father.father_id, father.father_address, father.father_occupation, father.father_income, mother.mother_id, mother.mother_address, mother.mother_occupation, mother.mother_income
+        FROM student 
+        LEFT JOIN father ON student.father_id = father.father_id 
+        LEFT JOIN mother ON student.mother_id = mother.mother_id 
+        WHERE student.student_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $student_id);
 $stmt->execute();
@@ -84,9 +88,10 @@ $conn->close();
             <div class="info-header">ข้อมูลติดต่อ</div>
             <div class="gradient-line"></div>
             <div class="info-body">
+            <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
                 <div class="info-row"><strong>เบอร์โทรศัพท์บ้าน</strong> <span><?php echo htmlspecialchars($student["phone_number_home"]); ?></span></div>
-                <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
                 <div class="info-row"><strong>อีเมล</strong> <span><?php echo htmlspecialchars($student["email"]); ?></span></div>
+                <div class="info-row"><strong>ที่อยู่</strong> <span><?php echo htmlspecialchars($student["address"]); ?></span></div>
             </div>
             <a href="user_profile_process_2.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
@@ -98,9 +103,19 @@ $conn->close();
             <div class="info-header">ข้อมูลสถานภาพครอบครัว</div>
             <div class="gradient-line"></div>
             <div class="info-body">
-                <div class="info-row"><strong>เบอร์โทรศัพท์บ้าน</strong> <span><?php echo htmlspecialchars($student["phone_number_home"]); ?></span></div>
-                <div class="info-row"><strong>เบอร์โทรศัพท์มือถือ</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
-                <div class="info-row"><strong>อีเมล</strong> <span><?php echo htmlspecialchars($student["email"]); ?></span></div>
+                <div class="info-row"><strong>ชื่อบิดา</strong> <span><?php echo htmlspecialchars($student["father_name"]); ?></span></div>
+                <div class="info-row"><strong>นามสกุลบิดา</strong> <span><?php echo htmlspecialchars($student["father_last_name"]); ?></span></div>
+                <div class="info-row"><strong>เลขบัตรประจำตัวประชาชน</strong> <span><?php echo htmlspecialchars($student["father_id"]); ?></span></div>
+                <div class="info-row"><strong>ที่อยู่</strong> <span><?php echo htmlspecialchars($student["father_address"]); ?></span></div>
+                <div class="info-row"><strong>อาชีพ</strong> <span><?php echo htmlspecialchars($student["father_occupation"]); ?></span></div>
+                <div class="info-row"><strong>เงินเดือนบิดา</strong> <span><?php echo htmlspecialchars($student["father_income"]); ?></span></div>
+                <div class="info-row"><strong>ชื่อมารดา</strong> <span><?php echo htmlspecialchars($student["mother_name"]); ?></span></div>
+                <div class="info-row"><strong>นามสกุลมารดา</strong> <span><?php echo htmlspecialchars($student["mother_last_name"]); ?></span></div>
+                <div class="info-row"><strong>เลขบัตรประจำตัวประชาชน</strong> <span><?php echo htmlspecialchars($student["mother_id"]); ?></span></div>
+                <div class="info-row"><strong>ที่อยู่</strong> <span><?php echo htmlspecialchars($student["mother_address"]); ?></span></div>
+                <div class="info-row"><strong>อาชีพ</strong> <span><?php echo htmlspecialchars($student["mother_occupation"]); ?></span></div>
+                <div class="info-row"><strong>เงินเดือนมารดา</strong> <span><?php echo htmlspecialchars($student["mother_income"]); ?></span></div>
+                <div class="info-row"><strong>สถานภาพครอบครัว</strong> <span><?php echo htmlspecialchars($student["family_status"]); ?></span></div>
             </div>
             <a href="user_profile_process_3.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
