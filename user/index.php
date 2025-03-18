@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
             <div class="box_menu">
                 <img src="../static/img/slide-image-1.jpg" alt="">
                 <nav>
-                    <a href="#">ขอแบบฟอร์มการกู้ยืม</a>
+                    <a href="user_page2.php">ขอแบบฟอร์มการกู้ยืม</a>
                     <a href="user_page1.php">นักศึกษาเริ่มกู้กับเกษม</a>
                     <a href="#">นักศึกษาเก่าในสถาบัน</a>
                     <a href="#">ปฏิทินกิจกรรม</a>
