@@ -173,7 +173,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </div>
 
-            <button type="submit">ตกลง</button>
+            <button type="submit">ส่งแบบฟอร์ม</button>
             <button type="button" onclick="document.querySelector('form').reset();" style="float: right;">ล้างแบบฟอร์ม</button>
         </form>
     </div>
