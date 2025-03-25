@@ -137,15 +137,18 @@ if ($conn->connect_error) {
         <div class="menu">
             <a href="user_studentloan1.php" class="btn btn-primary">หน้าแรก</a>
             <a href="user_studentloan2.php" class="btn btn-secondary">กิจกรรม</a>
-            <a href="user_studentloan4.php" class="btn btn-secondary">เพิ่มเติม</a>
+            <!-- <a href="user_studentloan4.php" class="btn btn-secondary">เพิ่มเติม</a> -->
         </div>
     </div>
 
     <main class="container my-4">
         <div class="content mb-4">
-            <span>ชั่วโมงที่ทำ: 16 / 18</span>
+            <span>ชั่วโมงที่ทำ: 13 / 18</span>
             <select class="form-select w-auto d-inline-block ms-2">
                 <option value="1">ภาคเรียนที่ 1/67</option>
+                <option value="1">ภาคเรียนที่ 2/67</option>
+                <option value="1">ภาคเรียนที่ 1/68</option>
+                <option value="1">ภาคเรียนที่ 2/68</option>
                 <!-- Add other options here -->
             </select>
         </div>
@@ -188,16 +191,13 @@ if ($conn->connect_error) {
                     <td>มูลนิธิบ้านนกขมิ้น</td>
                     <td>บริจาคสิ่งของ</td>
                     <td>สูงสุด 4 ชั่วโมง</td>
-                    <td>ผ่าน</td>
+                    <td>รอตรวจสอบ</td>
                 </tr>
                 <!-- เพิ่มแถวอื่น ๆ ตามต้องการ -->
             </tbody>
         </table>
     </main>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Kasem Bundit University</p>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -12,6 +12,53 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sql = "SELECT * FROM user_activities WHERE username = '" . $_SESSION['username'] . "'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    $row = ['activity_name' => ''];
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $activity_name = $_POST['activity_name'];
+    $location = $_POST['location'];
+    $details = $_POST['details'];
+    $username = $_SESSION['username'];
+
+    // Handle file upload
+    $target_dir = "../uploads/";
+    $target_file = $target_dir . basename($_FILES["activity_image"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $uploadOk = 1;
+
+    // Check file size
+    if ($_FILES["activity_image"]["size"] > 2097152) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+        echo "Sorry, only JPG, JPEG, & PNG files are allowed.";
+        $uploadOk = 0;
+    }
+
+    if ($uploadOk == 1) {
+        if (move_uploaded_file($_FILES["activity_image"]["tmp_name"], $target_file)) {
+            $sql = "INSERT INTO new_user_activities (username, activity_name, location, details, image_path) VALUES ('$username', '$activity_name', '$location', '$details', '$target_file')";
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>alert(''); window.location.href='user_studentloan4.php';</script>";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -143,31 +190,28 @@ if ($conn->connect_error) {
 
     <main class="container my-4">
         <h2 class="text-center mb-4">กิจกรรมจิตอาสา กยศ.</h2>
-        <form>
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="activity-name" class="form-label">ชื่อกิจกรรม</label>
-                <input type="text" class="form-control" id="activity-name" placeholder="ชื่อกิจกรรมที่เลือก...">
+                <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..."
+                value="<?php echo htmlspecialchars($row['activity_name']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">สถานที่</label>
-                <input type="text" class="form-control" id="location" placeholder="เพิ่มสถานที่...">
+                <input type="text" class="form-control" id="location" name="location" placeholder="เพิ่มสถานที่...">
             </div>
             <div class="mb-3">
                 <label for="details" class="form-label">รายละเอียดกิจกรรม</label>
-                <textarea class="form-control" id="details" rows="4" placeholder="การมีส่วนร่วมของนักศึกษา..."></textarea>
+                <textarea class="form-control" id="details" name="details" rows="4" placeholder="การมีส่วนร่วมของนักศึกษา..."></textarea>
             </div>
             <div class="mb-3">
                 <label for="activity-image" class="form-label">ภาพกิจกรรม</label>
-                <input type="file" class="form-control" id="activity-image" accept=".jpg, .jpeg, .png">
+                <input type="file" class="form-control" id="activity-image" name="activity_image" accept=".jpg, .jpeg, .png">
                 <div class="form-text">** Maximum 2MB. Type .jpg, .jpeg, .png</div>
             </div>
             <button type="submit" class="btn btn-success">เสร็จสิ้น</button>
         </form>
     </main>
-
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Kasem Bundit University</p>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -149,12 +149,12 @@ $result = $conn->query($sql);
         <ul>
             <li><a href="admin_dashboard.php"><i class="bi bi-house"></i> หน้าหลัก (Dashboard)</a></li>
             <!-- <li><a href="adminCheck_Borrower_Status.php"><i class="bi bi-search"></i> ตรวจสอบสถานะผู้กู้</a></li> -->
-            <li><a href="adminCheck_form_Status.php"><i class="bi bi-file-text"></i> ตรวจสอบสถานะเอกสาร</a></li>
+            <!-- <li><a href="adminCheck_form_Status.php"><i class="bi bi-file-text"></i> ตรวจสอบสถานะเอกสาร</a></li> -->
             <li><a href="admin_edit_student.php"><i class="bi bi-person"></i> แก้ไขข้อมูลนักศึกษา</a></li>
             <li><a href="adminadd_user.php"><i class="bi bi-person-plus"></i> เพิ่มนักศึกษา</a></li>
             <li><a href="admin_edit_teacher.php"><i class="bi bi-briefcase"></i> แก้ไขข้อมูลอาจารย์</a></li>
             <li><a href="adminadd_teacher.php"><i class="bi bi-person-plus"></i> เพิ่มอาจารย์</a></li>
-            <li><a href="admin_edit_admin.php"><i class="bi bi-gear"></i> จัดการแอดมิน</a></li>
+            <!-- <li><a href="admin_edit_admin.php"><i class="bi bi-gear"></i> จัดการแอดมิน</a></li> -->
             <li><a href="adminlogout.php" class="logout-btn"><i class="bi bi-box-arrow-right"></i> ออกจากระบบ</a></li>
         </ul>
     </div>
@@ -168,25 +168,25 @@ $result = $conn->query($sql);
         </header>
 
         <div class="dashboard text-center">
-            <h1>Admin Dashboard</h1>
+            <!-- <h1>Admin Dashboard</h1> -->
 
-            <!-- การ์ดสถานะ -->
-            <div class="status-container">
-                <div class="status-card pending">
-                    <h3>รอดำเนินการ</h3>
-                    <p>กำลังเตรียมเอกสารและส่งข้อมูล</p>
-                </div>
+                <!-- การ์ดสถานะ
+                <div class="status-container">
+                    <div class="status-card pending">
+                        <h3>รอดำเนินการ</h3>
+                        <p>กำลังเตรียมเอกสารและส่งข้อมูล</p>
+                    </div>
 
-                <div class="status-card in-review">
-                    <h3>กำลังตรวจสอบ</h3>
-                    <p>เจ้าหน้าที่กำลังพิจารณาเอกสาร</p>
-                </div>
+                    <div class="status-card in-review">
+                        <h3>กำลังตรวจสอบ</h3>
+                        <p>เจ้าหน้าที่กำลังพิจารณาเอกสาร</p>
+                    </div>
 
-                <div class="status-card approved">
-                    <h3>อนุมัติแล้ว</h3>
-                    <p>ได้รับอนุมัติเรียบร้อย สามารถดำเนินการต่อ</p>
-                </div>
-            </div>
+                    <div class="status-card approved">
+                        <h3>อนุมัติแล้ว</h3>
+                        <p>ได้รับอนุมัติเรียบร้อย สามารถดำเนินการต่อ</p>
+                    </div>
+                </div> -->
 
             <!-- ค้นหา -->
             <div class="search-container">

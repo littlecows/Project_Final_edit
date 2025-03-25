@@ -14,9 +14,18 @@ $sql = "SELECT student.*, father.father_name, father.father_last_name, mother.mo
         LEFT JOIN mother ON student.mother_id = mother.mother_id 
         WHERE student.student_id = ?";
 $stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    die("Prepare failed: " . htmlspecialchars($conn->error));
+}
+
 $stmt->bind_param("s", $student_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+if ($result === false) {
+    die("Execute failed: " . htmlspecialchars($stmt->error));
+}
 
 $student = $result->fetch_assoc();
 $stmt->close();
@@ -104,7 +113,7 @@ $conn->close();
         <div class="info-card">
             <div class="info-header">ข้อมูลสถานภาพครอบครัว</div>
             <div class="gradient-line"></div>
-            <divclassinfo-row class="info-body">
+            <div class="info-body">
                 <div class="info-row"><strong>ชื่อบิดา</strong> <span><?php echo htmlspecialchars($student["father_name"]); ?></span></div>
                 <div class="info-row"><strong>นามสกุลบิดา</strong> <span><?php echo htmlspecialchars($student["father_last_name"]); ?></span></div>
                 <div class="info-row"><strong>เลขบัตรประจำตัวประชาชน</strong> <span><?php echo htmlspecialchars($student["father_id"]); ?></span></div>
@@ -123,11 +132,9 @@ $conn->close();
                 <a href="user_profile_process_3.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                     <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
                 </a>
+            </div>
         </div>
-
-
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
