@@ -7,8 +7,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $activity_id = $_POST['activity'];
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['activity'])) {
+    $activity_id = $_GET['activity'];
     $username = $_SESSION['username'];
 
     // Fetch activity details
@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("sisi", $username, $activity_id, $activity_name, $max_hours);
 
     if ($stmt->execute()) {
-        echo "<script>alert(''); window.location.href='user_studentloan3.php';</script>";
+        header("Location: user_studentloan3.php");
+        exit();
     } else {
         echo "เกิดข้อผิดพลาด: " . $stmt->error;
     }

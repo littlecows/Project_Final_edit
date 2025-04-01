@@ -12,14 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM user_activities WHERE username = '" . $_SESSION['username'] . "'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-} else {
-    $row = ['activity_name' => ''];
-}
+$selected_activity = isset($_SESSION['selected_activity']) ? $_SESSION['selected_activity'] : ['activity_name' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $activity_name = $_POST['activity_name'];
@@ -47,18 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["activity_image"]["tmp_name"], $target_file)) {
-            $sql = "INSERT INTO new_user_activities (username, activity_name, location, details, image_path) VALUES ('$username', '$activity_name', '$location', '$details', '$target_file')";
-            if ($conn->query($sql) === TRUE) {
-                echo "<script>alert(''); window.location.href='user_studentloan4.php';</script>";
+            $stmt = $conn->prepare("INSERT INTO new_user_activities (username, activity_name, location, details, image_path) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $username, $activity_name, $location, $details, $target_file);
+            if ($stmt->execute()) {
+                echo "<script>alert('บันทึกข้อมูลสำเร็จ'); window.location.href='user_studentloan4.php';</script>";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "Error: " . $stmt->error;
             }
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -194,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mb-3">
                 <label for="activity-name" class="form-label">ชื่อกิจกรรม</label>
                 <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..."
-                value="<?php echo htmlspecialchars($row['activity_name']); ?>" required>
+                value="<?php echo htmlspecialchars($selected_activity['name']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">สถานที่</label>

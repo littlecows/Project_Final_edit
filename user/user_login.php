@@ -6,9 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username']; // รับค่าชื่อผู้ใช้ หรือเลขบัตรประชาชน
     $password = $_POST['password']; // รับค่ารหัสผ่าน
 
-    // ตรวจสอบในตาราง user (สำหรับเจ้าหน้าที่)
-    $sql_user = "SELECT * FROM teacher WHERE officer_id  = '$username' AND password_hash = '$password'";
-    $result_user = $conn->query($sql_user);
+    // // ตรวจสอบในตาราง user (สำหรับเจ้าหน้าที่)
+    // $sql_user = "SELECT * FROM teacher WHERE officer_id  = '$username' AND password_hash = '$password'";
+    // $result_user = $conn->query($sql_user);
 
     // ตรวจสอบในตาราง collegian (สำหรับนักศึกษา)
     $sql_collegian = "SELECT * FROM student WHERE student_id = '$username'";
