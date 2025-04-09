@@ -13,102 +13,186 @@ if ($conn->connect_error) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>กิจกรรมจิตสาธารณะ</title>
 
-    <title>กู้ยืมเงินนักศึกษา - มหาวิทยาลัยเกษมบัณฑิต</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+
+<script src="../static/js/bootstrap.min.js"></script>
+<!-- Internal CSS -->
+<style>
+        /* Reset */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
+        /* Header */
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
             text-align: center;
         }
 
-        .header img {
-            height: 50px;
+        header h1 {
+            font-size: 24px;
+            color: #333;
         }
 
-        .nav {
-            background-color: #444;
-            overflow: hidden;
-        }
-
-        .nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .content {
+        /* Main Content */
+        main {
             padding: 20px;
         }
 
-        footer {
-            background-color: #333;
+        /* Filter Section */
+        .filter-section {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* จัดกลางตามแนวนอน */
+            gap: 10px; /* ระยะห่างระหว่างองค์ประกอบ */
+        }
+
+        .filter-section label {
+            margin-right: 5px;
+        }
+
+        .filter-section select {
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .filter-section button {
+            padding: 5px 15px;
+            background-color: #007bff;
             color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Table */
+        table {
             width: 100%;
-            bottom: 0;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        /* Footer of the table (Total Hours) */
+        table tfoot tr {
+            background-color: #e9ecef; /* Light gray background for total row */
+        }
+
+        table tfoot td {
+            font-weight: bold; /* Bold text for total hours */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
         }
     </style>
-</head>
 
 <body>
-    <?php include('../user/header.php'); ?>
 
-   
+<?php include('../user/header.php'); ?>
 
-    <div class="container my-4">
-        <div class="text-center mb-4">
-        </div>
-        <div class="d-flex justify-content-center mb-4">
-            <a href="user_studentloan1.php" class="btn btn-primary mx-2">หน้าแรก</a>
-            <a href="user_studentloan2.php" class="btn btn-secondary mx-2">กิจกรรม</a>
-            <a href="user_studentloan4.php" class="btn btn-secondary mx-2">เพิ่มเติม</a>
-        </div>
-        <hr>
+    <!-- Header -->
+    <header>
+        <h1>กิจกรรมจิตสาธารณะ กยศ</h1>
+    </header>
 
-        <div class="content">
-            <!-- เนื้อหาของคุณอยู่ที่นี่ -->
-            <section id="home">
-                <h1 class="h11">กิจกรรมจิตสาธารณะ กยศ</h1>
-                <p>ทั้งนี้ ผู้กู้ยืมสามารถทำกิจกรรมจิตสาธารณะได้ โดยบันทึกการเข้าร่วมโครงการ/กิจกรรมที่ทำประโยชน์ต่อสังคมหรือสาธารณะ ในแบบฟอร์มตามที่กองทุนกำหนด และลงลายมือชื่อผู้รับรองการทำกิจกรรม ได้แก่ หัวหน้าหน่วยงานหรือผู้ที่ได้รับมอบหมาย และ ผู้บริหารสถานศึกษา</p>
-                <p>1. กรณีเป็นผู้กู้ยืมเงินรายใหม่ ไม่กำหนดจำนวนชั่วโมง<br />
-                    2. กรณีเป็นผู้กู้ยืมเงินรายเก่าเปลี่ยนระดับการศึกษา ไม่กำหนดจำนวนชั่วโมง<br />
-                    3. กรณีเป็นผู้กู้ยืมเงินรายเก่าเลื่อนชั้นปีทุกระดับการศึกษา กำหนดจำนวนไม่น้อยกว่า 36 ชั่วโมง<br />
-                </p>
-            </section>
-        </div>
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <form>
+            <label for="year">เลือกปี:</label>
+            <select id="year" name="year">
+                <option value="">ทั้งหมด</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+            </select>
+
+            <label for="term">เลือกเทอม:</label>
+            <select id="term" name="term">
+                <option value="">ทั้งหมด</option>
+                <option value="1">เทอม 1</option>
+                <option value="2">เทอม 2</option>
+            </select>
+
+            <button type="submit">กรองข้อมูล</button>
+        </form>
     </div>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <!-- Main Content -->
+    <main>
+        <!-- Table -->
+        <table id="activity-table">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อกิจกรรม</th>
+                    <th>ชั่วโมง</th>
+                    <th>ชั่วโมงที่ได้</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>กิจกรรมปลูกต้นไม้</td>
+                    <td>9</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>กิจกรรมเก็บขยะชายหาด</td>
+                    <td>13</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>กิจกรรมบริจาคโลหิต</td>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">รวมชั่วโมงทั้งหมด:</td>
+                    <td><strong>32</strong></td> <!-- รวมชั่วโมง -->
+                    <td><strong>29</strong></td> <!-- รวมชั่วโมงที่ได้ -->
+                </tr>
+            </tfoot>
+        </table>
+    </main>
 
+</body>
 </html>
