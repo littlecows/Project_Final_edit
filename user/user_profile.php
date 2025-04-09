@@ -88,6 +88,16 @@ $conn->close();
                 <div class="info-row"><strong>ชื่อ</strong> <span><?php echo htmlspecialchars($student["f_name"]); ?></span></div>
                 <div class="info-row"><strong>นามสกุล</strong> <span><?php echo htmlspecialchars($student["l_name"]); ?></span></div>
                 <div class="info-row"><strong>ที่อยู่</strong> <span><?php echo htmlspecialchars($student["address"]); ?></span></div>
+                <div class="info-row"><strong>เบอร์โทรศัพท์</strong> <span><?php echo htmlspecialchars($student["phone_number"]); ?></span></div>
+                <div class="info-row"><strong>อีเมล</strong> <span><?php echo htmlspecialchars($student["email"]); ?></span></div>
+                <div class="info-row"><strong>Spouse ID</strong> <span><?php echo htmlspecialchars($student["spouse_id"]); ?></span></div>
+                <div class="info-row"><strong>เลขบัตรประจำตัวประชาชนบิดา</strong> <span><?php echo htmlspecialchars($student["father_id"]); ?></span></div>
+                <div class="info-row"><strong>เลขบัตรประจำตัวประชาชนมารดา</strong> <span><?php echo htmlspecialchars($student["mother_id"]); ?></span></div>
+                <div class="info-row"><strong>Guardian_ID</strong> <span><?php echo htmlspecialchars($student["guardian_id"]); ?></span></div>
+                <div class="info-row"><strong>Endorser_ID</strong> <span><?php echo htmlspecialchars($student["endorser_id"]); ?></span></div>
+                <div class="info-row"><strong>Department_ID</strong> <span><?php echo htmlspecialchars($student["department_id"]); ?></span></div>
+                <div class="info-row"><strong>Family_status_ID</strong> <span><?php echo htmlspecialchars($student["family_status_id"]); ?></span></div>
+               
             </div>
             <a href="user_profile_process_1.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล
