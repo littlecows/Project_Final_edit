@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '/xampp/htdocs/Project_Final/server.php';
+//include '/Applications/XAMPP/htdocs/Project_Final/server.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: user_login.php");
@@ -11,6 +12,35 @@ if (!isset($_SESSION['username'])) {
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// ดึงข้อมูลจากตาราง new_user_activities และ student
+$sql = "
+    SELECT 
+        nau.id, 
+        nau.activity_name, 
+        nau.hours, 
+        nau.location, 
+        nau.details, 
+        nau.image_path, 
+        nau.student_id, 
+        stu.f_name, 
+        stu.l_name
+    
+    FROM 
+        new_user_activities nau
+    LEFT JOIN 
+        student stu      
+    ON 
+        nau.student_id = stu.student_id
+    ORDER BY 
+        nau.created_at DESC;
+";
+
+
+$result = $conn->query($sql);
+
+// ตัวแปรสำหรับรวมชั่วโมง
+$total_hours = 0;
 
 ?>
 <!DOCTYPE html>
@@ -181,38 +211,47 @@ if ($conn->connect_error) {
             <thead>
                 <tr>
                     <th>ลำดับ</th>
+                    <th>ชื่อนักศึกษา</th>
                     <th>ชื่อกิจกรรม</th>
-                    <th>ชั่วโมง</th>
-                    <th>ชั่วโมงที่ได้</th>
+                    <th>ชั่วโมงที่ทำได้</th>
+                    <!-- <th>ชั่วโมงจากจิตอาสาที่ทำ</th> -->
+                    <th>สถานที่</th>
+                    <th>รายละเอียด</th>
+                    <th>รูปภาพ</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>กิจกรรมปลูกต้นไม้</td>
-                    <td>9</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>กิจกรรมเก็บขยะชายหาด</td>
-                    <td>13</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>กิจกรรมบริจาคโลหิต</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
+                <?php
+                if ($result->num_rows > 0) {
+                    $count = 1; // ตัวนับลำดับ
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($count) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["f_name"] . " " . $row["l_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
+                        // echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["location"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["details"]) . "</td>";
+                        echo "<td><img src='" . htmlspecialchars($row["image_path"]) . "' alt='Activity Image' style='max-width: 100px;'></td>";
+                        echo "</tr>";
+
+                        $total_hours += $row["hours"];
+                        $count++;
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>ไม่มีข้อมูลกิจกรรม</td></tr>";
+                }
+                ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">รวมชั่วโมงทั้งหมด:</td>
-                    <td><strong>32</strong></td> <!-- รวมชั่วโมง -->
-                    <td><strong>29</strong></td> <!-- รวมชั่วโมงที่ได้ -->
+                    <td colspan="5">รวมชั่วโมงทั้งหมด:</td>
+                    <td><strong><?php echo htmlspecialchars($total_hours); ?></strong></td>
+                    <td></td>
                 </tr>
             </tfoot>
+
         </table>
     </main>
 
