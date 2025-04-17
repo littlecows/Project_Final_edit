@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '/xampp/htdocs/Project_Final/server.php';
+//include '/Applications/XAMPP/htdocs/Project_Final/server.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: user_login.php");
@@ -12,9 +13,39 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// ดึงข้อมูลจากตาราง new_user_activities และ student
+$sql = "
+    SELECT 
+        nau.id, 
+        nau.activity_name, 
+        nau.hours, 
+        nau.location, 
+        nau.details, 
+        nau.image_path, 
+        nau.student_id, 
+        stu.f_name, 
+        stu.l_name
+    
+    FROM 
+        new_user_activities nau
+    LEFT JOIN 
+        student stu      
+    ON 
+        nau.student_id = stu.student_id
+    ORDER BY 
+        nau.created_at DESC;
+";
+
+
+$result = $conn->query($sql);
+
+// ตัวแปรสำหรับรวมชั่วโมง
+$total_hours = 0;
+
 ?>
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,109 +58,130 @@ if ($conn->connect_error) {
 <script src="../static/js/bootstrap.min.js"></script>
 <!-- Internal CSS -->
 <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
 
-        /* Header */
-        header {
-            background-color: #f0f0f0;
-            padding: 20px;
-            text-align: center;
-        }
+    h1 {
+        text-align: right; /* จัดข้อความให้ชิดขวา */
+        margin-right: 20px; /* เพิ่มระยะห่างจากขอบขวา */
+        margin-top: 20px; /* เพิ่มระยะห่างจากขอบบน */
+        margin-bottom: 20px; /* เพิ่มระยะห่างจากขอบล่าง */
+        font-size: 32px; /* ปรับขนาดตัวอักษรให้ใหญ่ขึ้น */
+        color: #333; /* สีของข้อความ */
+    }
 
-        header h1 {
-            font-size: 24px;
-            color: #333;
-        }
+    /* Main Content */
+    main {
+        padding: 20px;
+    }
 
-        /* Main Content */
-        main {
-            padding: 20px;
-        }
+    /* Filter Section */
+    /* Adjust the filter section to move it slightly to the right */
+    .filter-section {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* จัดให้อยู่ชิดขวา */
+        gap: 10px; /* ระยะห่างระหว่างองค์ประกอบ */
+        padding-right: 20px; /* เพิ่มระยะห่างจากขอบขวา */
+    }
 
-        /* Filter Section */
-        .filter-section {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* จัดกลางตามแนวนอน */
-            gap: 10px; /* ระยะห่างระหว่างองค์ประกอบ */
-        }
+    .filter-section label {
+        margin-right: 5px;
+    }
 
-        .filter-section label {
-            margin-right: 5px;
-        }
+    .filter-section select {
+        margin-right: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-        .filter-section select {
-            margin-right: 10px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    .filter-section button {
+        padding: 5px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        .filter-section button {
-            padding: 5px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .filter-section button:hover {
+        background-color: #0056b3;
+    }
 
-        .filter-section button:hover {
-            background-color: #0056b3;
-        }
+    /* Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 
-        /* Table */
+    /* Adjust table text alignment to left */
+    /* Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    /* Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    /* กำหนด alignment สำหรับคอลัมน์ทั้งหมด */
+    table th,
+    table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        /* ค่า 기본: ชิดซ้าย */
+    }
+
+    /* กำหนด alignment สำหรับคอลัมน์ "ชั่วโมง" และ "ชั่วโมงที่ได้" */
+    table th:nth-child(3),
+    table th:nth-child(4),
+    table td:nth-child(3),
+    table td:nth-child(4) {
+        text-align: center;
+        /* ตรงกลาง */
+    }
+
+    /* Header of the table */
+    table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    /* Footer of the table (Total Hours) */
+    table tfoot tr {
+        background-color: #e9ecef;
+        /* Light gray background for total row */
+    }
+
+    /* กำหนด alignment สำหรับ td ใน tfoot */
+    table tfoot td {
+        text-align: center;
+        /* ตรงกลาง */
+        font-weight: bold;
+        /* Bold text for total hours */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            font-size: 14px;
         }
-
-        table th,
-        table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        table th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-
-        /* Footer of the table (Total Hours) */
-        table tfoot tr {
-            background-color: #e9ecef; /* Light gray background for total row */
-        }
-
-        table tfoot td {
-            font-weight: bold; /* Bold text for total hours */
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            table {
-                font-size: 14px;
-            }
-        }
-    </style>
+    }
+</style>
 
 <body>
 
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
 
     <!-- Header -->
-    <header>
         <h1>กิจกรรมจิตสาธารณะ กยศ</h1>
-    </header>
-
     <!-- Filter Section -->
     <div class="filter-section">
         <form>
@@ -159,40 +211,50 @@ if ($conn->connect_error) {
             <thead>
                 <tr>
                     <th>ลำดับ</th>
+                    <th>ชื่อนักศึกษา</th>
                     <th>ชื่อกิจกรรม</th>
-                    <th>ชั่วโมง</th>
-                    <th>ชั่วโมงที่ได้</th>
+                    <th>ชั่วโมงที่ทำได้</th>
+                    <!-- <th>ชั่วโมงจากจิตอาสาที่ทำ</th> -->
+                    <th>สถานที่</th>
+                    <th>รายละเอียด</th>
+                    <th>รูปภาพ</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>กิจกรรมปลูกต้นไม้</td>
-                    <td>9</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>กิจกรรมเก็บขยะชายหาด</td>
-                    <td>13</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>กิจกรรมบริจาคโลหิต</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
+                <?php
+                if ($result->num_rows > 0) {
+                    $count = 1; // ตัวนับลำดับ
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($count) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["f_name"] . " " . $row["l_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
+                        // echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["location"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["details"]) . "</td>";
+                        echo "<td><img src='" . htmlspecialchars($row["image_path"]) . "' alt='Activity Image' style='max-width: 100px;'></td>";
+                        echo "</tr>";
+
+                        $total_hours += $row["hours"];
+                        $count++;
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>ไม่มีข้อมูลกิจกรรม</td></tr>";
+                }
+                ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">รวมชั่วโมงทั้งหมด:</td>
-                    <td><strong>32</strong></td> <!-- รวมชั่วโมง -->
-                    <td><strong>29</strong></td> <!-- รวมชั่วโมงที่ได้ -->
+                    <td colspan="5">รวมชั่วโมงทั้งหมด:</td>
+                    <td><strong><?php echo htmlspecialchars($total_hours); ?></strong></td>
+                    <td></td>
                 </tr>
             </tfoot>
+
         </table>
     </main>
 
 </body>
+
 </html>
