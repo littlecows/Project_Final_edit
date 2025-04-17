@@ -9,7 +9,8 @@ if (!isset($_SESSION['username'])) {
 }
 
 // ดึงข้อมูลเอกสารจากฐานข้อมูล
-$query = "SELECT id, document_name, upload_date, status FROM documents";
+$query = "SELECT username, activity_name, locations,details,image_path,h_hours,created_at,  status FROM new_user_activities";
+// ตรวจสอบการเชื่อมต่อ
 $result = $conn->query($query);
 ?>
 
@@ -59,20 +60,33 @@ $result = $conn->query($query);
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ลำดับ</th>
-                    <th>ชื่อเอกสาร</th>
-                    <th>วันที่อัปโหลด</th>
+                    <th>ผู้ทำ</th>
+                    <th>ชื่อจิตกรรม</th>
+                    <th>สถานที่</th>
+                    <th>คำอธิบาย</th>
+                    <th>รูปจิตอาสา</th>
+                    <th>ชั่วโมง</th>
+                    <th>วันที่ส่ง</th>
                     <th>สถานะ</th>
-                    <th>การดำเนินการ</th>
+                    
+
                 </tr>
             </thead>
             <tbody>
                 <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
-                            <td><?= htmlspecialchars($row['id']) ?></td>
-                            <td><?= htmlspecialchars($row['document_name']) ?></td>
-                            <td><?= htmlspecialchars($row['upload_date']) ?></td>
+                            <td><?= htmlspecialchars($row['username']) ?></td>
+                            <td><?= htmlspecialchars($row['activity_name']) ?></td>
+                            <td><?= htmlspecialchars($row['locations']) ?></td>
+                            <td><?= htmlspecialchars($row['details']) ?></td>
+                            <td><img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Document Image" style="max-width: 100px;"></td>
+                            <td><?= htmlspecialchars($row['h_hours']) ?></td>
+                            <td><?= htmlspecialchars($row['created_at']) ?></td>
+                            <td><?= htmlspecialchars($row['status']) ?></td>
+
+                        
+                            
                             <td>
                                 <?php
                                 switch ($row['status']) {
@@ -91,8 +105,8 @@ $result = $conn->query($query);
                                 ?>
                             </td>
                             <td>
-                                <button class="btn-check" onclick="checkDocument(<?= $row['id'] ?>)">ตรวจเอกสาร</button>
-                                <button class="btn-score" onclick="giveScore(<?= $row['id'] ?>)">ให้คะแนน</button>
+                                <button class="btn-check" onclick="checkDocument('<?= htmlspecialchars($row['username']) ?>')">ตรวจเอกสาร</button>
+                                <button class="btn-score" onclick="giveScore('<?= htmlspecialchars($row['username']) ?>')">ให้คะแนน</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -106,16 +120,16 @@ $result = $conn->query($query);
     </div>
 
     <script>
-        function checkDocument(id) {
+        function checkDocument(username) {
             if (confirm("คุณต้องการตรวจเอกสารนี้หรือไม่?")) {
-                window.location.href = `check_document.php?id=${id}`;
+                window.location.href = `check_document.php?username=${encodeURIComponent(username)}`;
             }
         }
 
-        function giveScore(id) {
-            const score = prompt("กรุณากรอกคะแนน (0-100):");
-            if (score !== null && !isNaN(score) && score >= 0 && score <= 100) {
-                window.location.href = `give_score.php?id=${id}&score=${score}`;
+        function giveScore(username) {
+            const h_hours = prompt("กรุณากรอกคะแนน (0-100):");
+            if (h_hours !== null && !isNaN(h_hours) && h_hours >= 0 && h_hours <= 100) {
+                window.location.href = `give_score.php?username=${encodeURIComponent(username)}&h_hours=${h_hours}`;
             } else {
                 alert("กรุณากรอกคะแนนที่ถูกต้อง!");
             }

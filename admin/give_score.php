@@ -9,14 +9,15 @@ if (!isset($_SESSION['username'])) {
 }
 
 // รับ ID และคะแนนจาก URL
-if (isset($_GET['id']) && isset($_GET['score'])) {
-    $id = intval($_GET['id']);
-    $score = intval($_GET['score']);
+if (isset($_GET['username']) && isset($_GET['h_hours'])) {
+    $username = $_GET['username']; // Treat username as a string
+    $h_hours = intval($_GET['h_hours']);
+    echo "Debug: username = $username, h_hours = $h_hours"; // Debugging line
 
     // อัปเดตคะแนนในฐานข้อมูล
-    $query = "UPDATE documents SET score = ? WHERE id = ?";
+    $query = "UPDATE new_user_activities SET h_hours = ? WHERE username = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ii", $score, $id);
+    $stmt->bind_param("is", $h_hours, $username); // Use "is" for integer and string
 
     if ($stmt->execute()) {
         echo "บันทึกคะแนนสำเร็จ";
