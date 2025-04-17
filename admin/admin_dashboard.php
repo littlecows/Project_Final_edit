@@ -155,6 +155,11 @@ $result = $conn->query($sql);
             <li><a href="admin_edit_teacher.php"><i class="bi bi-briefcase"></i> แก้ไขข้อมูลอาจารย์</a></li>
             <li><a href="adminadd_teacher.php"><i class="bi bi-person-plus"></i> เพิ่มอาจารย์</a></li>
             <!-- <li><a href="admin_edit_admin.php"><i class="bi bi-gear"></i> จัดการแอดมิน</a></li> -->
+            <li><a href="admin_Check_document_status.php"><i class="bi bi-file-text"></i> ตรวจสอบสถานะเอกสาร</a></li>
+
+
+
+
             <li><a href="adminlogout.php" class="logout-btn"><i class="bi bi-box-arrow-right"></i> ออกจากระบบ</a></li>
         </ul>
     </div>
@@ -165,9 +170,16 @@ $result = $conn->query($sql);
             <?php if (isset($_SESSION['username'])): ?>
                 <span>ยินดีต้อนรับ , <?php echo $_SESSION['username']; ?></span>
             <?php endif; ?>
-        </header>
+            
+            <p class="text-right">  วันที่: <?php echo date("d/m/Y"); ?></p>
+            <br>
 
+        </header>
+        <div class="container mt-4">
+            <h2 class="text-center">ตรวจสอบสถานะผู้กู้</h2>
+            <p class="text-center">ข้อมูลนักศึกษาที่ลงทะเบียนในระบบ</p>
         <div class="dashboard text-center">
+
             <!-- <h1>Admin Dashboard</h1> -->
 
                 <!-- การ์ดสถานะ
