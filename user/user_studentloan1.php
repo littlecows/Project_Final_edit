@@ -16,32 +16,30 @@ if ($conn->connect_error) {
 echo "Session username: " . htmlspecialchars($_SESSION['username']);
 
 // ดึงข้อมูลเฉพาะนักศึกษาคนนี้ (ใช้ $_SESSION['username'])
-// ดึงข้อมูลเฉพาะนักศึกษาคนนี้ (ใช้ $_SESSION['username'])
-// ดึงข้อมูลเฉพาะนักศึกษาคนนี้ (ใช้ $_SESSION['username'])
 $sql = "
     SELECT 
         nau.id, 
         nau.activity_name, 
-        nau.hours AS hours_completed, -- ชั่วโมงที่ทำได้
+        nau.hours AS hours_completed, 
         nau.location, 
         nau.details, 
         nau.image_path, 
         nau.username, 
         stu.f_name, 
         stu.l_name,
-        ua.max_hours -- เพิ่มคอลัมน์ max_hours จากตาราง user_activities
+        act.max_hours
     FROM 
         new_user_activities nau
     LEFT JOIN 
         student stu      
     ON 
-        nau.username = stu.student_id -- เชื่อมโยงโดยใช้ student_id
+        nau.username = stu.student_id
     LEFT JOIN 
-        user_activities ua -- เชื่อมโยงกับตาราง user_activities
+        activities act
     ON 
-        nau.activity_id = ua.activity_id -- เชื่อมโยงผ่าน activity_id
+        nau.activity_id = act.id
     WHERE 
-        nau.username = ? -- กรองข้อมูลเฉพาะ username ของนักศึกษาคนนี้
+        nau.username = ?
     ORDER BY 
         nau.created_at DESC;
 ";
@@ -264,16 +262,20 @@ $result = $stmt->get_result();
         </thead>
         <tbody>
     <?php
+    $total_hours = 0; // กำหนดค่าเริ่มต้นให้ตัวแปรรวมชั่วโมงทั้งหมด
+
     if ($result->num_rows > 0) {
         $count = 1; // ตัวนับลำดับ
         while ($row = $result->fetch_assoc()) {
+            echo "<pre>";
+            print_r($row); // ตรวจสอบข้อมูลที่ดึงมา
+            echo "</pre>";
             echo "<tr>";
             echo "<td>" . htmlspecialchars($count) . "</td>";
             echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
-            echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>"; // ชั่วโมงสูงสุด
-            echo "<td>" . htmlspecialchars($row["hours_completed"]) . "</td>"; // ชั่วโมงที่ทำได้
+            echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
+            echo "<td>" . htmlspecialchars($row["hours_completed"]) . "</td>";
             echo "</tr>";
-
             $total_hours += $row["hours_completed"];
             $count++;
         }
