@@ -249,6 +249,13 @@ $result = $stmt->get_result();
     </form>
 </div>
 
+<!-- ปุ่มส่งแบบฟอร์มจิตอาสา -->
+<div style="text-align: right; margin-top: 20px;">
+    <button type="button" onclick="location.href='user_studentloan2.php'" style="padding: 5px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        ส่งแบบฟอร์มจิตอาสา
+    </button>
+</div>
+
 <!-- Main Content -->
 <main>
     <table id="activity-table">
@@ -267,10 +274,6 @@ $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $count = 1; // ตัวนับลำดับ
         while ($row = $result->fetch_assoc()) {
-            echo "<pre>";
-            print_r($row); // ตรวจสอบข้อมูลที่ดึงมา
-            echo "</pre>";
-            echo "<tr>";
             echo "<td>" . htmlspecialchars($count) . "</td>";
             echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
             echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
@@ -284,12 +287,6 @@ $result = $stmt->get_result();
     }
     ?>
 </tbody>
-<tfoot>
-    <tr>
-        <td colspan="3">รวมชั่วโมงทั้งหมด:</td>
-        <td><strong><?php echo htmlspecialchars($total_hours); ?></strong></td>
-    </tr>
-</tfoot>
         <tfoot>
             <tr>
                 <td colspan="3">รวมชั่วโมงทั้งหมด:</td>

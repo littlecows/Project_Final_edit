@@ -183,11 +183,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <main class="container my-4">
         <h2 class="text-center mb-4">กิจกรรมจิตอาสา กยศ.</h2>
-        <form method="post" enctype="multipart/form-data">
+        <form id="volunteer-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="activity-name" class="form-label">ชื่อกิจกรรม</label>
-                <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..."
-                value="<?php echo htmlspecialchars($selected_activity['name']); ?>" required>
+                <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..." required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">สถานที่</label>
@@ -205,6 +204,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-success">เสร็จสิ้น</button>
         </form>
     </main>
+
+    <script>
+        document.getElementById('volunteer-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // ป้องกันการรีเฟรชหน้า
+
+            const formData = new FormData(this); // เก็บข้อมูลฟอร์ม
+
+            fetch('user_studentloan3.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('บันทึกข้อมูลสำเร็จ');
+                    window.location.href = 'user_studentloan1.php'; // เปลี่ยนหน้าไปยัง user_studentloan1.php
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
