@@ -217,6 +217,25 @@ $result = $stmt->get_result();
         table td:nth-child(2) {
             text-align: center; /* จัดให้อยู่ตรงกลาง */
         }
+
+        .volunteer-button-container {
+            text-align: right;
+            margin-top: 20px;
+            padding-right: 20px; /* เว้นขอบด้านขวา */
+        }
+
+        .volunteer-button {
+            padding: 5px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .volunteer-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -250,8 +269,8 @@ $result = $stmt->get_result();
 </div>
 
 <!-- ปุ่มส่งแบบฟอร์มจิตอาสา -->
-<div style="text-align: right; margin-top: 20px;">
-    <button type="button" onclick="location.href='user_studentloan2.php'" style="padding: 5px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+<div class="volunteer-button-container">
+    <button type="button" onclick="location.href='user_studentloan2.php'" class="volunteer-button">
         ส่งแบบฟอร์มจิตอาสา
     </button>
 </div>
