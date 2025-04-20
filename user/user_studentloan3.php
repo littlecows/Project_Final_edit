@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $location = $_POST['location'];
     $details = $_POST['details'];
     $username = $_SESSION['username'];
+    $activity_id = isset($_SESSION['selected_activity']['id']) ? $_SESSION['selected_activity']['id'] : null;
 
     // Handle file upload
     $target_dir = "../uploads/";
@@ -40,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["activity_image"]["tmp_name"], $target_file)) {
-            $stmt = $conn->prepare("INSERT INTO new_user_activities (username, activity_name, location, details, image_path) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssss", $username, $activity_name, $location, $details, $target_file);
+            $stmt = $conn->prepare("INSERT INTO new_user_activities (username, activity_id, activity_name, location, details, image_path) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sissss", $username, $activity_id, $activity_name, $location, $details, $target_file);
             if ($stmt->execute()) {
-                echo "<script>alert('บันทึกข้อมูลสำเร็จ'); window.location.href='user_studentloan4.php';</script>";
+                echo "<script>alert('บันทึกข้อมูลสำเร็จ'); window.location.href='user_studentloan1.php';</script>";
             } else {
                 echo "Error: " . $stmt->error;
             }
@@ -183,10 +184,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <main class="container my-4">
         <h2 class="text-center mb-4">กิจกรรมจิตอาสา กยศ.</h2>
-        <form id="volunteer-form" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="activity-name" class="form-label">ชื่อกิจกรรม</label>
-                <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..." required>
+                <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..."
+                value="<?php echo htmlspecialchars($selected_activity['name']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">สถานที่</label>
@@ -204,32 +206,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-success">เสร็จสิ้น</button>
         </form>
     </main>
-
-    <script>
-        document.getElementById('volunteer-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // ป้องกันการรีเฟรชหน้า
-
-            const formData = new FormData(this); // เก็บข้อมูลฟอร์ม
-
-            fetch('user_studentloan3.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('บันทึกข้อมูลสำเร็จ');
-                    window.location.href = 'user_studentloan1.php'; // เปลี่ยนหน้าไปยัง user_studentloan1.php
-                } else {
-                    alert('เกิดข้อผิดพลาด: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
-            });
-        });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
