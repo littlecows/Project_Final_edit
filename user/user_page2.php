@@ -162,7 +162,7 @@ if (!isset($_SESSION['username'])) {
         <p>รอประกาศอย่างเป็นทางการ</p>
 
         <h3>ดาวน์โหลดแบบคำขอกู้ยืม</h3>
-        <p>สแกน QR Code เพื่อขอแบบคำขอกู้ยืม หรือ <a href="user_page2_form1.php">คลิกเพื่อขอแบบคำขอกู้</a> (เปิดให้ดาวน์โหลดเดือนตุลาคม 2568 เป็นต้นไป)</p>
+        <p>สแกน QR Code เพื่อขอแบบคำขอกู้ยืม หรือ <a href="https://docs.google.com/forms/d/e/1FAIpQLSedH4xCrJn2q_qV0dBUvcZ8zlhws7tGCA2nLXNezTAs5uj9WA/viewform?usp=header">คลิกเพื่อขอแบบคำขอกู้</a> (เปิดให้ดาวน์โหลดเดือนตุลาคม 2568 เป็นต้นไป)</p>
         <img src="path_to_qr_code_image.png" alt="QR Code" style="max-width: 200px; margin-top: 10px;">
     </div>
 </div>
