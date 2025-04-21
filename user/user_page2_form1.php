@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
             <input type="radio" id="no" name="answer" value="no">
             <label for="no">ไม่ยินยอม</label><br>
             <button type="submit">ตกลง</button>
-            <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
+            <!-- <button type="button" style="float: right;">ล้างแบบฟอร์ม</button> -->
         </form>
     </div>
 </div>

@@ -76,12 +76,7 @@ $result = $stmt->get_result();
     <!-- Internal CSS -->
     <style>
         /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
+       
 
         /* Header */
         header {
