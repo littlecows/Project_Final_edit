@@ -155,7 +155,7 @@ $result = $conn->query($sql);
             <li><a href="admin_edit_teacher.php"><i class="bi bi-briefcase"></i> แก้ไขข้อมูลอาจารย์</a></li>
             <li><a href="adminadd_teacher.php"><i class="bi bi-person-plus"></i> เพิ่มอาจารย์</a></li>
             <!-- <li><a href="admin_edit_admin.php"><i class="bi bi-gear"></i> จัดการแอดมิน</a></li> -->
-            <li><a href="admin_Check_document_status.php"><i class="bi bi-file-text"></i> ตรวจสอบสถานะเอกสาร</a></li>
+            <li><a href="admin_Check_document_status.php"><i class="bi bi-file-text"></i> ตรวจสอบเอกสารจิตอาสา</a></li>
 
 
 

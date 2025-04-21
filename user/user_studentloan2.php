@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['activity'])) {
 ?>
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['activity'])) {
     <link rel="stylesheet" href="../static/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
     <div class="menu-container">
         <div class="menu">
             <a href="user_studentloan1.php" class="btn btn-primary">หน้าแรก</a>
@@ -63,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['activity'])) {
             <tbody>
                 <?php
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td class='h2o'>" . $row["name"] . "</td>";
@@ -82,4 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['activity'])) {
         <p>&copy; 2024 Kasem Bundit University</p>
     </footer>
 </body>
+
 </html>

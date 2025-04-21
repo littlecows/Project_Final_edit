@@ -105,9 +105,12 @@ $result = $stmt->get_result();
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* จัดให้อยู่ชิดขวา */
-            gap: 10px; /* ระยะห่างระหว่างองค์ประกอบ */
-            padding-right: 20px; /* เพิ่มระยะห่างจากขอบขวา */
+            justify-content: flex-end;
+            /* จัดให้อยู่ชิดขวา */
+            gap: 10px;
+            /* ระยะห่างระหว่างองค์ประกอบ */
+            padding-right: 20px;
+            /* เพิ่มระยะห่างจากขอบขวา */
         }
 
         .filter-section label {
@@ -146,7 +149,8 @@ $result = $stmt->get_result();
         table td {
             border: 1px solid #ddd;
             padding: 10px;
-            text-align: left; /* ค่า 기본: ชิดซ้าย */
+            text-align: left;
+            /* ค่า 기본: ชิดซ้าย */
         }
 
         /* กำหนด alignment สำหรับคอลัมน์ "ชั่วโมง" และ "ชั่วโมงที่ได้" */
@@ -154,7 +158,8 @@ $result = $stmt->get_result();
         table th:nth-child(4),
         table td:nth-child(3),
         table td:nth-child(4) {
-            text-align: center; /* ตรงกลาง */
+            text-align: center;
+            /* ตรงกลาง */
         }
 
         /* Header of the table */
@@ -165,13 +170,16 @@ $result = $stmt->get_result();
 
         /* Footer of the table (Total Hours) */
         table tfoot tr {
-            background-color: #e9ecef; /* Light gray background for total row */
+            background-color: #e9ecef;
+            /* Light gray background for total row */
         }
 
         /* กำหนด alignment สำหรับ td ใน tfoot */
         table tfoot td {
-            text-align: center; /* ตรงกลาง */
-            font-weight: bold; /* Bold text for total hours */
+            text-align: center;
+            /* ตรงกลาง */
+            font-weight: bold;
+            /* Bold text for total hours */
         }
 
         /* Responsive Design */
@@ -183,31 +191,45 @@ $result = $stmt->get_result();
 
         /* Custom Header Style */
         h1 {
-            text-align: right; /* จัดข้อความให้ชิดขวา */
-            margin-right: 20px; /* เพิ่มระยะห่างจากขอบขวา */
-            margin-top: 20px; /* เพิ่มระยะห่างจากขอบบน */
-            margin-bottom: 20px; /* เพิ่มระยะห่างจากขอบล่าง */
-            font-size: 32px; /* ปรับขนาดตัวอักษรให้ใหญ่ขึ้น */
-            color: #333; /* สีของข้อความ */
+            text-align: right;
+            /* จัดข้อความให้ชิดขวา */
+            margin-right: 20px;
+            /* เพิ่มระยะห่างจากขอบขวา */
+            margin-top: 20px;
+            /* เพิ่มระยะห่างจากขอบบน */
+            margin-bottom: 20px;
+            /* เพิ่มระยะห่างจากขอบล่าง */
+            font-size: 32px;
+            /* ปรับขนาดตัวอักษรให้ใหญ่ขึ้น */
+            color: #333;
+            /* สีของข้อความ */
         }
 
         /* กำหนด alignment สำหรับ td ใน tfoot */
         table tfoot td {
-            text-align: left; /* ชิดซ้าย */
-            font-weight: bold; /* ทำให้ข้อความเป็นตัวหนา */
-            padding-left: 10px; /* เพิ่มระยะห่างจากขอบซ้าย */
+            text-align: left;
+            /* ชิดซ้าย */
+            font-weight: bold;
+            /* ทำให้ข้อความเป็นตัวหนา */
+            padding-left: 10px;
+            /* เพิ่มระยะห่างจากขอบซ้าย */
         }
 
         /* กำหนด alignment สำหรับ td ใน tfoot */
         table tfoot td:first-child {
-            text-align: left; /* ชิดซ้ายสำหรับข้อความ "รวมชั่วโมงทั้งหมด" */
-            font-weight: bold; /* ทำให้ข้อความเป็นตัวหนา */
-            padding-left: 10px; /* เพิ่มระยะห่างจากขอบซ้าย */
+            text-align: left;
+            /* ชิดซ้ายสำหรับข้อความ "รวมชั่วโมงทั้งหมด" */
+            font-weight: bold;
+            /* ทำให้ข้อความเป็นตัวหนา */
+            padding-left: 10px;
+            /* เพิ่มระยะห่างจากขอบซ้าย */
         }
 
         table tfoot td:last-child {
-            text-align: center; /* จัดตัวเลขให้อยู่ตรงกลาง */
-            font-weight: bold; /* ทำให้ตัวเลขเป็นตัวหนา */
+            text-align: center;
+            /* จัดตัวเลขให้อยู่ตรงกลาง */
+            font-weight: bold;
+            /* ทำให้ตัวเลขเป็นตัวหนา */
         }
 
         /* จัดข้อความในคอลัมน์ "ลำดับ" และ "ชื่อกิจกรรม" ให้อยู่ตรงกลาง */
@@ -215,13 +237,15 @@ $result = $stmt->get_result();
         table td:nth-child(1),
         table th:nth-child(2),
         table td:nth-child(2) {
-            text-align: center; /* จัดให้อยู่ตรงกลาง */
+            text-align: center;
+            /* จัดให้อยู่ตรงกลาง */
         }
 
         .volunteer-button-container {
             text-align: right;
             margin-top: 20px;
-            padding-right: 20px; /* เว้นขอบด้านขวา */
+            padding-right: 20px;
+            /* เว้นขอบด้านขวา */
         }
 
         .volunteer-button {
@@ -241,79 +265,80 @@ $result = $stmt->get_result();
 
 <body>
 
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
 
 
-<h1>กิจกรรมจิตสาธารณะ กยศ</h1>
+    <h1>กิจกรรมจิตสาธารณะ กยศ</h1>
 
-<!-- Filter Section -->
-<div class="filter-section">
-    <form>
-        <label for="year">เลือกปี:</label>
-        <select id="year" name="year">
-            <option value="">ทั้งหมด</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-        </select>
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <form>
+            <label for="year">เลือกปี:</label>
+            <select id="year" name="year">
+                <option value="">ทั้งหมด</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+            </select>
 
-        <label for="term">เลือกเทอม:</label>
-        <select id="term" name="term">
-            <option value="">ทั้งหมด</option>
-            <option value="1">เทอม 1</option>
-            <option value="2">เทอม 2</option>
-        </select>
+            <label for="term">เลือกเทอม:</label>
+            <select id="term" name="term">
+                <option value="">ทั้งหมด</option>
+                <option value="1">เทอม 1</option>
+                <option value="2">เทอม 2</option>
+            </select>
 
-        <button type="submit">กรองข้อมูล</button>
-    </form>
-</div>
+            <button type="submit">กรองข้อมูล</button>
+        </form>
+    </div>
 
-<!-- ปุ่มส่งแบบฟอร์มจิตอาสา -->
-<div class="volunteer-button-container">
-    <button type="button" onclick="location.href='user_studentloan2.php'" class="volunteer-button">
-        ส่งแบบฟอร์มจิตอาสา
-    </button>
-</div>
+    <!-- ปุ่มส่งแบบฟอร์มจิตอาสา -->
+    <div class="volunteer-button-container">
+        <button type="button" onclick="location.href='user_studentloan2.php'" class="volunteer-button">
+            ส่งแบบฟอร์มจิตอาสา
+        </button>
+    </div>
 
-<!-- Main Content -->
-<main>
-    <table id="activity-table">
-        <thead>
-            <tr>
-                <th>ลำดับ</th>
-                <th>ชื่อกิจกรรม</th>
-                <th>ชั่วโมงสูงสุด</th>
-                <th>ชั่วโมงที่ทำได้</th>
-            </tr>
-        </thead>
-        <tbody>
-    <?php
-    $total_hours = 0; // กำหนดค่าเริ่มต้นให้ตัวแปรรวมชั่วโมงทั้งหมด
+    <!-- Main Content -->
+    <main>
+        <table id="activity-table">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อกิจกรรม</th>
+                    <th>ชั่วโมงสูงสุด</th>
+                    <th>ชั่วโมงที่ทำได้</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $total_hours = 0; // กำหนดค่าเริ่มต้นให้ตัวแปรรวมชั่วโมงทั้งหมด
 
-    if ($result->num_rows > 0) {
-        $count = 1; // ตัวนับลำดับ
-        while ($row = $result->fetch_assoc()) {
-            echo "<td>" . htmlspecialchars($count) . "</td>";
-            echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
-            echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
-            echo "<td>" . htmlspecialchars($row["hours_completed"]) . "</td>";
-            echo "</tr>";
-            $total_hours += $row["hours_completed"];
-            $count++;
-        }
-    } else {
-        echo "<tr><td colspan='5'>ไม่มีข้อมูลกิจกรรม</td></tr>";
-    }
-    ?>
-</tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3">รวมชั่วโมงทั้งหมด:</td>
-                <td><strong><?php echo htmlspecialchars($total_hours); ?></strong></td>
-            </tr>
-        </tfoot>
-    </table>
-</main>
+                if ($result->num_rows > 0) {
+                    $count = 1; // ตัวนับลำดับ
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<td>" . htmlspecialchars($count) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["hours_completed"]) . "</td>";
+                        echo "</tr>";
+                        $total_hours += $row["hours_completed"];
+                        $count++;
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>ไม่มีข้อมูลกิจกรรม</td></tr>";
+                }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">รวมชั่วโมงทั้งหมด:</td>
+                    <td><strong><?php echo htmlspecialchars($total_hours); ?></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
 
 </body>
+
 </html>

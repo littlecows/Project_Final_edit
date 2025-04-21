@@ -97,7 +97,7 @@ $conn->close();
                 <div class="info-row"><strong>Endorser_ID</strong> <span><?php echo htmlspecialchars($student["endorser_id"]); ?></span></div>
                 <div class="info-row"><strong>Department_ID</strong> <span><?php echo htmlspecialchars($student["department_id"]); ?></span></div>
                 <div class="info-row"><strong>Family_status_ID</strong> <span><?php echo htmlspecialchars($student["family_status"]); ?></span></div>
-               
+
             </div>
             <a href="user_profile_process_1.php?student_id=<?php echo htmlspecialchars($student['student_id']); ?>" class="edit-btn">
                 <i class="bi bi-pencil-square"></i> แก้ไขข้อมูล

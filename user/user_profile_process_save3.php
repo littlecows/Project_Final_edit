@@ -37,14 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    WHERE father_id = (SELECT father_id FROM student WHERE student_id = ?)";
     $stmt_father = $conn->prepare($sql_father);
     $stmt_father->bind_param(
-        "sssssssi", 
-        $father_name, 
-        $father_last_name, 
-        $father_id, 
-        $father_address, 
-        $father_occupation, 
-        $father_income, 
-        $father_phone_number, 
+        "sssssssi",
+        $father_name,
+        $father_last_name,
+        $father_id,
+        $father_address,
+        $father_occupation,
+        $father_income,
+        $father_phone_number,
         $student_id
     );
 
@@ -60,14 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    WHERE mother_id = (SELECT mother_id FROM student WHERE student_id = ?)";
     $stmt_mother = $conn->prepare($sql_mother);
     $stmt_mother->bind_param(
-        "sssssssi", 
-        $mother_name, 
-        $mother_last_name, 
-        $mother_id, 
-        $mother_address, 
-        $mother_occupation, 
-        $mother_income, 
-        $mother_phone_number, 
+        "sssssssi",
+        $mother_name,
+        $mother_last_name,
+        $mother_id,
+        $mother_address,
+        $mother_occupation,
+        $mother_income,
+        $mother_phone_number,
         $student_id
     );
 
@@ -95,4 +95,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: user_profile.php");
     exit();
 }
-?>

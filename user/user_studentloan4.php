@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>กิจกรรม</title>
-    
+
     <link rel="stylesheet" href="../static/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -132,7 +132,7 @@ if ($conn->connect_error) {
 
 <body>
 
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
     <div class="menu-container">
         <div class="menu">
             <a href="user_studentloan1.php" class="btn btn-primary">หน้าแรก</a>

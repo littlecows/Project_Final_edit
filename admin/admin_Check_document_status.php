@@ -8,12 +8,37 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// ดึงข้อมูลเอกสารจากฐานข้อมูล
-$query = "SELECT username, activity_name, locations,details,image_path,h_hours,created_at,  status FROM new_user_activities";
-// ตรวจสอบการเชื่อมต่อ
-$result = $conn->query($query);
-?>
+// ดึงข้อมูลนักศึกษาทั้งหมด
+$sql = "
+    SELECT 
+        nau.id, 
+        nau.activity_name, 
+        nau.hours AS hours_completed, 
+        nau.location, 
+        nau.details, 
+        nau.image_path, 
+        nau.username, 
+        stu.f_name, 
+        stu.l_name,
+        act.max_hours,
+        nau.created_at
+    FROM 
+        new_user_activities nau
+    LEFT JOIN 
+        student stu      
+    ON 
+        nau.username = stu.student_id
+    LEFT JOIN 
+        activities act
+    ON 
+        nau.activity_id = act.id
+    ORDER BY 
+        nau.created_at DESC;
+";
 
+// เตรียมคำสั่ง SQL
+$result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="th">
 
@@ -54,67 +79,60 @@ $result = $conn->query($query);
 
 <body>
     <div class="container mt-4">
-        <h2 class="text-center">ตรวจสอบสถานะเอกสาร</h2>
+        <h2 class="text-center">ตรวจสอบเอกสารจิตอาสา</h2>
         <p class="text-center">ข้อมูลเอกสารที่ส่งเข้ามาในระบบ</p>
 
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ผู้ทำ</th>
+                    <th>ลำดับ</th>
+                    <th>ชื่อผู้ใช้</th>
                     <th>ชื่อจิตกรรม</th>
+                    <th>ชั่วโมงสูงสุด</th>
+                    <th>ชั่วโมงที่ทำได้</th>
                     <th>สถานที่</th>
                     <th>คำอธิบาย</th>
-                    <th>รูปจิตอาสา</th>
-                    <th>ชั่วโมง</th>
-                    <th>วันที่ส่ง</th>
-                    <th>สถานะ</th>
-                    
-
+                    <th>รูปภาพ</th>
+                    <th>วันที่สร้าง</th>
+                    <th>เพิ่มชั่วโมง</th> <!-- เพิ่มหัวข้อสำหรับปุ่ม -->
                 </tr>
             </thead>
             <tbody>
-                <?php if ($result->num_rows > 0): ?>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($row['username']) ?></td>
-                            <td><?= htmlspecialchars($row['activity_name']) ?></td>
-                            <td><?= htmlspecialchars($row['locations']) ?></td>
-                            <td><?= htmlspecialchars($row['details']) ?></td>
-                            <td><img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Document Image" style="max-width: 100px;"></td>
-                            <td><?= htmlspecialchars($row['h_hours']) ?></td>
-                            <td><?= htmlspecialchars($row['created_at']) ?></td>
-                            <td><?= htmlspecialchars($row['status']) ?></td>
-
-                        
-                            
-                            <td>
-                                <?php
-                                switch ($row['status']) {
-                                    case 1:
-                                        echo "รอดำเนินการ";
-                                        break;
-                                    case 2:
-                                        echo "กำลังตรวจสอบ";
-                                        break;
-                                    case 3:
-                                        echo "อนุมัติแล้ว";
-                                        break;
-                                    default:
-                                        echo "ไม่ทราบสถานะ";
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <button class="btn-check" onclick="checkDocument('<?= htmlspecialchars($row['username']) ?>')">ตรวจเอกสาร</button>
-                                <button class="btn-score" onclick="giveScore('<?= htmlspecialchars($row['username']) ?>')">ให้คะแนน</button>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="5" class="text-center">ไม่มีข้อมูลเอกสาร</td>
-                    </tr>
-                <?php endif; ?>
+                <?php
+                if ($result->num_rows > 0) {
+                    $count = 1; // ตัวนับลำดับ
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($count) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["activity_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["max_hours"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["hours_completed"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["location"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["details"]) . "</td>";
+                        // แสดงรูปภาพ
+                        if (!empty($row["image_path"])) {
+                            echo "<td><img src='" . htmlspecialchars($row["image_path"]) . "' alt='Activity Image' style='width: 100px; height: auto;'></td>";
+                        } else {
+                            echo "<td>ไม่มีรูปภาพ</td>";
+                        }
+                        // แสดงวันที่สร้าง
+                        echo "<td>" . htmlspecialchars($row["created_at"]) . "</td>";
+                        // เพิ่มปุ่มสำหรับใส่ชั่วโมง
+                        echo "<td>
+                                <form method='POST' action='save_hours.php'>
+                                    <input type='hidden' name='activity_id' value='" . htmlspecialchars($row["id"]) . "'>
+                                    <input type='number' name='hours' min='0' max='" . htmlspecialchars($row["max_hours"]) . "' required>
+                                    <button type='submit' class='btn btn-primary'>บันทึก</button>
+                                </form>
+                              </td>";
+                        echo "</tr>";
+                        $count++;
+                    }
+                } else {
+                    echo "<tr><td colspan='10' class='text-center'>ไม่มีข้อมูลกิจกรรม</td></tr>";
+                }
+                ?>
             </tbody>
         </table>
     </div>
@@ -135,6 +153,9 @@ $result = $conn->query($query);
             }
         }
     </script>
+    <div class="text-center mt-4">
+        <a href="admin_dashboard.php" class="btn btn-secondary">ย้อนกลับ</a>
+    </div>
 </body>
 
 </html>

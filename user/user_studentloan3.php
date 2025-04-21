@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Loan Kasem Bundit</title>
-    
+
     <link rel="stylesheet" href="../static/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-<?php include('../user/header.php'); ?>
+    <?php include('../user/header.php'); ?>
 
     <div class="menu-container">
         <div class="menu">
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mb-3">
                 <label for="activity-name" class="form-label">ชื่อกิจกรรม</label>
                 <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="ชื่อกิจกรรมที่เลือก..."
-                value="<?php echo htmlspecialchars($selected_activity['name']); ?>" required>
+                    value="<?php echo htmlspecialchars($selected_activity['name']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">สถานที่</label>
