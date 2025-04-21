@@ -15,7 +15,10 @@ if ($conn->connect_error) {
 // เพิ่ม Debug: แสดงค่า $_SESSION['username']
 echo "Session username: " . htmlspecialchars($_SESSION['username']);
 
-// ดึงข้อมูลเฉพาะนักศึกษาคนนี้ (ใช้ $_SESSION['username'])
+// รับค่าปีจาก URL (GET)
+$selected_year = isset($_GET['year']) ? $_GET['year'] : '';
+
+// ปรับ SQL Query เพื่อกรองข้อมูลตามปีที่เลือก
 $sql = "
     SELECT 
         nau.id, 
@@ -40,11 +43,16 @@ $sql = "
         nau.activity_id = act.id
     WHERE 
         nau.username = ?
-    ORDER BY 
-        nau.created_at DESC;
 ";
 
-// เตรียมคำสั่ง SQL แบบ prepared statement เพื่อป้องกัน SQL Injection
+// เพิ่มเงื่อนไขกรองปี
+if (!empty($selected_year)) {
+    $sql .= " AND YEAR(nau.start_date) = ?";
+}
+
+$sql .= " ORDER BY nau.created_at DESC";
+
+// เตรียมคำสั่ง SQL
 $stmt = $conn->prepare($sql);
 
 // ตรวจสอบว่าคำสั่ง SQL ถูกเตรียมไว้สำเร็จหรือไม่
@@ -53,7 +61,11 @@ if (!$stmt) {
 }
 
 // ผูกพารามิเตอร์
-$stmt->bind_param("s", $_SESSION['username']);
+if (!empty($selected_year)) {
+    $stmt->bind_param("ss", $_SESSION['username'], $selected_year);
+} else {
+    $stmt->bind_param("s", $_SESSION['username']);
+}
 
 // รันคำสั่ง SQL
 $stmt->execute();
@@ -61,6 +73,22 @@ $stmt->execute();
 // ดึงผลลัพธ์
 $result = $stmt->get_result();
 
+// ดึงข้อมูลปีจาก start_date และ end_date
+$year_sql = "SELECT DISTINCT YEAR(start_date) AS year_start, YEAR(end_date) AS year_end FROM new_user_activities ORDER BY year_start DESC";
+$year_result = $conn->query($year_sql);
+
+// ตรวจสอบผลลัพธ์
+$years = [];
+if ($year_result->num_rows > 0) {
+    while ($year_row = $year_result->fetch_assoc()) {
+        $years[] = $year_row['year_start'];
+        if ($year_row['year_end'] !== $year_row['year_start']) {
+            $years[] = $year_row['year_end'];
+        }
+    }
+    $years = array_unique($years); // ลบค่าที่ซ้ำกัน
+    rsort($years); // เรียงลำดับจากมากไปน้อย
+}
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -266,14 +294,16 @@ $result = $stmt->get_result();
     <h1>กิจกรรมจิตสาธารณะ กยศ</h1>
 
     <!-- Filter Section -->
-    <div class="filter-section">
+    <div class="filter-section"></div>
         <form>
             <label for="year">เลือกปี:</label>
             <select id="year" name="year">
                 <option value="">ทั้งหมด</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
+                <?php foreach ($years as $year): ?>
+                    <option value="<?php echo htmlspecialchars($year); ?>" <?php echo ($selected_year == $year) ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($year); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
 
             <label for="term">เลือกเทอม:</label>
@@ -283,7 +313,7 @@ $result = $stmt->get_result();
                 <option value="2">เทอม 2</option>
             </select>
 
-            <button type="submit">กรองข้อมูล</button>
+            <!-- <button type="submit">กรองข้อมูล</button> -->
         </form>
     </div>
 
@@ -333,6 +363,15 @@ $result = $stmt->get_result();
             </tfoot>
         </table>
     </main>
+
+    <script>
+        document.getElementById('year').addEventListener('change', function () {
+            const selectedYear = this.value;
+            const url = new URL(window.location.href);
+            url.searchParams.set('year', selectedYear);
+            window.location.href = url.toString();
+        });
+    </script>
 
 </body>
 
