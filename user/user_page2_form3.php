@@ -46,8 +46,12 @@ if (!isset($_SESSION['username'])) {
             margin-bottom: 5px;
         }
 
-        .content input[type="radio"] {
-            margin-right: 5px;
+        .content select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         .content button {
@@ -102,7 +106,7 @@ if (!isset($_SESSION['username'])) {
             <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
             <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
 
-            <form action="user_page2_form4.php" method="post">
+            <form id="family-status-form" action="user_page2_form4.php" method="post">
 
                 <div class="question-section">
                     <h3>ข้อมูลสถานภาพครอบครัว</h3>
@@ -127,24 +131,41 @@ if (!isset($_SESSION['username'])) {
                     <div class="content-section">
                         <p><b>นักศึกษาอยู่ในความดูแลของใคร *</b></p>
                         <div class="form-group">
-                            <input type="radio" id="both-parents" name="guardian" value="both-parents">
-                            <label for="both-parents">บิดาและมารดา</label><br>
-                            <input type="radio" id="father-only" name="guardian" value="father-only">
-                            <label for="father-only">บิดาคนเดียว</label><br>
-                            <input type="radio" id="mother-only" name="guardian" value="mother-only">
-                            <label for="mother-only">มารดาคนเดียว</label><br>
-                            <input type="radio" id="guardian" name="guardian" value="guardian">
-                            <label for="guardian">ผู้ปกครอง (เฉพาะกรณีที่ไม่มีทั้งบิดาและมารดา)</label>
+                            <label for="guardian">เลือกสถานภาพ:</label>
+                            <select id="guardian" name="guardian" required>
+                                <option value="" disabled selected>-- เลือกสถานภาพ --</option>
+                                <option value="both-parents">บิดาและมารดา</option>
+                                <option value="father-only">บิดาคนเดียว</option>
+                                <option value="mother-only">มารดาคนเดียว</option>
+                                <option value="guardian">ผู้ปกครอง (เฉพาะกรณีที่ไม่มีทั้งบิดาและมารดา)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-
-                <button type="submit"><a href="user_page2_form4.php"></a>ตกลง</button>
+                <button type="submit">ตกลง</button>
                 <button type="button" style="float: right;">ล้างแบบฟอร์ม</button>
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('family-status-form').addEventListener('submit', function (e) {
+            const guardian = document.getElementById('guardian').value;
+
+            // ตรวจสอบค่าที่เลือก
+            if (guardian === 'both-parents') {
+                e.preventDefault(); // ป้องกันการส่งฟอร์มปกติ
+                window.location.href = 'user_page2_form3_1.php'; // เปลี่ยนเส้นทางไปยังหน้า user_page2_form3_1.php
+            } else if (guardian === 'father-only') {
+                e.preventDefault(); // ป้องกันการส่งฟอร์มปกติ
+                window.location.href = 'user_page2_form3_2.php'; // เปลี่ยนเส้นทางไปยังหน้า user_page2_form3_2.php
+            } else if (guardian === 'mother-only') {
+                e.preventDefault(); // ป้องกันการส่งฟอร์มปกติ
+                window.location.href = 'user_page2_form3_3.php'; // เปลี่ยนเส้นทางไปยังหน้า user_page2_form3_3.php
+            }
+        });
+    </script>
 
 </body>
 

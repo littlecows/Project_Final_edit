@@ -46,8 +46,12 @@ if (!isset($_SESSION['username'])) {
             margin-bottom: 5px;
         }
 
-        .content input[type="radio"] {
-            margin-right: 5px;
+        .content select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         .content button {
@@ -90,27 +94,6 @@ if (!isset($_SESSION['username'])) {
         .content .question-section p {
             margin-bottom: 5px;
         }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .form-group label {
-            margin: 0;
-        }
-
-        .form-group div {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .form-group input[type="radio"] {
-            margin-right: 10px;
-        }
     </style>
 </head>
 
@@ -123,7 +106,7 @@ if (!isset($_SESSION['username'])) {
         <h2>ดาวน์โหลดแบบฟอร์มขอกู้ยืมปี 2568</h2>
         <p>* ระบุว่าเป็นคำถามที่จำเป็น</p>
 
-        <form action="user_nonti.php" method="post">
+        <form action="index.php" method="post">
 
             <div class="question-text">
                 <h3>หนังสือให้ความยินยอม</h3>
@@ -134,30 +117,15 @@ if (!isset($_SESSION['username'])) {
             <div class="question-section">
                 <div class="content-section">
                     <p><b>หนังสือให้ความยินยอม *</b></p>
-                    
-                        <div>
-                            <input type="radio" id="both-parents" name="consent_form" value="both-parents">
-                            <label for="both-parents">นักศึกษาอยู่ในความดูแลของบิดาและมารดา ดาวน์โหลด 3 แผ่น</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="father-only" name="consent_form" value="father-only">
-                            <label for="father-only">นักศึกษาอยู่ในความดูแลของบิดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="mother-only" name="consent_form" value="mother-only">
-                            <label for="mother-only">นักศึกษาอยู่ในความดูแลของมารดาคนเดียว ดาวน์โหลด 2 แผ่น</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="guardian" name="consent_form" value="guardian">
-                            <label for="guardian">นักศึกษาอยู่ในความดูแลของผู้ปกครอง
-                                (กรณีไม่ได้อยู่ในความดูแลของทั้งบิดาและมารดา) ดาวน์โหลด 2 แผ่น</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="both-parents-guardian" name="consent_form"
-                                value="both-parents-guardian">
-                            <label for="both-parents-guardian">นักศึกษาอยู่ในความดูแลของบิดามารดา และผู้ปกครอง
-                                ดาวน์โหลด 4 แผ่น (กรณีบิดาและมารดาไม่มีรายได้)</label>
-                        </div>
+                    <label for="consent_form">เลือกจำนวนหนังสือให้ความยินยอม:</label>
+                    <select id="consent_form" name="consent_form" required>
+                        <option value="" disabled selected>-- เลือกจำนวน --</option>
+                        <option value="both-parents">นักศึกษาอยู่ในความดูแลของบิดาและมารดา ดาวน์โหลด 3 แผ่น</option>
+                        <option value="father-only">นักศึกษาอยู่ในความดูแลของบิดาคนเดียว ดาวน์โหลด 2 แผ่น</option>
+                        <option value="mother-only">นักศึกษาอยู่ในความดูแลของมารดาคนเดียว ดาวน์โหลด 2 แผ่น</option>
+                        <option value="guardian">นักศึกษาอยู่ในความดูแลของผู้ปกครอง (กรณีไม่ได้อยู่ในความดูแลของทั้งบิดาและมารดา) ดาวน์โหลด 2 แผ่น</option>
+                        <option value="both-parents-guardian">นักศึกษาอยู่ในความดูแลของบิดามารดา และผู้ปกครอง ดาวน์โหลด 4 แผ่น (กรณีบิดาและมารดาไม่มีรายได้)</option>
+                    </select>
                 </div>
             </div>
 
@@ -166,10 +134,16 @@ if (!isset($_SESSION['username'])) {
                     <p><b>แบบฟอร์มการกู้ยืม *</b></p>
                     <p>นักศึกษาสามารถดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101ได้หลังจากบันทึกข้อมูลและกดส่งเรียบร้อยแล้ว
                         ขอให้นำส่งหลังจากดาวน์โหลดแบบฟอร์มการกู้ยืม กยศ.101 ภายใน 7 วันทำการ</p>
-                    <div class="form-group">
-                        <input type="radio" id="loan-form-acknowledged" name="loan_form" value="acknowledged">
-                        <label for="loan-form-acknowledged">รับทราบ</label><br>
-                    </div>
+                    <label for="loan_form">รับทราบ:</label>
+                    <select id="loan_form" name="loan_form" required>
+                        <option value="" disabled selected>-- เลือกคำตอบ --</option>
+                        <option value="acknowledged">รับทราบ</option>
+                    </select>
+                    <p>
+                        <a href="https://www.studentloan.or.th/sites/default/files/files/highlight/%E0%B8%81%E0%B8%A2%E0%B8%A8.102.pdf" target="_blank" style="color: blue; text-decoration: underline;">
+                            ดาวน์โหลดหนังสือรับรองรายได้ กยศ. 102
+                        </a>
+                    </p>
                 </div>
             </div>
 

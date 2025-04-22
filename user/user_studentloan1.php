@@ -128,12 +128,10 @@ if ($year_result->num_rows > 0) {
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            /* จัดให้อยู่ชิดขวา */
-            gap: 10px;
-            /* ระยะห่างระหว่างองค์ประกอบ */
-            padding-right: 20px;
-            /* เพิ่มระยะห่างจากขอบขวา */
+            justify-content: flex-end; /* จัดให้อยู่ชิดขวา */
+            gap: 10px; /* ระยะห่างระหว่างองค์ประกอบ */
+            margin-left: auto; /* บังคับให้ชิดขวา */
+            padding-right: 20px; /* เว้นระยะห่างจากขอบขวา */
         }
 
         .filter-section label {
@@ -294,7 +292,7 @@ if ($year_result->num_rows > 0) {
     <h1>กิจกรรมจิตสาธารณะ กยศ</h1>
 
     <!-- Filter Section -->
-    <div class="filter-section"></div>
+    <div class="filter-section">
         <form>
             <label for="year">เลือกปี:</label>
             <select id="year" name="year">
@@ -313,7 +311,7 @@ if ($year_result->num_rows > 0) {
                 <option value="2">เทอม 2</option>
             </select>
 
-            <!-- <button type="submit">กรองข้อมูล</button> -->
+            <button type="submit">กรองข้อมูล</button>
         </form>
     </div>
 
