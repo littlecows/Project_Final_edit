@@ -11,6 +11,21 @@ if (!isset($_SESSION['username'])) {
 $sql = "SELECT student_id, student_code, CONCAT(f_name, ' ', l_name) AS full_name, address, phone_number, email FROM student";
 $result = $conn->query($sql);
 
+// ดึงข้อมูลคณะและสาขา
+$faculty_sql = "
+    SELECT 
+        f.faculty_name, 
+        d.department_name 
+    FROM 
+        faculty f
+    LEFT JOIN 
+        department d 
+    ON 
+        f.faculty_id = d.faculty_id
+    ORDER BY f.faculty_name, d.department_name
+";
+$faculty_result = $conn->query($faculty_sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -116,12 +131,6 @@ $result = $conn->query($sql);
         .approved { background-color: #7dcea0; }
 
         /* ตาราง */
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-
         .table {
             width: 100%;
             margin-top: 10px;
@@ -231,6 +240,28 @@ $result = $conn->query($sql);
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="container mt-4">
+        <h2 class="text-center">ข้อมูลคณะและสาขา</h2>
+        <p class="text-center">รายชื่อคณะและสาขาที่มีในระบบ</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>คณะ</th>
+                    <th>สาขา</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $faculty_result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row["faculty_name"]) ?></td>
+                        <td><?= htmlspecialchars($row["department_name"]) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 
     <script>
